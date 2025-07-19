@@ -1,0 +1,56 @@
+import { Meta, Canvas, ArgTypes, Story } from "@storybook/addon-docs/blocks"
+import * as SliderStories from './Slider.stories';
+
+<Meta of={SliderStories} />
+
+# Slider
+
+The Slider component provides a way to select a value from a range of values using a sliding interface. Built with Material-UI's Slider component, it offers a clean and accessible way to select numeric values.
+
+## Features
+
+- **Value Range**: Customizable minimum and maximum values
+- **Step Control**: Define the increment/decrement step size  
+- **Marks**: Display marks along the slider track
+- **Optional Stepper**: Stepper controls for precise value input (planned feature)
+
+## Usage
+
+```tsx
+import Slider from './Slider';
+
+<Slider 
+  defaultValue={50}
+  min={0}
+  max={100}
+/>
+```
+
+## Examples
+
+### Default Slider
+
+<Canvas of={SliderStories.Default} />
+
+### Slider with Marks and Stepper
+
+<Canvas of={SliderStories.WithStepper} />
+
+## Props
+
+The Slider component accepts all standard Material-UI Slider props plus:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| stepper | boolean | false | Whether to show +/- stepper controls (planned feature) |
+| defaultValue | number | - | The default value of the slider |
+| min | number | 0 | The minimum allowed value |
+| max | number | 100 | The maximum allowed value |
+| step | number | 1 | The step size for increments/decrements |
+| marks | boolean \| array | false | Whether to show marks or custom mark definitions |
+| disabled | boolean | false | Whether the slider is disabled |
+| onChange | function | - | Callback fired when the value changes |
+
+## Styling
+
+The component uses Material-UI's Slider component with a fixed width of 300px and proper spacing for optimal usability. 
