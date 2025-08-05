@@ -14,11 +14,15 @@
     "deploy": "gh-pages -d storybook-static"
   },
   "dependencies": {
+    "@emoji-mart/data": "^1.2.1",
+    "@emoji-mart/react": "^1.1.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@fontsource/roboto": "^5.2.6",
     "@mui/icons-material": "^5.17.1",
     "@mui/material": "^5.17.1",
+    "emoji-mart": "^5.6.0",
+    "rc-virtual-list": "^3.19.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -32,6 +36,7 @@
     "@storybook/react-vite": "^9.0.4",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "@types/react-virtualized": "^9.21.29",
     "@vitejs/plugin-react": "^4.4.1",
     "@vitest/browser": "^3.2.1",
     "@vitest/coverage-v8": "^3.2.1",

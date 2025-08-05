@@ -1,4 +1,5 @@
 import { type SxProps } from "@mui/material";
+import { useMemo } from "react";
 
 interface MessageInputStyleProps {
   disabled?: boolean;
@@ -33,44 +34,46 @@ export const useMessageInputStyles = ({
   disabled,
   error,
 }: MessageInputStyleProps) => {
-  const root = {
-    borderRadius: 28,
-    border: getBorderColor({ disabled, error }),
-    display: "flex",
-    alignItems: "center",
-    padding: 0.8,
-    justifyContent: "space-between",
-    transition: "border-color 0.2s ease-in-out",
-    "&:focus-within": getFocusStyles({ disabled, error }),
-  };
+  return useMemo(() => {
+    const root = {
+      borderRadius: 28,
+      border: getBorderColor({ disabled, error }),
+      display: "flex",
+      alignItems: "center",
+      padding: 0.8,
+      justifyContent: "space-between",
+      transition: "border-color 0.2s ease-in-out",
+      "&:focus-within": getFocusStyles({ disabled, error }),
+    };
 
-  const textFieldsButton = {
-    color: "black",
-    ":disabled": { color: "rgb(163, 163, 163)" },
-  };
+    const textFieldsButton = {
+      color: "black",
+      ":disabled": { color: "rgb(163, 163, 163)" },
+    };
 
-  const inputBase = {
-    flex: 1,
-    marginLeft: 1,
-  };
+    const inputBase = {
+      flex: 1,
+      marginLeft: 1,
+    };
 
-  const micButton = {
-    color: "black",
-    ":disabled": {
-      color: "rgb(163, 163, 163)",
-    },
-    transition: "background-color 0.2s ease-in-out, color 0.2s ease-in-out",
-  };
+    const micButton = {
+      color: "black",
+      ":disabled": {
+        color: "rgb(163, 163, 163)",
+      },
+      transition: "background-color 0.2s ease-in-out, color 0.2s ease-in-out",
+    };
 
-  const sendButton = {
-    color: "black",
-    ":disabled": {
-      color: "rgb(163, 163, 163)",
-    },
-    transition: "background-color 0.2s ease-in-out, color 0.2s ease-in-out",
-  };
+    const sendButton = {
+      color: "black",
+      ":disabled": {
+        color: "rgb(163, 163, 163)",
+      },
+      transition: "background-color 0.2s ease-in-out, color 0.2s ease-in-out",
+    };
 
-  return { root, textFieldsButton, inputBase, micButton, sendButton };
+    return { root, textFieldsButton, inputBase, micButton, sendButton };
+  }, [disabled, error]);
 };
 
 interface IChatStyles {

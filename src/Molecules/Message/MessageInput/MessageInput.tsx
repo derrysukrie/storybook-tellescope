@@ -1,5 +1,5 @@
 import { Box, InputBase, Stack } from "@mui/material";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, memo } from "react";
 import { IconButton } from "../../../components/atoms/button/icon-button";
 import { Icon } from "../../../Atoms";
 import { AddCircleOutline, EmojiEmotionsOutlined, Mic } from "@mui/icons-material";
@@ -22,7 +22,7 @@ import { useMessageInput, type MessageInputProps } from "../hooks/useMessageInpu
  * />
  * ```
  */
-export const MessageInput = ({ 
+export const MessageInput = memo(({ 
   enableTeamChat, 
   chatInterface, 
   setChatInterface, 
@@ -61,7 +61,8 @@ export const MessageInput = ({
   }, [autoFocus]);
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    const newValue = e.target.value;
+    setValue(newValue);
   }, [setValue]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -78,6 +79,20 @@ export const MessageInput = ({
   const handleCompositionEnd = useCallback(() => {
     setIsComposing(false);
   }, [setIsComposing]);
+
+  // Memoize the input props to prevent unnecessary re-renders
+  const inputProps = useCallback(() => ({
+    "aria-label": "Type a message",
+    maxLength: maxLength,
+    "aria-describedby": showCharacterCount ? "character-count" : undefined
+  }), [maxLength, showCharacterCount]);
+
+  // Memoize the send button styles
+  const sendButtonStyles = useCallback(() => ({
+    ...inputStyles.sendButton,
+    opacity: canSubmit ? 1 : 0.5,
+    transition: 'opacity 0.2s ease'
+  }), [inputStyles.sendButton, canSubmit]);
 
   return (
     <Box sx={styles.inputContainer(enableTeamChat)}>
@@ -128,11 +143,7 @@ export const MessageInput = ({
               multiline={multiline}
               minRows={multiline ? 2 : 1}
               maxRows={multiline ? 4 : 1}
-              inputProps={{ 
-                "aria-label": "Type a message",
-                maxLength: maxLength,
-                "aria-describedby": showCharacterCount ? "character-count" : undefined
-              }}
+              inputProps={inputProps()}
             />
             <Box sx={{ display: "flex", alignItems: "center" }}>
               <IconButton 
@@ -146,11 +157,7 @@ export const MessageInput = ({
                 onClick={handleSubmit}
                 disabled={!canSubmit}
                 className="send-button"
-                sx={{
-                  ...inputStyles.sendButton,
-                  opacity: canSubmit ? 1 : 0.5,
-                  transition: 'opacity 0.2s ease'
-                }}
+                sx={sendButtonStyles()}
                 aria-label="Send message"
               >
                 <Send />
@@ -179,4 +186,6 @@ export const MessageInput = ({
       </Stack>
     </Box>
   );
-};
+});
+
+MessageInput.displayName = 'MessageInput';
