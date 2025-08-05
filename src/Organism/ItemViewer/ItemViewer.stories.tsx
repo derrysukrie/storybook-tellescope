@@ -6,7 +6,7 @@ import { ItemViewer } from "./ItemViewer";
 // import { mockMessages } from "../../data/mock";
 
 const meta: Meta<typeof ItemViewer> = {
-  title: "Organism/ItemViewer",
+  title: "Organisms/ItemViewer",
   parameters: {
     layout: "padded",
     docs: {

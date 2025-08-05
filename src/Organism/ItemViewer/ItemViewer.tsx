@@ -33,6 +33,7 @@ export const ItemViewer: React.FC<MessageProps> = React.memo(
     const [loading, setLoading] = useState({ isSubmitting: false });
     const [error, setError] = useState<string | null>(null);
 
+    console.log("messages", messages);
     // Use the centralized state management hook
     const { state, actions } = useMessageState(config, {
       onMessageSubmit: async (content: string) => {
