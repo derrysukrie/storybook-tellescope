@@ -39,7 +39,7 @@ export const HeaderContent = ({ chatInterface, enableTeamChat, setEnableTeamChat
   return (
     <Box>
       {/* Top section with patient info and actions - only show when not empty */}
-      {isEmpty && (
+      {!isEmpty && (
         <Box display="flex" bgcolor={enableTeamChat ? "#F4F0FF" : "#E2E8F0"} justifyContent="space-between" alignItems="center" p={2} sx={{ transition }}>
           <Box display="flex" gap={2} alignItems="center">
             <Typography variant="h5">Patient Name</Typography>
