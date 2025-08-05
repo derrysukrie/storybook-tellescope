@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Select from './select';
 import { useState } from 'react';
+import { MenuItem } from '@mui/material';
 
 const meta = {
     title: 'ATOMS/FormInputs/Select',
@@ -34,10 +35,10 @@ export const SingleSelect: Story = {
         label: "Label",
         value: "",
         onChange: () => { },
-        options: ['Synt to health', 'Content capsqd', 'Chip 3', 'Chip 4'],
         appearance: 'standard',
         multiple: false,
-        size: "medium"
+        size: "medium",
+        children: []
     },
     render: (args) => {
         const [value, setValue] = useState<string | string[]>(args.multiple || args.appearance === "table" ? [] : '');
@@ -47,7 +48,12 @@ export const SingleSelect: Story = {
                 multiple={args.multiple || args.appearance === "table"}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-            />
+            >
+                <MenuItem value="Synt to health" key="Synt to health">Synt to health</MenuItem>
+                <MenuItem value="Content capsqd" key="Content capsqd">Content capsqd</MenuItem>
+                <MenuItem value="Chip 3" key="Chip 3">Chip 3</MenuItem>
+                <MenuItem value="Chip 4" key="Chip 4">Chip 4</MenuItem>
+            </Select>
         );
     }
 };

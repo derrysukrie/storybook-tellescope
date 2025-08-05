@@ -1,17 +1,18 @@
-import { Stack, TableCell } from "@mui/material";
+import { Stack, TableCell, type TableCellProps } from "@mui/material";
 import CheckBox from "../../checkbox/checkbox";
 import StarIcon from '@mui/icons-material/Star';
 import type { FC } from "react";
 
-interface TableHeadProps {
+interface TableHeadProps extends TableCellProps {
     icon?: 'none' | 'left' | 'right';
     checkbox?: boolean;
-    small?: boolean
+    small?: boolean;
+    children?: React.ReactNode;
 }
 
-const TableHead: FC<TableHeadProps> = ({ icon, checkbox, small }) => {
+const TableHead: FC<TableHeadProps> = ({ icon, checkbox, small, children, sx, ...rest }) => {
     return (
-        <TableCell align="right" sx={{ fontWeight: 'bold', padding: "8px 16px", border: 0 }} variant="head">
+        <TableCell {...rest} sx={{ fontWeight: 'bold', border: 0, ...sx }} variant="head" >
             <Stack sx={{
                 flexDirection: "row",
                 alignItems: "center",
@@ -22,6 +23,10 @@ const TableHead: FC<TableHeadProps> = ({ icon, checkbox, small }) => {
                     <CheckBox
                         color="primary"
                         size={small ? "small" : "medium"}
+                        sx={{
+                            height: small ? "24px" : undefined,
+                            width: small ? "24px" : undefined,
+                        }}
                     />
                 }
 
@@ -34,7 +39,7 @@ const TableHead: FC<TableHeadProps> = ({ icon, checkbox, small }) => {
                         icon === "left" &&
                         <StarIcon sx={{ width: 20, color: "rgba(0, 0, 0, 0.56)" }} />
                     }
-                    Head
+                    {children}
                     {
                         icon === "right" &&
                         <StarIcon sx={{ width: 20, color: "rgba(0, 0, 0, 0.56)" }} />

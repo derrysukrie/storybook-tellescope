@@ -117,4 +117,5 @@ export const MessageContent = styled(Typography, {
 })<{ messageType: MessageType }>(({ messageType }) => ({
   color: messageTextColors[messageType],
   fontSize: "16px",
+  maxWidth: 300,
 }));

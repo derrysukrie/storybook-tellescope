@@ -3,7 +3,6 @@ import SvgIcon from "@mui/material/SvgIcon";
 export default function AddTicket() {
   return (
     <SvgIcon>
-      {/* credit: cog icon from https://heroicons.com */}
       <svg
         width="24"
         height="24"

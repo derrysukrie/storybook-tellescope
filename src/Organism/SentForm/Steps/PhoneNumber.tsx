@@ -69,8 +69,8 @@ export const PhoneNumber = () => {
           
           <FormControlAtom variant="outlined" fullWidth>
             <Input
-              appearance="outlined"
-              size="small"
+              appearance="distinct"
+              size="medium"
               hiddenLabel
               sx={{
                 backgroundColor: "white",

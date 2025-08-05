@@ -1,37 +1,45 @@
 import { Stack, TableCell as MuiTableCell, type TableCellProps as MuiTableCellProps } from "@mui/material";
-import StarIcon from '@mui/icons-material/Star';
-import type { ComponentProps, FC } from "react";
+import type { ComponentProps, FC, ReactNode } from "react";
 
 export interface TableCellProps extends Omit<MuiTableCellProps, 'children'> {
-    icon?: 'none' | 'left' | 'right';
+    iconPosition?: 'left' | 'right';
     children?: React.ReactNode;
     StackProps?: ComponentProps<typeof Stack>
+    icon?: ReactNode
+
 }
 
-const TableCell: FC<TableCellProps> = ({ icon, children, StackProps, sx, ...rest }) => {
+const TableCell: FC<TableCellProps> = ({ icon, iconPosition, children, StackProps, sx, ...rest }) => {
     const { sx: stackSx, ...stackRest } = StackProps || {};
 
     return (
-        <MuiTableCell align="right" sx={{ padding: "8px 16px", border: 0, ...sx }} {...rest}>
+        <MuiTableCell align="right" sx={{ border: 0, padding: "4px 16px !important", ...sx }} {...rest}>
             <Stack sx={{
                 flexDirection: "row",
                 alignItems: "center",
                 gap: 2,
+                // width: "100%",
                 ...stackSx
             }} {...stackRest}>
                 <Stack sx={{
                     flexDirection: "row",
                     alignItems: "center",
                     gap: 1,
+                    width: "100%",
+                    "svg": {
+                        width: 20,
+                        color: "rgba(0, 0, 0, 0.56)"
+                    }
                 }} >
                     {
-                        icon === "left" &&
-                        <StarIcon sx={{ width: 20, color: "rgba(0, 0, 0, 0.56)" }} />
+                        iconPosition === "left" &&
+                        icon
+                        // <StarIcon sx={{ width: 20, color: "rgba(0, 0, 0, 0.56)" }} />
                     }
                     {children}
                     {
-                        icon === "right" &&
-                        <StarIcon sx={{ width: 20, color: "rgba(0, 0, 0, 0.56)" }} />
+                        iconPosition === "right" &&
+                        icon
                     }
                 </Stack>
             </Stack>

@@ -4,7 +4,7 @@ import { Description, FormIntro, TextField, QuestionsGroup, LongTextField, Numbe
 import Graphic from "./Steps/Graphic";
 
 const meta = {
-  title: "Organism/SentForm",
+  title: "Organisms/SentForm",
   component: SentForm,
   parameters: {
     layout: "centered",

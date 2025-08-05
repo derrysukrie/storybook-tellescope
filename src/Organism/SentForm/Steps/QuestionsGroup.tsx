@@ -15,9 +15,8 @@ export const QuestionsGroup = () => {
             <Typography variant="h5">What would you like to be called?</Typography>
             <FormControlAtom variant="outlined" fullWidth>
               <Input
-                appearance="outlined"
-                size="small"
-                hiddenLabel
+                appearance="distinct"
+                size="medium"
                 sx={{
                   backgroundColor: "white",
                   width: "100%",
@@ -32,8 +31,8 @@ export const QuestionsGroup = () => {
             <Typography variant="h5">What would you like to be called?</Typography>
             <FormControlAtom variant="outlined" fullWidth>
               <Input
-                appearance="outlined"
-                size="small"
+                appearance="distinct"
+                size="medium"
                 hiddenLabel
                 sx={{
                   backgroundColor: "white",

@@ -23,7 +23,7 @@ export const InlineIcons: Story = {
     args: {
         color: "secondary",
         children: 'LABEL',
-        appearence: 'contained',
+        appearance: 'contained',
         size: "medium",
         disabled: false,
     },
@@ -31,11 +31,11 @@ export const InlineIcons: Story = {
         return (
             <div style={{ display: 'flex', gap: 8 }}>
                 <Button {...args} color="primary" endIcon={<ArrowForwardIosIcon sx={{ width: 16 }} />}>{args.children}</Button>
-                <Button {...args} color="primary" appearence="text" startIcon={<ArrowBackIosNewIcon sx={{ width: 16 }} />}>{args.children}</Button>
+                <Button {...args} color="primary" appearance="text" startIcon={<ArrowBackIosNewIcon sx={{ width: 16 }} />}>{args.children}</Button>
                 <div>
                     <Button {...args} color="secondary" startIcon={<FileCopyIcon sx={{ width: 16 }} />} endIcon={<ArrowDropDownIcon sx={{ fontSize: 30 }} />} size="small">{args.children}</Button>
                 </div>
-                <Button {...args} color="info" appearence="outlined" endIcon={<ArrowForwardIosIcon sx={{ width: 16 }} />}>{args.children}</Button>
+                <Button {...args} color="info" appearance="outlined" endIcon={<ArrowForwardIosIcon sx={{ width: 16 }} />}>{args.children}</Button>
             </div>
         );
     }

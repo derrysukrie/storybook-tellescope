@@ -10,8 +10,8 @@ export const EmailField = () => {
           <Typography variant="h5">Enter your email</Typography>
           <FormControlAtom variant="outlined" fullWidth>
             <Input
-              appearance="outlined"
-              size="small"
+              appearance="distinct"
+              size="medium"
               type="email"
               placeholder="Your email"
               hiddenLabel

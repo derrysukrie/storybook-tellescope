@@ -11,7 +11,7 @@ const meta = {
         },
     },
     argTypes: {
-        appearence: {
+        appearance: {
             control: { type: 'select' },
             options: ['contained', 'outlined', 'text'],
         },
@@ -43,7 +43,7 @@ type Story = StoryObj<typeof meta>;
 export const Loading: Story = {
     args: {
         children: 'Click Me',
-        appearence: 'contained',
+        appearance: 'contained',
         size: 'medium',
         color: 'primary',
         loading: true,

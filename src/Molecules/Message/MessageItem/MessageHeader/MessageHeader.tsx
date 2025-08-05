@@ -20,7 +20,7 @@ export const MessageHeader = ({
   onHeaderFormChange
 }: MessageHeaderProps) => {
   const isEmpty = content?.length === 0;
-  
+
   return (
     <HeaderContent
       chatInterface={chatInterface}

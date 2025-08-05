@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Select from './select';
 import { useState } from 'react';
+import { MenuItem } from '@mui/material';
+import { CheckCircle } from '@mui/icons-material';
 
 const meta = {
     title: 'ATOMS/FormInputs/Select',
@@ -31,25 +33,44 @@ type Story = StoryObj<typeof meta>;
 
 export const CheckMarks: Story = {
     args: {
-        label: 'Label',
-        options: ['Oliver Hansen', 'Van Henry', 'April Tucker', 'Ralph Hubbard', 'Omar Alexander'],
-        appearance: 'standard',
+        label: "Label",
+        appearance: "standard",
         multiple: true,
-        value: '',
+        size: "medium",
+        value: [],
         onChange: () => { },
-        size: 'medium',
-        optionStyle: "checkmark",
-
+        children: []
     },
     render: (args) => {
-        const [value, setValue] = useState<string | string[]>(args.multiple ? [] : '');
+        const [value, setValue] = useState<string | string[]>([]);
 
         return (
             <Select
                 {...args}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-            />
+            >
+                <MenuItem value="Oliver Hansen" key="Oliver Hansen">
+                    Oliver Hansen
+                    {value.includes("Oliver Hansen") && <CheckCircle />}
+                </MenuItem>,
+                <MenuItem value="Van Henry" key="Van Henry">
+                    Van Henry
+                    {value.includes("Van Henry") && <CheckCircle />}
+                </MenuItem>,
+                <MenuItem value="April Tucker" key="April Tucker">
+                    April Tucker
+                    {value.includes("April Tucker") && <CheckCircle />}
+                </MenuItem>,
+                <MenuItem value="Ralph Hubbard" key="Ralph Hubbard">
+                    Ralph Hubbard
+                    {value.includes("Ralph Hubbard") && <CheckCircle />}
+                </MenuItem>,
+                <MenuItem value="Omar Alexander" key="Omar Alexander">
+                    Omar Alexander
+                    {value.includes("Omar Alexander") && <CheckCircle />}
+                </MenuItem>
+            </Select>
         );
     }
 };

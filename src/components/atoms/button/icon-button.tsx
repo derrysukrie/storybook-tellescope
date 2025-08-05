@@ -16,13 +16,17 @@ export interface IconButtonProps extends Omit<MuiIconButtonProps, 'color' | 'var
     children?: React.ReactNode;
 }
 
-export const IconButton = ({ children, color = "primary", size = "medium", disabled = false, ...rest }: IconButtonProps) => (
+export const IconButton = ({ children, color = "primary", size = "medium", disabled = false, sx, ...rest }: IconButtonProps) => (
     <MuiIconButton
         disableRipple
         color={color}
         disabled={disabled}
         size={size}
         {...rest}
+        sx={{
+            height: "fit-content",
+            ...sx
+        }}
     >
         {children}
     </MuiIconButton>

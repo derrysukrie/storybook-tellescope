@@ -23,6 +23,9 @@ export const MessageImage = ({ image, messageType }: ImageProps) => {
         src={image.url}
         style={{
           borderRadius: "10px",
+          width: "100%",
+          height: 140,
+          objectFit: "cover",
         }}
         alt="message-image"
       />

@@ -3,17 +3,32 @@ import {
   MarkEmailUnreadOutlined,
   AddReactionOutlined,
 } from "@mui/icons-material";
-import { Nice } from "../Icons";
+import { Checkmark, Eye, HandsUp } from "../Icons";
 import type { MessageType } from "../types";
 
 interface MessageOptionsProps {
   haveUnreadMessages?: boolean;
   messageType: MessageType;
+  createdAt: Date;
+  messageId: string;
+  isEmojiPickerActive: boolean;
+  onAddReactionClick: (
+    messageId: string,
+    buttonElement: HTMLElement,
+    messageType: string
+  ) => void;
 }
 
-const ButttonIcon = ({ icon }: { icon: React.ReactNode }) => {
+const ButttonIcon = ({
+  icon,
+  onClick,
+}: {
+  icon: React.ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}) => {
   return (
     <IconButton
+      onClick={onClick}
       sx={{
         padding: "8px",
         transition: "all 0.2s ease-in-out",
@@ -30,7 +45,17 @@ const ButttonIcon = ({ icon }: { icon: React.ReactNode }) => {
 export const MessageOptions = ({
   haveUnreadMessages,
   messageType,
+  createdAt,
+  messageId,
+  isEmojiPickerActive,
+  onAddReactionClick,
 }: MessageOptionsProps) => {
+  const handleAddReactionClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    onAddReactionClick(messageId, event.currentTarget, messageType);
+  };
+
   return (
     <Box>
       <Box
@@ -50,7 +75,10 @@ export const MessageOptions = ({
           justifyContent={"flex-end"}
         >
           <Typography color={"black"} variant="caption">
-            9:00 AM
+            {new Date(createdAt).toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
           </Typography>
           <Box
             bgcolor={haveUnreadMessages ? "#EFF0F2" : "transparent"}
@@ -70,7 +98,7 @@ export const MessageOptions = ({
             <MarkEmailUnreadOutlined sx={{ color: "#3C82F6" }} />
           </Box>
         </Box>
-        <Box>
+        <Box position="relative">
           <Box
             display={"flex"}
             alignItems={"center"}
@@ -78,9 +106,13 @@ export const MessageOptions = ({
             borderRadius={"100px"}
             padding={"0"}
           >
-            <ButttonIcon icon={<Nice />} />
-            <ButttonIcon icon={<Nice />} />
-            <ButttonIcon icon={<AddReactionOutlined />} />
+            <ButttonIcon icon={<Checkmark />} />
+            <ButttonIcon icon={<HandsUp />} />
+            <ButttonIcon icon={<Eye />} />
+            <ButttonIcon
+              icon={<AddReactionOutlined />}
+              onClick={handleAddReactionClick}
+            />
           </Box>
         </Box>
       </Box>

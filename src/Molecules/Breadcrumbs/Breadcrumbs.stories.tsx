@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Breadcrumbs } from './Breadcrumbs';
-import React from 'react';
-import { Home, Settings, Notifications, Person, Star, FavoriteBorder } from '@mui/icons-material';
+import { Home, Settings } from '@mui/icons-material';
 
 interface ExtendedArgs {
   levels: 1 | 2 | 3;

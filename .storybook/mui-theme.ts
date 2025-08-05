@@ -22,6 +22,13 @@ declare module '@mui/material/Select' {
     }
 }
 
+declare module '@mui/material/Typography' {
+    interface TypographyPropsVariantOverrides {
+        custom: true;
+    }
+    
+}
+
 
 export const theme = createTheme({
     palette: {
@@ -625,6 +632,32 @@ export const theme = createTheme({
                     }),
                 },
             ],
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    justifyContent: 'space-between',
+                    "&.Mui-selected, &.Mui-selected:hover": {
+                        backgroundColor: '#DDE1F9',
+                    },
+                    "& > svg" : {
+                        width: "24px",
+                        color: "#0000008F"
+                    }
+                },
+            },
+            defaultProps: {
+                disableRipple: true
+            }
+        },
+        MuiTableCell: {
+            styleOverrides: {
+                root: {
+                    "&": {
+                        padding: "6px 16px",
+                    }
+                }
+            }
         }
     },
 });

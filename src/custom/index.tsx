@@ -14,10 +14,11 @@ export const useWheel = <T extends HTMLElement>() => {
 
         const handleWheel = (event: WheelEvent) => {
             // Hijack vertical scroll for horizontal movement
-            scrollElement.scrollTo({
-                left: scrollElement.scrollLeft + event.deltaY,
-                behavior: 'smooth',
-            });
+            // scrollElement.scrollTo({
+            //     left: scrollElement.scrollLeft + event.deltaY,
+            //     behavior: 'smooth',
+            // });
+            scrollElement.scrollLeft += event.deltaY;
             event.preventDefault();
         };
 

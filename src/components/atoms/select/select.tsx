@@ -1,29 +1,24 @@
-import { type FC } from 'react';
+import { useEffect, useRef, useState, type FC, type ReactNode } from 'react';
 import {
-    FormControl,
+    FormControl, Select as MuiSelect,
+    Chip, Stack,
+    type Theme,
     InputLabel,
-    MenuItem,
-    Select as MuiSelect,
-    Chip,
-    ListItemText, Stack,
-    type Theme
+    type FormControlProps
 } from '@mui/material';
 import type { SelectChangeEvent } from '@mui/material/Select';
-import CheckIcon from '@mui/icons-material/Check';
-import CheckBox from '../checkbox/checkbox';
 import { FormHelperText } from '@mui/material';
 import type { SelectProps as MuiSelectProps } from '@mui/material/Select';
-import { useWheel } from '../../../custom';
 
 
 type VariantType = 'standard' | 'filled' | 'outlined' | 'patientForm' | 'table';
 type OptionStyle = 'default' | 'checkmark' | 'checkbox';
 
-interface SelectProps extends Omit<MuiSelectProps<string | string[]>, 'onChange' | 'value'> {
+interface SelectProps extends Omit<MuiSelectProps<string | string[]>, 'onChange' | 'value' | "variant"> {
     label?: string;
     value: string | string[];
     onChange: (event: SelectChangeEvent<string | string[]>) => void;
-    options: string[];
+    // options: string[];
     multiple?: boolean;
     appearance?: VariantType;
     disabled?: boolean;
@@ -31,131 +26,128 @@ interface SelectProps extends Omit<MuiSelectProps<string | string[]>, 'onChange'
     helperText?: string;
     optionStyle?: OptionStyle;
     size?: 'small' | 'medium';
+    children: ReactNode;
+    hiddenLabel?: boolean;
+    FormControlProps?: FormControlProps;
 }
 
 const Select: FC<SelectProps> = ({
     label,
     value,
     onChange,
-    options,
+    // options,
+    children,
     multiple = false,
     appearance = 'standard',
     disabled = false,
     error = false,
     helperText,
-    optionStyle = 'default',
     size,
+    hiddenLabel = false,
+    FormControlProps,
     ...rest
 }) => {
     const isCustomVariant = appearance === 'patientForm' || appearance === 'table';
 
-    const scrollElementRef = useWheel<HTMLDivElement>();
+    const parentRef = useRef<HTMLDivElement>(null);
+    const childRef = useRef<HTMLDivElement>(null);
+    const [width, setWidth] = useState<string | number>("200");
+    const [isResizing, setIsResizing] = useState<boolean | null>(null);
+    // const { expanded } = useAppbarSidebarContext();
+    // const previousExpanded = useRef(expanded);
+
+    useEffect(() => {
+        let resizeTimeout: ReturnType<typeof setTimeout>;
+
+        const handleResize = () => {
+            setIsResizing(true);
+            clearTimeout(resizeTimeout);
+
+            resizeTimeout = setTimeout(() => {
+                if (parentRef.current) {
+                    const newWidth = parentRef.current.clientWidth;
+
+                    setWidth(newWidth);
+                }
+                setIsResizing(false);
+            }, 300);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        // Set initial width
+        if (parentRef.current) {
+            setWidth(parentRef.current.clientWidth);
+        }
+
+        return () => {
+            clearTimeout(resizeTimeout);
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
 
 
     const renderValue = (selected: string | string[]) => {
         if (multiple && Array.isArray(selected)) {
             return (
-                <Stack
-                    component="div"
-                    ref={scrollElementRef}
-                    sx={{
-                        flexDirection: "row",
-                        gap: 1,
-                        overflowX: 'auto',
-                        overflowY: 'hidden',
-                        maxWidth: '100%',
-                        touchAction: 'pan-y',
-                        paddingRight: appearance === 'table' ? "72px" : undefined,
-                        "& > *": {
-                            flexShrink: 0, // Prevent chips from shrinking and shifting
-                        },
-                        // Hide scrollbar for all major browsers
-                        "&::-webkit-scrollbar": {
-                            display: "none"
-                        },
-                        "-ms-overflow-style": "none", // IE and Edge
-                        "scrollbarWidth": "none", // Firefox
-                    }}
-                >
-                    {selected.map((val: string) => (
-                        <Chip
-                            disabled={disabled}
-                            key={val}
-                            label={val}
-                            size="small"
-                            clickable
-                            onMouseDown={(e) => e.stopPropagation()}
-                            onDelete={(e) => {
-                                e.stopPropagation();
-                                const filtered = selected.filter((item) => item !== val);
-                                onChange({
-                                    target: {
-                                        value: filtered,
-                                        name: label
-                                    }
-                                } as SelectChangeEvent<string | string[]>);
-                            }}
-                        />
-                    ))}
-                </Stack>
+                !isResizing && (
+                    <Stack
+                        component="div"
+                        ref={childRef}
+                        sx={{
+                            flexDirection: "row",
+                            gap: 1,
+                            overflowX: 'auto',
+                            overflowY: 'hidden',
+                            maxWidth: `${(width as number) - 40}px !important`,
+                            paddingRight: appearance === 'table' ? "40px" : undefined,
+                            // Hide scrollbar for all major browsers
+                            "&::-webkit-scrollbar": {
+                                display: "none"
+                            },
+                            "-ms-overflow-style": "none", // IE and Edge
+                            opacity: isResizing !== null ? 0 : 1,
+                            animation: isResizing !== null ? 'fadeInOpacity 0.3s forwards' : undefined,
+                            '@keyframes fadeInOpacity': {
+                                from: { opacity: 0 },
+                                to: { opacity: 1 }
+                            },
+                            borderRadius: "4px",
+                        }}
+                    >
+                        {selected.map((val: string) => (
+                            <Chip
+                                disabled={disabled}
+                                key={val}
+                                label={val}
+                                size="small"
+                                clickable
+                                onMouseDown={(e) => e.stopPropagation()}
+                                onDelete={(e) => {
+                                    e.stopPropagation();
+                                    const filtered = selected.filter((item) => item !== val);
+                                    onChange({
+                                        target: {
+                                            value: filtered,
+                                            name: label
+                                        }
+                                    } as SelectChangeEvent<string | string[]>);
+                                }}
+                                sx={{
+                                    textTransform: "capitalize",
+                                    maxWidth: "100%",
+                                }}
+                            />
+                        ))}
+                    </Stack>
+                )
+
             );
         }
         return selected;
     };
 
-    const renderMenuItem = (option: string) => {
-        if (!multiple) return <MenuItem
-            value={option}
-            disableRipple
-            sx={{
-                "&.Mui-selected, &.Mui-selected:hover": {
-                    backgroundColor: '#DDE1F9',
-                }
-            }}
-        >{option}</MenuItem>;
-
-        if (optionStyle === 'checkmark') {
-            return (
-                <MenuItem key={option} value={option} disableRipple sx={{
-                    justifyContent: 'space-between',
-                    "&.Mui-selected, &.Mui-selected:hover": {
-                        backgroundColor: '#DDE1F9',
-                    }
-                }}>
-                    {option}
-                    {value.includes(option) && <CheckIcon />}
-                </MenuItem>
-            );
-        }
-
-        if (optionStyle === 'checkbox') {
-            return (
-                <MenuItem key={option} value={option} disableRipple
-                    sx={{
-                        "&.Mui-selected, &.Mui-selected:hover": {
-                            backgroundColor: '#DDE1F9',
-                        }
-                    }}
-                >
-                    <CheckBox checked={(value as string[]).includes(option)} />
-                    <ListItemText primary={option} />
-                </MenuItem>
-            );
-        }
-
-        return <MenuItem
-            key={option}
-            value={option}
-            disableRipple
-            sx={{
-                "&.Mui-selected, &.Mui-selected:hover": {
-                    backgroundColor: '#DDE1F9',
-                }
-            }}
-        >
-            {option}
-        </MenuItem>;
-    };
 
     const getSx = (theme: Theme) => {
         if (appearance === 'standard') {
@@ -211,6 +203,9 @@ const Select: FC<SelectProps> = ({
             return {
                 minWidth: 220,
                 maxWidth: "100%",
+                "& .MuiInputBase-root.MuiInput-root": {
+                    marginTop: "0px !important",
+                },
                 '.MuiOutlinedInput-root': {
                     height: "auto",
                     padding: '24px',
@@ -219,18 +214,19 @@ const Select: FC<SelectProps> = ({
                     display: 'none',
                 },
                 "& .MuiSvgIcon-root.MuiSelect-icon.MuiSelect-iconStandard": {
-                    // display: 'none',
+                    display: 'none',
                     backgroundColor: '#fff',
-                    paddingRight: "24px",
-                    paddingLeft: "24px",
-                    top: size === "medium" ? "4px" : "1px",
+                    paddingRight: "8px",
+                    paddingLeft: "8px",
+                    // top: size === "medium" ? "4px" : "1px",
+                    top: "4px",
                     width: "auto",
                     zIndex: 999
                 },
                 '&:hover': {
                     "& .MuiSvgIcon-root.MuiSelect-icon.MuiSelect-iconStandard": {
                         display: "block",
-                        paddingLeft: "24px",
+                        paddingLeft: "8px",
                     }
                 },
                 ".MuiSelect-select.MuiSelect-standard.MuiInputBase-input.MuiInput-input:focus": {
@@ -239,11 +235,13 @@ const Select: FC<SelectProps> = ({
                 '& .Mui-focused ': {
                     "& .MuiSvgIcon-root.MuiSelect-icon.MuiSelect-iconStandard": {
                         display: "block",
-                        paddingLeft: "24px",
+                        paddingLeft: "8px",
                     }
                 },
                 ".MuiSelect-select.MuiSelect-standard.MuiSelect-multiple.MuiInputBase-input": {
-                    paddingRight: "0 !important"
+                    paddingRight: "0",
+                    paddingY: "4px",
+
                 },
                 '& .MuiOutlinedInput-notchedOutline': {
                     display: 'none',
@@ -262,22 +260,27 @@ const Select: FC<SelectProps> = ({
         }
     };
 
+    const { sx } = FormControlProps || {}
+
+
     return (
         <FormControl
             fullWidth
             variant={appearance === "patientForm" ? "outlined" : appearance === "table" ? "standard" : appearance}
+            {...FormControlProps}
             sx={(theme) => ({ ...getSx(theme) })}
             error={error}
             disabled={disabled}
             size={size}
+            hiddenLabel={hiddenLabel}
+            ref={parentRef}
         >
-            <InputLabel variant={isCustomVariant ? "outlined" : appearance}>{label}</InputLabel>
+            {!hiddenLabel ? <InputLabel variant={isCustomVariant ? "outlined" : appearance}>{label}</InputLabel> : null}
+
             <MuiSelect
-                label={label}
                 multiple={multiple}
                 value={value}
                 onChange={onChange}
-                // input={multiple ? <Input label={label} /> : undefined}
                 renderValue={renderValue}
                 error={error}
                 disabled={disabled}
@@ -291,7 +294,7 @@ const Select: FC<SelectProps> = ({
                 } : undefined}
                 {...rest}
             >
-                {options.map(renderMenuItem)}
+                {children}
             </MuiSelect>
             {helperText && (
                 <FormHelperText error={error}>

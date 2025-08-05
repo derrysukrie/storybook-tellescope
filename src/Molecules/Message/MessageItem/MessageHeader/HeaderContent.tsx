@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, MenuItem, Stack, Typography } from "@mui/material";
 import { InfoOutlined, PersonAddAlt, ChatBubbleOutline, MailOutline, TextsmsOutlined, GroupOutlined, AddOutlined, GroupAddOutlined } from "@mui/icons-material";
 import { Icon } from "../../../../Atoms";
 import { Button } from "../../../../components/atoms/button/button";
@@ -59,7 +59,7 @@ export const HeaderContent = ({ chatInterface, enableTeamChat, setEnableTeamChat
             <Icon icon={IconComponent} size="medium" sx={{ color }} />
             {isEmpty ? (
               <Button
-                appearence="outlined"
+                appearance="outlined"
                 size="small"
                 sx={{
                   borderRadius: "10px",
@@ -80,7 +80,7 @@ export const HeaderContent = ({ chatInterface, enableTeamChat, setEnableTeamChat
                 <TranslateIcon />
                 <Typography variant="h5">{getDisplayText(chatInterface)}</Typography>
                 <Button
-                  appearence="outlined"
+                  appearance="outlined"
                   size="small"
                   sx={{
                     borderRadius: "10px",
@@ -116,8 +116,11 @@ export const HeaderContent = ({ chatInterface, enableTeamChat, setEnableTeamChat
                 label="From: +123 456 7890"
                 sx={{ margin: 0 }}
                 onChange={(e) => onHeaderFormChange?.("from", e.target.value as string)}
-                options={["Option 1", "Option 2", "Option 3"]}
-              />
+              >
+                <MenuItem value="Option 1">Option 1</MenuItem>
+                <MenuItem value="Option 2">Option 2</MenuItem>
+                <MenuItem value="Option 3">Option 3</MenuItem>
+              </Select>
             )}
             {chatInterface === "EMAIL" && (
               <Select
@@ -125,8 +128,11 @@ export const HeaderContent = ({ chatInterface, enableTeamChat, setEnableTeamChat
                 label="CC"
                 sx={{ margin: 0 }}
                 onChange={(e) => onHeaderFormChange?.("cc", e.target.value as string)}
-                options={["Option 1", "Option 2", "Option 3"]}
-              />
+              >
+                <MenuItem value="Option 1">Option 1</MenuItem>
+                <MenuItem value="Option 2">Option 2</MenuItem>
+                <MenuItem value="Option 3">Option 3</MenuItem>
+              </Select>
             )}
             {chatInterface === "MMS" && (
               <Select
@@ -135,8 +141,11 @@ export const HeaderContent = ({ chatInterface, enableTeamChat, setEnableTeamChat
                 sx={{ margin: 0 }}
                 multiple
                 onChange={(e) => onHeaderFormChange?.("cc", e.target.value as string[])}
-                options={["Option 1", "Option 2", "Option 3"]}
-              />
+              >
+                <MenuItem value="Option 1">Option 1</MenuItem>
+                <MenuItem value="Option 2">Option 2</MenuItem>
+                <MenuItem value="Option 3">Option 3</MenuItem>
+              </Select>
             )}
           </Box>
         )}
@@ -150,11 +159,12 @@ export const HeaderContent = ({ chatInterface, enableTeamChat, setEnableTeamChat
             <Stack display={"flex"} flexDirection={"row"} gap={2} alignItems={"center"}>
               <Icon icon={GroupAddOutlined} size="medium" />
               <Button
-                appearence="outlined"
+                appearance="outlined"
                 size="small"
                 color="secondary"
                 sx={{
                   textTransform: "none",
+                  borderRadius: "100px",
                 }}
                 startIcon={<AddOutlined />}
               >

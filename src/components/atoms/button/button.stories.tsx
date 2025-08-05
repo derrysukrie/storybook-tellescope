@@ -16,7 +16,7 @@ const meta = {
             options: ['primary', 'secondary', 'info'],
             control: { type: 'select' },
         },
-        appearence: {
+        appearance: {
             control: { type: 'select' },
             options: ['contained', 'outlined', 'text'],
         },
@@ -35,7 +35,7 @@ export const Default: Story = {
     args: {
         children: 'LABEL',
         color: 'primary',
-        appearence: 'contained',
+        appearance: 'contained',
         size: "medium",
         disabled: false,
     },

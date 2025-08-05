@@ -3,7 +3,7 @@ import {
     InputAdornment,
     TextField as MuiTextField,
 } from '@mui/material';
-import type { TextFieldProps as MuiTextFieldProps } from '@mui/material/TextField';
+import type { TextFieldProps as MuiTextFieldProps, FormControlProps as MuiFormControlProps } from '@mui/material';
 import { useState, type ChangeEvent, type ReactNode } from 'react';
 
 type BaseProps = {
@@ -13,6 +13,7 @@ type BaseProps = {
     defaultValue?: string;
     startIcon?: ReactNode;
     endIcon?: ReactNode;
+    FormControlProps?: MuiFormControlProps
 };
 
 
@@ -48,13 +49,14 @@ export const Input = (props: InputProps) => {
             endIcon,
             placeholder,
             sx,
+            FormControlProps,
             ...rest
         } = props;
 
         const hasStartAdornment = !!startIcon;
         const pos = getPos("outlined");
         return (
-            <FormControl variant={"outlined"} size={size} error={error}>
+            <FormControl variant={"outlined"} size={size} error={error} {...FormControlProps}>
                 <MuiTextField
                     variant={"outlined"}
                     value={currentValue}
@@ -63,6 +65,7 @@ export const Input = (props: InputProps) => {
                     placeholder={placeholder ? placeholder : typeof label === 'string' ? label : undefined}
                     helperText={helperText}
                     error={error}
+
                     hiddenLabel
                     InputProps={{
                         startAdornment: startIcon ? (
@@ -148,19 +151,22 @@ export const Input = (props: InputProps) => {
         label,
         placeholder,
         sx,
+        InputLabelProps,
+        InputProps,
+        FormControlProps,
         ...rest
     } = props;
     const hasStartAdornment = !!startIcon;
     const pos = getPos(appearance);
 
     return (
-        <FormControl variant={appearance} size={size} error={error}>
+        <FormControl variant={appearance} size={size} error={error}  {...FormControlProps}>
             <MuiTextField
                 variant={appearance}
                 value={currentValue}
                 onChange={handleChange}
                 // InputLabelProps={{ shrink: currentValue.length > 0 }}
-                InputLabelProps={{ shrink: currentValue.length > 0 || !!placeholder }}
+                InputLabelProps={{ shrink: currentValue.length > 0 || !!placeholder, ...InputLabelProps }}
                 size={size}
                 label={label}
                 helperText={helperText}
@@ -177,6 +183,7 @@ export const Input = (props: InputProps) => {
                             {endIcon}
                         </InputAdornment>
                     ) : null,
+                    ...InputProps
                 }}
                 sx={{
                     ...(hasStartAdornment && {

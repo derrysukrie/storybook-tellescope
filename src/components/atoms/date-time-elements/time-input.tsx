@@ -36,7 +36,7 @@ const TimeInput: FC<TimeInputProps> = ({ label = false, value, onChange, ...rest
     };
 
     return (
-        <FormControl sx={{ gap: "7px" }}>
+        <FormControl sx={{ gap: "7px", height: "fit-content" }}>
             <Input
                 appearance="outlined"
                 // inputProps={{ maxLength: 2 }}
@@ -74,9 +74,15 @@ const TimeInput: FC<TimeInputProps> = ({ label = false, value, onChange, ...rest
                 onChange={handleChange}
                 {...rest}
             />
-            <FormLabel sx={{ color: "rgba(69, 70, 79, 1)" }}>
-                {label ? "Time label" : ""}
-            </FormLabel>
+
+            {
+                label ? (
+                    <FormLabel sx={{ color: "rgba(69, 70, 79, 1)" }}>
+                        {label ? "Time label" : ""}
+                    </FormLabel>
+                ) : null
+            }
+
         </FormControl>
     )
 }

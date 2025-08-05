@@ -3,7 +3,7 @@ import { Input, type InputProps } from '../input/input';
 
 type TextareaProps = Omit<InputProps, 'appearance' | "size"> & {
     rows?: number;
-    appearance: 'standard' | 'filled' | 'outlined' | "patientForm";
+    appearance: 'standard' | 'filled' | 'outlined' | "patientForm" | "distinct";
 };
 
 const Textarea: FC<TextareaProps> = (props) => {

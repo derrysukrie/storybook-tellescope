@@ -3,7 +3,7 @@ import type { ButtonProps as MuiButtonProps } from '@mui/material/Button';
 import type { FC } from 'react';
 
 export interface LoadingButtonProps extends Omit<MuiButtonProps, 'color' | 'variant' | 'size'> {
-    appearence?: "contained" | "outlined" | "text"
+    appearance?: "contained" | "outlined" | "text"
     size?: "large" | "medium" | "small";
     loading?: boolean;
     color?: "primary" | "secondary" | "info";
@@ -18,7 +18,7 @@ export const LoadingButton: FC<LoadingButtonProps> = ({
     loadingPosition = 'start',
     loadingIndicator,
     children,
-    appearence = "contained",
+    appearance = "contained",
     ...rest
 }) => {
     return (
@@ -35,7 +35,7 @@ export const LoadingButton: FC<LoadingButtonProps> = ({
                     <CircularProgress color="inherit" size={16} />
                 ) : undefined
             }
-            variant={appearence}
+            variant={appearance}
         >
             {loading && loadingPosition === 'center' ? (
                 <>

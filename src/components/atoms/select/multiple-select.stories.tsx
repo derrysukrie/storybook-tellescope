@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Select from './select';
 import { useState } from 'react';
+import { MenuItem } from '@mui/material';
 
 const meta = {
     title: 'ATOMS/FormInputs/Select',
@@ -32,7 +33,7 @@ type Story = StoryObj<typeof meta>;
 export const MultipleSelect: Story = {
     args: {
         label: 'Label',
-        options: ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'],
+        children: [],
         appearance: "standard",
         multiple: true,
         value: '',
@@ -46,7 +47,12 @@ export const MultipleSelect: Story = {
                 {...args}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-            />
+            >
+                <MenuItem value="Option 1" key="Option 1">Option 1</MenuItem>
+                <MenuItem value="Option 2" key="Option 2">Option 2</MenuItem>
+                <MenuItem value="Option 3" key="Option 3">Option 3</MenuItem>
+                <MenuItem value="Option 4" key="Option 4">Option 4</MenuItem>
+            </Select>
         );
     }
 };

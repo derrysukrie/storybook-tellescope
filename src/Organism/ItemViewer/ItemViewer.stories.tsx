@@ -1,12 +1,12 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from 'storybook/test';
+// import { fn } from 'storybook/test';
 
 import { ItemViewer } from "./ItemViewer";
-import { mockMessages } from "../../data/mock";
+import { generateSampleMessages } from "../../data/mock";
 
 const meta: Meta<typeof ItemViewer> = {
-  title: "Organism/ItemViewer",
+  title: "Organisms/ItemViewer",
   parameters: {
     layout: "padded",
     docs: {
@@ -51,10 +51,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // Basic API Integration Story
-export const Basic: Story = {
+export const Default: Story = {
   render: () => (
     <ItemViewer
-      messages={[]}
+      messages={generateSampleMessages(100)}
       config={{
         enableTeamChat: false,
         chatInterface: "CHAT",

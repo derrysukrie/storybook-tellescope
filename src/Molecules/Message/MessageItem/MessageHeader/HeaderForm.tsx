@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Box, MenuItem, Stack } from "@mui/material";
 import { FormControlAtom } from "../../../../Atoms";
 import { Input } from "../../../../components/atoms/input/input";
 import Select from "../../../../components/atoms/select/select";
@@ -26,8 +26,11 @@ export const HeaderForm = ({
                 onChange={(e) =>
                   onHeaderFormChange("to", e.target.value as string)
                 }
-                options={["Option 1", "Option 2", "Option 3"]}
-              />
+              >
+                <MenuItem value="Option 1">Option 1</MenuItem>
+                <MenuItem value="Option 2">Option 2</MenuItem>
+                <MenuItem value="Option 3">Option 3</MenuItem>
+              </Select>
             </FormControlAtom>
             <FormControlAtom variant="standard">
               <Select
@@ -38,8 +41,11 @@ export const HeaderForm = ({
                 onChange={(e) =>
                   onHeaderFormChange("cc", e.target.value as string)
                 }
-                options={["Option 1", "Option 2", "Option 3"]}
-              />
+              >
+                <MenuItem value="Option 1">Option 1</MenuItem>
+                <MenuItem value="Option 2">Option 2</MenuItem>
+                <MenuItem value="Option 3">Option 3</MenuItem>
+              </Select>
             </FormControlAtom>
             <FormControlAtom variant="standard">
               <Input
@@ -66,8 +72,11 @@ export const HeaderForm = ({
                 onChange={(e) =>
                   onHeaderFormChange("from", e.target.value as string)
                 }
-                options={["Option 1", "Option 2", "Option 3"]}
-              />
+              >
+                <MenuItem value="Option 1">Option 1</MenuItem>
+                <MenuItem value="Option 2">Option 2</MenuItem>
+                <MenuItem value="Option 3">Option 3</MenuItem>
+              </Select>
               <Input
                 sx={{ mt: 2 }}
                 placeholder="To"
@@ -93,8 +102,11 @@ export const HeaderForm = ({
                 onChange={(e) =>
                   onHeaderFormChange("to", e.target.value as string[])
                 }
-                options={["Option 1", "Option 2", "Option 3"]}
-              />
+              >
+                <MenuItem value="Option 1">Option 1</MenuItem>
+                <MenuItem value="Option 2">Option 2</MenuItem>
+                <MenuItem value="Option 3">Option 3</MenuItem>
+              </Select>
               <Input
                 sx={{ mt: 2 }}
                 placeholder="Subject"
@@ -116,11 +128,14 @@ export const HeaderForm = ({
                   label="To"
                   labelId="chat-to-select-label"
                   id="chat-to-select"
-                  options={["James", "John", "Jane"]}
                   onChange={(e) =>
                     onHeaderFormChange("to", e.target.value as string)
                   }
-                />
+                >
+                  <MenuItem value="James">James</MenuItem>
+                  <MenuItem value="John">John</MenuItem>
+                  <MenuItem value="Jane">Jane</MenuItem>
+                </Select>
               </FormControlAtom>
               <FormControlAtom variant="standard">
                 <Input
