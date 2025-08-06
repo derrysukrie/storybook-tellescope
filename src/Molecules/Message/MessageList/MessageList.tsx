@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import  { useEffect, useRef, useState, useCallback } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 import type { IMessage } from "../types";
 
@@ -14,79 +14,142 @@ export interface ChatProps {
 
 export const Messages = ({ content, enableTeamChat }: ChatProps) => {
   const messagesRef = useRef<HTMLDivElement>(null);
-  let lastDate: Date | null = null;
+  const listRef = useRef<any>(null);
+  const [containerHeight, setContainerHeight] = useState(0);
 
-  // Auto-scroll to bottom when messages change
-  useEffect(() => {
-    if (messagesRef.current && content && content.length > 0) {
-      const scrollToBottom = () => {
-        if (messagesRef.current) {
-          messagesRef.current.scrollTo({
-            top: messagesRef.current.scrollHeight,
-            behavior: "smooth",
-          });
+  const calculateAverageItemHeight = useCallback(() => {
+    // ... (Fungsi ini tidak perlu diubah, biarkan seperti adanya)
+    if (!content || content.length === 0) return 100;
+    let totalHeight = 0;
+    let itemCount = 0;
+    let lastDate: Date | null = null;
+    content.forEach((message) => {
+      let height = 0;
+      const basePadding = 16;
+      const messagePadding = 12;
+      height += basePadding + messagePadding;
+      if (message.text) {
+        const averageCharPerLine = 50;
+        const lineHeight = 20;
+        const minLines = 1;
+        const maxLines = 10;
+        const estimatedLines = Math.min(
+          Math.max(
+            Math.ceil(message.text.length / averageCharPerLine),
+            minLines
+          ),
+          maxLines
+        );
+        height += estimatedLines * lineHeight;
+      }
+      if (message.image) {
+        height += 200;
+      }
+      if (message.createdAt) {
+        const showDateSeparator = !lastDate || lastDate.toDateString() !== message.createdAt.toDateString();
+        if (showDateSeparator) {
+          height += 40;
         }
-      };
-
-      // Use setTimeout to ensure DOM is updated
-      setTimeout(scrollToBottom, 100);
-    }
+        lastDate = new Date(message.createdAt);
+      }
+      height += 32;
+      totalHeight += height;
+      itemCount++;
+    });
+    return itemCount > 0 ? totalHeight / itemCount : 100;
   }, [content]);
 
-  // Initial scroll to bottom when component mounts
-  useEffect(() => {
+  const updateContainerHeight = useCallback(() => {
     if (messagesRef.current) {
-      const scrollToBottom = () => {
-        if (messagesRef.current) {
-          messagesRef.current.scrollTo({
-            top: messagesRef.current.scrollHeight,
-            behavior: "auto",
-          });
-        }
-      };
-
-      // Initial scroll to bottom
-      setTimeout(scrollToBottom, 50);
+      const parent = messagesRef.current.parentElement;
+      if (parent) {
+        setContainerHeight(parent.clientHeight);
+      }
     }
   }, []);
+  
+  // Scroll to bottom function - Disederhanakan
+  const scrollToBottom = useCallback((behavior: ScrollBehavior = "smooth") => {
+    if (listRef.current) {
+      // rc-virtual-list memiliki method `scrollTo` sendiri
+      listRef.current.scrollTo({
+        index: content.length - 1,
+        align: 'bottom',
+        behavior: behavior,
+      });
+    }
+  }, [content.length]);
+
+  // useEffect untuk mengukur tinggi container
+  useEffect(() => {
+    updateContainerHeight();
+    window.addEventListener('resize', updateContainerHeight);
+    return () => window.removeEventListener('resize', updateContainerHeight);
+  }, [updateContainerHeight]);
+
+  // useEffect UTAMA untuk scroll. Menggabungkan initial load dan pesan baru.
+  useEffect(() => {
+    // Pastikan ada konten dan container sudah punya tinggi
+    if (content && content.length > 0 && containerHeight > 0) {
+        // Gunakan 'auto' untuk scroll instan pada load pertama atau perubahan besar
+        // Gunakan timeout kecil untuk memastikan rc-virtual-list sudah siap
+        setTimeout(() => scrollToBottom("auto"), 50);
+    }
+  }, [content, containerHeight, scrollToBottom]); // <-- KUNCI UTAMA ADA DI SINI
+
+  const renderMessageItem = useCallback((message: IMessage, index: number) => {
+    // ... (Fungsi ini tidak perlu diubah)
+    const previousMessage = index > 0 ? content[index - 1] : null;
+    const previousDate = previousMessage?.createdAt ? new Date(previousMessage.createdAt) : null;
+    const currentDate = message.createdAt ? new Date(message.createdAt) : null;
+    const showDateSeparator = currentDate && (
+      !previousDate || 
+      previousDate.toDateString() !== currentDate.toDateString()
+    );
+    return (
+      <Box
+        key={message.id || index}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "fit-content",
+        }}
+      >
+        {showDateSeparator && currentDate && (
+          <DateSeparator date={currentDate} />
+        )}
+        <MessageBubble 
+          message={message} 
+          messageId={message.id || String(Math.random())}
+          isEmojiPickerActive={false}
+          onAddReactionClick={() => {}}
+        />
+      </Box>
+    );
+  }, [content]);
 
   return (
     <Box
       ref={messagesRef}
       sx={{
         ...styles.messagesContainer(content?.length, enableTeamChat),
-        flex: 1, // Take remaining space
-        overflowY: "auto", // Enable scrolling
+        flex: 1,
+        overflow: 'hidden', // <-- Ganti overflowY ke hidden, biarkan List yang handle
         display: "flex",
-        flexDirection: "column", // Normal column direction
-
-        maxHeight: "100vh", // Set a max height to enable scrolling
-        // Hide scrollbar for cleaner look
-        "&::-webkit-scrollbar": {
-          display: "none",
-        },
-        "-ms-overflow-style": "none", // IE and Edge
-        scrollbarWidth: "none", // Firefox
+        flexDirection: "column",
+        height: "100%", // <-- Pastikan ini terdefinisi
       }}
     >
-      <List data={content} fullHeight itemKey="id">
-        {(message,index) => <MessageBubble message={message} />}
-      </List>
-
-      {/* {content?.length > 0 ? (
-        content.map((message, index) => {
-          const showDateSeparator = message.createdAt && (!lastDate || lastDate.toDateString() !== message.createdAt.toDateString());
-          lastDate = message.createdAt ? new Date(message.createdAt) : lastDate;
-
-          return (
-            <React.Fragment key={index}>
-              {showDateSeparator && message.createdAt && <DateSeparator date={message.createdAt} />}
-              <List data={content} height={200} itemHeight={30} itemKey="id">
-                {(index) => <MessageBubble message={message} />}
-              </List>
-            </React.Fragment>
-          );
-        })
+      {content?.length > 0 ? (
+        <List 
+          ref={listRef}
+          data={content} 
+          height={containerHeight}
+          itemHeight={calculateAverageItemHeight()}
+          itemKey="id"
+        >
+          {renderMessageItem}
+        </List>
       ) : (
         <Stack
           sx={{
@@ -104,7 +167,7 @@ export const Messages = ({ content, enableTeamChat }: ChatProps) => {
             </Typography>
           </Box>
         </Stack>
-      )} */}
+      )}
     </Box>
   );
 };
