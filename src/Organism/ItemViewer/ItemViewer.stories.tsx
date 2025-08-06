@@ -54,7 +54,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <ItemViewer
-      messages={generateSampleMessages(100)}
+      messages={generateSampleMessages(10)}
       config={{
         enableTeamChat: false,
         chatInterface: "CHAT",
