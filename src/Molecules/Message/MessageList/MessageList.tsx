@@ -5,6 +5,7 @@ import { MessageBubble } from "../MessageItem/MessageBubble/MessageBubble";
 import { DateSeparator } from "../MessageItem/DateSeparator";
 import { styles } from "../MessageInput/styles/maps";
 import { useVirtualizer } from "@tanstack/react-virtual";
+import { EmojiPicker } from "../../EmojiPicker/EmojiPicker";
 
 const estimateMessageHeight = (message: IMessage, lastDate: Date | null): number => { 
     let height = 0; const basePadding = 16; const messagePadding = 12; height += basePadding + messagePadding;
@@ -18,7 +19,6 @@ interface MessagesProps {
   content: IMessage[];
   enableTeamChat?: boolean;
 }
-
 
 const stylesMessageList = {
   container: {
@@ -51,6 +51,57 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const [isAtBottom, setIsAtBottom] = React.useState(false);
+
+  // Emoji picker state and refs
+  const [activeEmojiPicker, setActiveEmojiPicker] = React.useState<string | null>(null);
+  const [emojiPickerPosition, setEmojiPickerPosition] = React.useState<{ x: number; y: number; messageType: string } | null>(null);
+  const emojiPickerRef = React.useRef<HTMLDivElement>(null);
+
+  // Handler for selecting an emoji
+  const handleEmojiSelect = (emoji: any) => {
+    // TODO: handle emoji selection logic
+    console.log("Selected emoji:", emoji);
+    setActiveEmojiPicker(null);
+    setEmojiPickerPosition(null);
+  };
+
+  // Handler for add reaction button click
+  const handleAddReactionClick = (messageId: string, buttonElement: HTMLElement, messageType: string) => {
+    if (activeEmojiPicker === messageId) {
+      setActiveEmojiPicker(null);
+      setEmojiPickerPosition(null);
+    } else {
+      setActiveEmojiPicker(messageId);
+      // Calculate position for the emoji picker
+      const rect = buttonElement.getBoundingClientRect();
+      const pickerHeight = 400; // Approximate height of emoji picker
+      const spaceBelow = window.innerHeight - rect.bottom;
+
+      // If not enough space below, position above the button
+      const y = spaceBelow >= pickerHeight + 10 
+        ? rect.bottom + 10 
+        : rect.top - pickerHeight - 10;
+      // For x, you may want to adjust based on message type (left/right)
+      const x = messageType === "INCOMING" ? rect.right - 350 : rect.left;
+      setEmojiPickerPosition({ x, y, messageType });
+    }
+  };
+
+  // Handle click outside to close emoji picker
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target as Node)) {
+        setActiveEmojiPicker(null);
+        setEmojiPickerPosition(null);
+      }
+    };
+    if (activeEmojiPicker) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [activeEmojiPicker]);
 
   const virtualizer = useVirtualizer({
     count: content.length,
@@ -122,7 +173,7 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
                     message={message}
                     messageId={message.id || String(Math.random())}
                     isEmojiPickerActive={false}
-                    onAddReactionClick={() => {}}
+                    onAddReactionClick={handleAddReactionClick}
                   />
                 </Box>
               );
@@ -144,6 +195,20 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
           </Stack>
         )}
       </Box>
+      {/* Render EmojiPicker at the top level, positioned absolutely */}
+      {activeEmojiPicker && emojiPickerPosition && (
+        <Box
+          ref={emojiPickerRef}
+          sx={{
+            position: 'fixed',
+            left: emojiPickerPosition.x,
+            top: emojiPickerPosition.y,
+            zIndex: 1000,
+          }}
+        >
+          <EmojiPicker onEmojiSelect={handleEmojiSelect} />
+        </Box>
+      )}
     </Box>
   );
 };  
