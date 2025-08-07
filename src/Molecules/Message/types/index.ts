@@ -2,6 +2,7 @@ export type MessageType = "INCOMING" | "OUTGOING" | "TEAM_CHAT";
 export type ChatInterface = "CHAT" | "SMS" | "EMAIL" | "MMS";
 
 export interface IMessage {
+  id?: string;
   type: MessageType;
   text: string;
   avatar?: string;

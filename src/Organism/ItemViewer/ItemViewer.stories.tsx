@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 // import { fn } from 'storybook/test';
 
 import { ItemViewer } from "./ItemViewer";
-// import { mockMessages } from "../../data/mock";
+import { generateSampleMessages } from "../../data/mock";
 
 const meta: Meta<typeof ItemViewer> = {
   title: "Organisms/ItemViewer",
@@ -54,7 +54,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   render: () => (
     <ItemViewer
-      messages={[]}
+      messages={generateSampleMessages(10)}
       config={{
         enableTeamChat: false,
         chatInterface: "CHAT",

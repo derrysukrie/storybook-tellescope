@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState, useMemo, useEffect } from "react";
 import type { ChatInterface } from "../types";
 
 export interface InputConfig {
@@ -31,15 +31,34 @@ export const useMessageInput = ({
   const [value, setValue] = useState("");
   const [isComposing, setIsComposing] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const handleChange = useCallback(
     (newValue: string) => {
       if (maxLength && newValue.length > maxLength) return;
       setValue(newValue);
-      onInputChange?.(newValue);
+      
+      // Debounce the onInputChange callback to reduce parent component updates
+      if (onInputChange) {
+        if (debounceTimeoutRef.current) {
+          clearTimeout(debounceTimeoutRef.current);
+        }
+        debounceTimeoutRef.current = setTimeout(() => {
+          onInputChange(newValue);
+        }, 100); // 100ms debounce
+      }
     },
     [maxLength, onInputChange]
   );
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const handleSubmit = useCallback(() => {
     const trimmedValue = value.trim();
@@ -50,7 +69,14 @@ export const useMessageInput = ({
     inputRef.current?.focus();
   }, [value, disabled, isComposing, onSubmit]);
 
-  const canSubmit = value.trim().length > 0 && !disabled && !isComposing;
+  // Memoize canSubmit calculation to prevent unnecessary re-renders
+  const canSubmit = useMemo(() => {
+    return value.trim().length > 0 && !disabled && !isComposing;
+  }, [value, disabled, isComposing]);
+
+  // Memoize character count calculations
+  const characterCount = useMemo(() => value.length, [value]);
+  const remainingChars = useMemo(() => maxLength - value.length, [maxLength, value]);
 
   return {
     value,
@@ -60,7 +86,7 @@ export const useMessageInput = ({
     inputRef,
     isComposing,
     setIsComposing,
-    characterCount: value.length,
-    remainingChars: maxLength - value.length,
+    characterCount,
+    remainingChars,
   };
 };
