@@ -73,6 +73,7 @@ export const Default: Story = {
         onTeamChatToggle: (enabled) => console.log('Team chat toggled:', enabled),
         onMessageReaction: (messageId, reaction) => console.log('Message reaction:', messageId, reaction),
         onMessageOptions: (messageId, action) => console.log('Message options:', messageId, action),
+        onMessageRetry: (messageId) => alert(`Message retry: ${messageId}`),
       }}
     />
   ),

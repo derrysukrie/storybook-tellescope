@@ -9,19 +9,21 @@ interface MessageBubbleProps {
   messageId: string;
   isEmojiPickerActive: boolean;
   onAddReactionClick: (messageId: string, buttonElement: HTMLElement, messageType: string) => void;
+  onMessageRetry?: (messageId: string) => void;
 }
 
 export const MessageBubble = ({ 
   message, 
   messageId, 
   isEmojiPickerActive, 
-  onAddReactionClick
+  onAddReactionClick,
+  onMessageRetry  
 }: MessageBubbleProps) => {
   const styles = useMessageItemStyles({ messageType: message.type });
 
   return (
     <Box sx={styles.root}>
-      <MessageText messageType={message.type} message={message} />
+      <MessageText onMessageRetry={onMessageRetry} messageType={message.type} message={message} />
       <Box className="message-options" sx={styles.messageOptions}>
         <MessageOptions 
           createdAt={message.createdAt || new Date()} 

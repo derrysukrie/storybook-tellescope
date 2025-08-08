@@ -1,6 +1,5 @@
 import {  Stack, Typography } from "@mui/material";
 import type { MessageType } from "../types";
-
 import { Icon } from "../../../Atoms";
 import { Download } from "@mui/icons-material";
 import { messageTextColors } from "./MessageBubble/styles/maps";

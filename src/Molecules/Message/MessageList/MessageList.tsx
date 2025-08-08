@@ -6,18 +6,11 @@ import { DateSeparator } from "../MessageItem/DateSeparator";
 import { styles } from "../MessageInput/styles/maps";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { EmojiPicker } from "../../EmojiPicker/EmojiPicker";
-
-const estimateMessageHeight = (message: IMessage, lastDate: Date | null): number => { 
-    let height = 0; const basePadding = 16; const messagePadding = 12; height += basePadding + messagePadding;
-    if (message.text) { const averageCharPerLine = 50; const lineHeight = 20; const estimatedLines = Math.ceil(message.text.length / averageCharPerLine); height += Math.min(estimatedLines, 10) * lineHeight; }
-    if (message.image) { height += 200; }
-    if (message.createdAt) { const showDateSeparator = !lastDate || lastDate.toDateString() !== new Date(message.createdAt).toDateString(); if (showDateSeparator) { height += 40; } }
-    height += 32; return height;
-};
+import { useEstimateMessageHeight } from "./hooks";
 
 interface MessagesProps {
   content: IMessage[];
-  enableTeamChat?: boolean;
+  onMessageRetry?: (messageId: string) => void;
 }
 
 const stylesMessageList = {
@@ -47,14 +40,20 @@ const stylesMessageList = {
   },
 };
 
-export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
+export const Messages = ({ content, onMessageRetry }: MessagesProps) => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const [isAtBottom, setIsAtBottom] = React.useState(false);
 
   // Emoji picker state and refs
-  const [activeEmojiPicker, setActiveEmojiPicker] = React.useState<string | null>(null);
-  const [emojiPickerPosition, setEmojiPickerPosition] = React.useState<{ x: number; y: number; messageType: string } | null>(null);
+  const [activeEmojiPicker, setActiveEmojiPicker] = React.useState<
+    string | null
+  >(null);
+  const [emojiPickerPosition, setEmojiPickerPosition] = React.useState<{
+    x: number;
+    y: number;
+    messageType: string;
+  } | null>(null);
   const emojiPickerRef = React.useRef<HTMLDivElement>(null);
 
   // Handler for selecting an emoji
@@ -66,7 +65,11 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
   };
 
   // Handler for add reaction button click
-  const handleAddReactionClick = (messageId: string, buttonElement: HTMLElement, messageType: string) => {
+  const handleAddReactionClick = (
+    messageId: string,
+    buttonElement: HTMLElement,
+    messageType: string
+  ) => {
     if (activeEmojiPicker === messageId) {
       setActiveEmojiPicker(null);
       setEmojiPickerPosition(null);
@@ -78,9 +81,10 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
       const spaceBelow = window.innerHeight - rect.bottom;
 
       // If not enough space below, position above the button
-      const y = spaceBelow >= pickerHeight + 10 
-        ? rect.bottom + 10 
-        : rect.top - pickerHeight - 10;
+      const y =
+        spaceBelow >= pickerHeight + 10
+          ? rect.bottom + 10
+          : rect.top - pickerHeight - 10;
       // For x, you may want to adjust based on message type (left/right)
       const x = messageType === "INCOMING" ? rect.right - 350 : rect.left;
       setEmojiPickerPosition({ x, y, messageType });
@@ -90,16 +94,19 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
   // Handle click outside to close emoji picker
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target as Node)) {
+      if (
+        emojiPickerRef.current &&
+        !emojiPickerRef.current.contains(event.target as Node)
+      ) {
         setActiveEmojiPicker(null);
         setEmojiPickerPosition(null);
       }
     };
     if (activeEmojiPicker) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [activeEmojiPicker]);
 
@@ -109,18 +116,22 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
     estimateSize: (index) => {
       const message = content[index];
       const prevMessage = index > 0 ? content[index - 1] : null;
-      const prevDate = prevMessage?.createdAt ? new Date(prevMessage.createdAt) : null;
-      return estimateMessageHeight(message, prevDate);
+      const prevDate = prevMessage?.createdAt
+        ? new Date(prevMessage.createdAt)
+        : null;
+      return useEstimateMessageHeight(message, prevDate);
     },
     overscan: 10,
   });
 
   useEffect(() => {
     if (content.length > 0) {
-      virtualizer.scrollToIndex(content.length - 1, { align: "end", behavior: "smooth" });
+      virtualizer.scrollToIndex(content.length - 1, {
+        align: "end",
+        behavior: "smooth",
+      });
     }
   }, [content.length, virtualizer]);
-
 
   const virtualItems = virtualizer.getVirtualItems();
 
@@ -130,17 +141,13 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
       return;
     }
     const lastIndex = content.length - 1;
-    const isLastVisible = virtualItems.some(item => item.index === lastIndex);
+    const isLastVisible = virtualItems.some((item) => item.index === lastIndex);
     setIsAtBottom(isLastVisible);
   }, [virtualItems, content.length]);
 
   return (
     <Box sx={stylesMessageList.container}>
-      
-      <Box
-        ref={parentRef}
-        sx={stylesMessageList.scrollBox}
-      >
+      <Box ref={parentRef} sx={stylesMessageList.scrollBox}>
         {content?.length > 0 ? (
           <Box
             sx={{
@@ -150,10 +157,18 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
           >
             {virtualItems.map((virtualItem) => {
               const message = content[virtualItem.index];
-              const previousMessage = virtualItem.index > 0 ? content[virtualItem.index - 1] : null;
-              const previousDate = previousMessage?.createdAt ? new Date(previousMessage.createdAt) : null;
-              const currentDate = message.createdAt ? new Date(message.createdAt) : null;
-              const showDateSeparator = currentDate && (!previousDate || previousDate.toDateString() !== currentDate.toDateString());
+              const previousMessage =
+                virtualItem.index > 0 ? content[virtualItem.index - 1] : null;
+              const previousDate = previousMessage?.createdAt
+                ? new Date(previousMessage.createdAt)
+                : null;
+              const currentDate = message.createdAt
+                ? new Date(message.createdAt)
+                : null;
+              const showDateSeparator =
+                currentDate &&
+                (!previousDate ||
+                  previousDate.toDateString() !== currentDate.toDateString());
 
               return (
                 <Box
@@ -168,9 +183,14 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
                     transform: `translateY(${virtualItem.start}px)`,
                   }}
                 >
-                  {showDateSeparator && currentDate && <DateSeparator date={currentDate} />}
+                  {showDateSeparator && currentDate && (
+                    <DateSeparator date={currentDate} />
+                  )}
                   <MessageBubble
                     message={message}
+                    onMessageRetry={() =>
+                      onMessageRetry?.(message.id || String(Math.random()))
+                    }
                     messageId={message.id || String(Math.random())}
                     isEmojiPickerActive={false}
                     onAddReactionClick={handleAddReactionClick}
@@ -186,9 +206,20 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
             )}
           </Box>
         ) : (
-          <Stack sx={{ ...styles.emptyContainer, justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <Stack
+            sx={{
+              ...styles.emptyContainer,
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
             <Box sx={styles.emptyMessageBox}>
-              <Typography variant="body2" fontWeight={600} color="text.secondary">
+              <Typography
+                variant="body2"
+                fontWeight={600}
+                color="text.secondary"
+              >
                 You must specify a subject to send a chat
               </Typography>
             </Box>
@@ -200,7 +231,7 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
         <Box
           ref={emojiPickerRef}
           sx={{
-            position: 'fixed',
+            position: "fixed",
             left: emojiPickerPosition.x,
             top: emojiPickerPosition.y,
             zIndex: 1000,
@@ -211,4 +242,4 @@ export const Messages = ({ content, enableTeamChat }: MessagesProps) => {
       )}
     </Box>
   );
-};  
+};

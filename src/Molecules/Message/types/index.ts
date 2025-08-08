@@ -16,6 +16,7 @@ export interface IMessage {
   reactions?: Reaction[];
   scheduledTime?: Date | null;
   isTranslated?: boolean;
+  failedTime?: Date | null;
 }
 
 export interface Reaction {
@@ -64,6 +65,7 @@ export interface MessageCallbacks {
   onTeamChatToggle?: (enabled: boolean) => void;
   onMessageReaction?: (messageId: string, reaction: Reaction) => void;
   onMessageOptions?: (messageId: string, action: string) => void;
+  onMessageRetry?: (messageId: string) => void;
 }
 
 // Error handling types

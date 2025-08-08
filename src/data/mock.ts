@@ -105,6 +105,10 @@ export const generateSampleMessages = (count: number = 200): IMessage[] => {
       message.scheduledTime = new Date(now.getTime() + Math.random() * 24 * 60 * 60 * 1000);
     }
 
+    if (Math.random() > 0.95) {
+      message.failedTime = new Date(now.getTime() + Math.random() * 24 * 60 * 60 * 1000);
+    }
+
     messages.push(message);
   }
   

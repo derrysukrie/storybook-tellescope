@@ -185,6 +185,9 @@ export const ItemViewer: React.FC<MessageProps> = React.memo(
           setLoading({ isSubmitting: false });
         }
       },
+      onMessageRetry: (messageId: string) => {
+        externalCallbacks?.onMessageRetry?.(messageId);
+      },
       onInputChange: (value: string) => {
         externalCallbacks?.onInputChange?.(value);
       },
@@ -236,7 +239,7 @@ export const ItemViewer: React.FC<MessageProps> = React.memo(
           />
 
           {/* Messages List */}
-          <Messages content={messages} enableTeamChat={state.enableTeamChat} />
+          <Messages content={messages} enableTeamChat={state.enableTeamChat} onMessageRetry={externalCallbacks?.onMessageRetry} />
 
           {/* Input */}
           <MessageInput

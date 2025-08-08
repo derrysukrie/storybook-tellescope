@@ -7,3 +7,4 @@ export * from "./Reactions/Reactions";
 export * from "./DateSeparator";
 export * from "./MessageHeader";
 export * from "./MessageBubble";
+export * from "./MessageFailed";

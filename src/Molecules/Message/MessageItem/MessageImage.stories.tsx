@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Box } from '@mui/material';
 import { MessageImage } from './MessageImage';
-import type { MessageType } from '../types';
 
 const meta: Meta<typeof MessageImage> = {
   title: 'Molecules/Message/MessageItem/MessageImage',
