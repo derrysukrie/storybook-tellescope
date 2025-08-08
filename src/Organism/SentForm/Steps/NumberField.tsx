@@ -2,20 +2,25 @@ import { Box, Stack, Typography } from "@mui/material";
 import { FormControlAtom } from "../../../Atoms/Form";
 import { Input } from "../../../components/atoms/input/input";
 import { useState } from "react";
+import { useFormContext } from "../FormContext";
 
 export const NumberField = () => {
+  const { updateFormData, currentStep } = useFormContext();
   const [value, setValue] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric
     if (val === "") {
       setValue("");
+      updateFormData(currentStep, "");
       return;
     }
     let num = Number(val);
     if (num < 1) num = 1;
     if (num > 10) num = 10;
-    setValue(num.toString());
+    const finalValue = num.toString();
+    setValue(finalValue);
+    updateFormData(currentStep, finalValue);
   };
 
   return (

@@ -2,8 +2,10 @@ import { Box, FormHelperText, Stack, Typography } from "@mui/material";
 import { FormControlAtom } from "../../../Atoms/Form";
 import { Input } from "../../../components/atoms/input/input";
 import { useState, useCallback, useMemo } from "react";
+import { useFormContext } from "../FormContext";
 
 export const PhoneNumber = () => {
+  const { updateFormData, currentStep } = useFormContext();
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
 
@@ -45,6 +47,9 @@ export const PhoneNumber = () => {
     // Update the input value
     setValue(formattedNumber);
     
+    // Update form data
+    updateFormData(currentStep, formattedNumber);
+    
     // Validate and show appropriate error states
     const digitCount = digitsOnly.length;
     
@@ -59,7 +64,7 @@ export const PhoneNumber = () => {
       const isValidFormat = validatePhone(formattedNumber);
       setError(!isValidFormat);
     }
-  }, [formatPhone, validatePhone]);
+  }, [formatPhone, validatePhone, updateFormData, currentStep]);
 
   return (
     <Box width="100%">

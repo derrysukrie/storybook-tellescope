@@ -1,28 +1,56 @@
-import { Box, FormControlLabel, Typography, useTheme } from "@mui/material";
+import { Box, FormControlLabel, Typography } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import CheckBox from "../../components/atoms/checkbox/checkbox";
 import { Button } from "../../components/atoms/button/button";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import TellescopeLogo from "../../assets/tellescope-logo.svg";
+import { sentFormStyles } from "./styles";
+import { FormProvider } from "./FormContext";
 
 export interface FormStep {
   content: React.ReactNode;
-
   onNext?: () => void;
+  // Add step identifier for tracking values
+  id?: string;
 }
 
 interface SentFormProps {
   steps: FormStep[];
   onComplete?: () => void;
+  // Add callback to collect all form values
+  onFormDataChange?: (formData: Record<string, any>) => void;
 }
 
-export const SentForm = ({ steps, onComplete }: SentFormProps) => {
+export const SentForm = ({ steps, onComplete, onFormDataChange }: SentFormProps) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [checked, setChecked] = useState(false);
+  // Add centralized form state
+  const [formData, setFormData] = useState<Record<string, any>>({});
 
   const currentStepData = steps[currentStep];
+
   const progress = ((currentStep + 1) / steps.length) * 100;
   const isLastStep = currentStep === steps.length - 1;
+
+  // Function to update form data from any step
+  const updateFormData = useCallback((stepId: string, value: any) => {
+    setFormData(prev => {
+      const newData = { ...prev, [stepId]: value };
+      // Notify parent component of form data changes
+      onFormDataChange?.(newData);
+      return newData;
+    });
+  }, [onFormDataChange]);
+
+  // Function to get current form data
+  const getFormData = useCallback(() => {
+    return formData;
+  }, [formData]);
+
+  // Function to get all step values
+  const getAllStepValues = useCallback(() => {
+    return formData;
+  }, [formData]);
 
   const handleNext = () => {
     if (currentStepData.onNext) {
@@ -30,76 +58,56 @@ export const SentForm = ({ steps, onComplete }: SentFormProps) => {
     }
 
     if (isLastStep) {
+      // Log all collected form data when completing
+      console.log("All form data:", getAllStepValues());
       onComplete?.();
     } else {
       setCurrentStep(currentStep + 1);
     }
   };
 
+  // Create context value to pass to step components
+  const formContext = {
+    updateFormData,
+    getFormData,
+    getAllStepValues,
+    currentStep: currentStepData.id || `step-${currentStep}`,
+  };
+
   return (
-    <Box
-      bgcolor={"#F4F3FA"}
-      width="100vw"
-      minHeight="100vh"
-      display="flex"
-      justifyContent="center"
-      sx={{
-        px: { xs: "24px", sm: "24px" },
-        py: { xs: 2, sm: 0 },
-      }}
-    >
-      <Box
-        display={"flex"}
-        justifyContent={"space-between"}
-        flexDirection={"column"}
-        width={{ xs: "100%", sm: "100%  ", md: 600, lg: 720 }}
-        minHeight="100vh"
-        mx={{ xs: 0, sm: "auto" }}
-      >
+    <Box sx={sentFormStyles.container}>
+      <Box sx={sentFormStyles.contentWrapper}>
         <LinearProgress
-          sx={{
-            mt: { xs: "16px", sm: "24px" },
-            height: { xs: "8px", sm: "16px" },
-            width: "100%",
-            borderRadius: "8px",
-            backgroundColor: "#bbc6e9",
-            "& .MuiLinearProgress-bar": {
-              backgroundColor: "#798ED0",
-            },
-          }}
+          sx={sentFormStyles.progressBar}
           variant="determinate"
           value={progress}
         />
         {currentStep !== 0 && (
-          <Box pt={{ xs: "24px", sm: "48px" }} display="flex">
+          <Box sx={sentFormStyles.logoContainer}>
             <img
               src={TellescopeLogo}
               alt="Tellescope Logo"
-              style={{
-                maxWidth: "160px",
-                width: "100%",
-                height: "auto",
-              }}
+              style={sentFormStyles.logo}
             />
           </Box>
         )}
-        <Box display={"flex"} flexDirection={"column"} width="100%" height={"100%"}>
-          <Box height={"100%"}>{currentStepData.content}</Box>
+        <Box sx={sentFormStyles.contentContainer}>
+          <Box sx={sentFormStyles.contentBox}>
+            <FormProvider value={formContext}>
+              {currentStepData.content}
+            </FormProvider>
+          </Box>
         </Box>
-        <Box display={"flex"} flexDirection={"column"}>
-          <Box sx={{ px: { xs: "0px", sm: "10px" }, width: "100%" }}>
+        <Box sx={sentFormStyles.bottomContainer}>
+          <Box sx={sentFormStyles.checkboxContainer}>
             {currentStep === 0 && (
               <FormControlLabel
-                sx={{ gap: 0, alignItems: "flex-start" }}
+                sx={sentFormStyles.formControlLabel}
                 control={
                   <CheckBox
                     checked={checked}
                     onChange={(e) => setChecked(e.target.checked)}
-                    sx={{
-                      "&.Mui-checked": {
-                        color: "#798ED0",
-                      },
-                    }}
+                    sx={sentFormStyles.checkbox}
                   />
                 }
                 label={
@@ -111,19 +119,10 @@ export const SentForm = ({ steps, onComplete }: SentFormProps) => {
               />
             )}
           </Box>
-          <Box py={{ xs: "24px", sm: "48px" }} width={"100%"}>
+          <Box sx={sentFormStyles.buttonContainer}>
             <Button
               onClick={handleNext}
-              sx={{
-                boxShadow: "none",
-                backgroundColor: "#585E72",
-                "&:disabled": {
-                  backgroundColor: "#E5E7EB",
-                  color: "#9CA3AF",
-                },
-                // fontSize: { xs: "1rem", sm: "1.125rem" },
-                // py: { xs: 1.25, sm: 2 },
-              }}
+              sx={sentFormStyles.continueButton}
               fullWidth
             >
               CONTINUE

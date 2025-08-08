@@ -1,27 +1,38 @@
-import { Box, Stack, Typography, type SelectChangeEvent } from "@mui/material";
+import {
+  Box,
+  MenuItem,
+  Stack,
+  Typography,
+  type SelectChangeEvent,
+} from "@mui/material";
 import { FormControlAtom } from "../../../Atoms/Form";
 import Select from "../../../components/atoms/select/select";
 import { useState } from "react";
+import { useFormContext } from "../FormContext";
 
 export const SelectField = () => {
+  const { updateFormData, currentStep } = useFormContext();
   const [value, setValue] = useState("");
 
   const handleChange = (event: SelectChangeEvent<string | string[]>) => {
-    setValue(event.target.value as string);
+    const newValue = event.target.value as string;
+    setValue(newValue);
+    updateFormData(currentStep, newValue);
   };
 
   return (
     <Box width="100%">
       <Box pt={"48px"}>
         <Stack gap={"12px"}>
-          <Typography variant="h5">What would you like to be called?</Typography>
+          <Typography variant="h5">
+            What would you like to be called?
+          </Typography>
           <FormControlAtom variant="outlined" fullWidth>
             <Select
               appearance="outlined"
               size="small"
               value={value}
               onChange={handleChange}
-              options={["Option 1", "Option 2", "Option 3"]}
               placeholder="Select an option"
               sx={{
                 backgroundColor: "white",
@@ -32,10 +43,15 @@ export const SelectField = () => {
                   boxShadow: "none",
                 },
               }}
-            />
+            >
+              <MenuItem value="1">Option 1</MenuItem>
+              <MenuItem value="2">Option 2</MenuItem>
+              <MenuItem value="3">Option 3</MenuItem>
+            </Select>
           </FormControlAtom>
           <Typography color="text.secondary" variant="caption">
-            The location is where you’re treatment supplies will be shipped, if prescibed
+            The location is where you’re treatment supplies will be shipped, if
+            prescibed
           </Typography>
         </Stack>
       </Box>

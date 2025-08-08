@@ -1,15 +1,27 @@
 import { Box, Typography } from "@mui/material";
 
-export default function Graphic() {
+interface GraphicProps {
+  image: string;
+  description: string;
+}
+
+export default function Graphic({ image, description }: GraphicProps) {
   return (
     <Box>
       <Box py="54px">
         {/* <img src="https://dummyimage.com/wuxga" alt="graphic" /> */}
-        <Box width={"100%"} bgcolor={"gray"} height={640} borderRadius={"28px"}></Box>
+        <Box width={"100%"} bgcolor={"gray"} height={640} borderRadius={"28px"}>
+          <img
+            src={image}
+            style={{ borderRadius: "28px", objectFit: "cover" }}
+            width={"100%"}
+            height={"100%"}
+            alt="graphic"
+          />
+        </Box>
       </Box>
       <Typography variant="caption" color="text.secondary">
-        a longer label and will displayed at a smaller size in order to conserve valuable space. This can be used to display some disclaimer about terms or
-        conditions that might be a bit too long for a normal label area
+        {description}
       </Typography>
     </Box>
   );
