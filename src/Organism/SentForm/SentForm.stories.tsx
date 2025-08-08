@@ -1,23 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { SentForm } from "./SentForm";
-import {
-  FormIntro,
-  Description,
-  TextField,
-  QuestionsGroup,
-  LongTextField,
-  NumberField,
-  EmailField,
-  PhoneNumber,
-  MultipleChoice,
-  CheckboxField,
-  SelectField,
-  MultipleSelectField,
-} from "./Steps";
-import Graphic from "./Steps/Graphic";
 
 const meta = {
-  title: "Organisms/SentForm/CompleteExample",
+  title: "Organisms/SentForm",
   component: SentForm,
   parameters: {
     layout: "centered",
@@ -28,89 +13,154 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const CompleteFormExample: Story = {
+// Common options for better DX
+const commonOptions = {
+  countries: [
+    { value: "us", label: "United States" },
+    { value: "ca", label: "Canada" },
+    { value: "uk", label: "United Kingdom" },
+    { value: "au", label: "Australia" },
+    { value: "de", label: "Germany" },
+    { value: "fr", label: "France" },
+    { value: "other", label: "Other" },
+  ],
+  
+  interests: [
+    { value: "tech", label: "Technology" },
+    { value: "health", label: "Healthcare" },
+    { value: "finance", label: "Finance" },
+    { value: "education", label: "Education" },
+    { value: "sports", label: "Sports" },
+    { value: "travel", label: "Travel" },
+  ],
+  
+  contactMethods: [
+    { id: "email", label: "Email", value: "email" },
+    { id: "phone", label: "Phone call", value: "phone" },
+    { id: "sms", label: "Text message", value: "sms" },
+    { id: "mail", label: "Postal mail", value: "mail" },
+  ],
+  
+  planTypes: [
+    { id: "basic", label: "Basic Plan", value: "basic" },
+    { id: "premium", label: "Premium Plan", value: "premium" },
+    { id: "enterprise", label: "Enterprise Plan", value: "enterprise" },
+    { id: "custom", label: "Custom Solution", value: "custom" },
+  ],
+};
+
+export const Default: Story = {
   args: {
     steps: [
+      // ✅ Proper form structure with intro first
       {
-        id: "intro",
-        content: <FormIntro />,
+        type: "intro",
+        id: "welcome",
       },
       {
+        type: "description",
         id: "description",
-        content: (
-          <Description description="Great, we have a variety of plans to fit your needs. Let's start with some questions about you, after that we'll find the plan that's a perfect fit!" />
-        ),
+        description: "Great, we have a variety of plans to fit your needs. Let's start with some questions about you, after that we'll find the plan that's a perfect fit!",
       },
       {
-        id: "graphic",
-        content: (
-          <Graphic
-            image="https://dummyimage.com/wuxga"
-            description="a longer label and will displayed at a smaller size in order to conserve valuable space. This can be used to display some disclaimer about terms or conditions that might be a bit too long for a normal label area"
-          />
-        ),
+        type: "select",
+        id: "location",
+        title: "Where are you located?",
+        options: commonOptions.countries,
+        placeholder: "Choose your country",
+        helperText: "This helps us provide location-specific services",
       },
       {
+        type: "multiSelect",
+        id: "interests",
+        title: "What are your interests?",
+        options: commonOptions.interests,
+        placeholder: "Select multiple interests",
+        helperText: "Choose all that apply to help personalize your experience",
+      },
+      {
+        type: "choice",
+        id: "plan_type",
+        label: "What type of plan are you looking for?",
+        options: commonOptions.planTypes,
+        helperText: "Choose the plan that best fits your needs",
+      },
+      {
+        type: "text",
         id: "name",
-        content: <TextField />,
       },
       {
-        id: "questions_group",
-        content: <QuestionsGroup />,
-      },
-      {
-        id: "long_text",
-        content: <LongTextField />,
-      },
-      {
-        id: "number",
-        content: <NumberField />,
-      },
-      {
+        type: "email",
         id: "email",
-        content: <EmailField />,
       },
       {
+        type: "phone",
         id: "phone",
-        content: <PhoneNumber />,
       },
       {
-        id: "multiple_choice",
-        content: <MultipleChoice />,
+        type: "number",
+        id: "age",
       },
       {
-        id: "checkbox",
-        content: <CheckboxField />,
+        type: "longText",
+        id: "description",
       },
       {
-        id: "select",
-        content: <SelectField />,
-      },
-      {
-        id: "multiple_select",
-        content: <MultipleSelectField />,
+        type: "checkbox",
+        id: "preferences",
+        title: "What are your preferences?",
+        options: [
+          { value: "newsletter", label: "Receive newsletter" },
+          { value: "updates", label: "Product updates" },
+          { value: "marketing", label: "Marketing emails" },
+        ],
+        helperText: "Select all that apply",
       },
     ],
     onFormDataChange: (formData) => {
       console.log("Form data updated:", formData);
-      // This will show all collected form data in real-time
-      // Example output:
-      // {
-      //   name: "John Doe",
-      //   questions_group_question1: "Answer 1",
-      //   questions_group_question2: "Answer 2",
-      //   long_text: "Long text content",
-      //   number: "5",
-      //   email: "john@example.com",
-      //   phone: "123-456-7890",
-      //   multiple_choice: "2",
-      //   checkbox: ["1", "3"],
-      //   select: "2",
-      //   multiple_select: ["1", "2"]
-      // }
     },
-    onComplete: () => {
-      console.log("Form completed! All data collected successfully.");
+    onComplete: (formData) => {
+      console.log("Form completed with data:", formData);
     },
   },
-}; 
+};
+
+// Simple example with proper intro structure
+export const SimpleExample: Story = {
+  args: {
+    steps: [
+      // ✅ Always start with intro
+      {
+        type: "intro",
+        id: "welcome",
+      },
+      {
+        type: "description",
+        id: "description",
+        description: "Let's get to know you better to find the perfect plan.",
+      },
+      {
+        type: "select",
+        id: "location",
+        title: "Where are you located?",
+        options: commonOptions.countries,
+        placeholder: "Choose your country",
+        helperText: "This helps us provide location-specific services",
+      },
+      {
+        type: "choice",
+        id: "contact_preference",
+        label: "How would you prefer to be contacted?",
+        options: commonOptions.contactMethods,
+        helperText: "We'll use this as your primary contact method",
+      },
+    ],
+    onFormDataChange: (formData) => {
+      console.log("Simple form data:", formData);
+    },
+    onComplete: (formData) => {
+      console.log("Simple form completed:", formData);
+    },
+  },
+};

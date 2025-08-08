@@ -1,34 +1,48 @@
 import { Box } from "@mui/material";
 import { FormGroup } from "../../../Molecules/FormGroup";
 import { useFormContext } from "../FormContext";
-import { useState } from "react";
+import { useCallback, memo } from "react";
+import type { ChoiceOption } from "./types";
 
-export const MultipleChoice = () => {
-  const { updateFormData, currentStep } = useFormContext();
-  const [selectedValue, setSelectedValue] = useState<string>("");
+interface MultipleChoiceProps {
+  label?: string;
+  options?: ChoiceOption[];
+  helperText?: string;
+}
 
-  const handleChange = (value: string | string[]) => {
+export const MultipleChoice = memo(({ 
+  label = "Select your location",
+  options = [
+    { id: "1", label: "This is a selectable question", value: "1" },
+    { id: "2", label: "This is a selectable question", value: "2" },
+    { id: "3", label: "This is a selectable question", value: "3" },
+  ],
+  helperText = "This is a helper text"
+}: MultipleChoiceProps) => {
+  const { updateFormData, getFormData, currentStep } = useFormContext();
+  
+  // Get current value from centralized form state
+  const currentValue = getFormData()[currentStep] || "";
+
+  const handleChange = useCallback((value: string | string[]) => {
     const selectedValue = Array.isArray(value) ? value[0] || "" : value;
-    setSelectedValue(selectedValue);
     updateFormData(currentStep, selectedValue);
-  };
+  }, [updateFormData, currentStep]);
 
   return (
     <Box width="100%">
       <Box pt={"48px"}>
         <FormGroup.Selectable
-          label="Select your location"
+          label={label}
           labelSize="large"
-          helperText="This is a helper text"
-          options={[
-            { id: "1", label: "This is a selectable  question ", value: "1" },
-            { id: "2", label: "This is a selectable  question ", value: "2" },
-            { id: "3", label: "This is a selectable  question ", value: "3" },
-          ]}
-          value={selectedValue}
+          helperText={helperText}
+          options={options}
+          value={currentValue}
           onChange={handleChange}
         />
       </Box>
     </Box>
   );
-};
+});
+
+MultipleChoice.displayName = "MultipleChoice";

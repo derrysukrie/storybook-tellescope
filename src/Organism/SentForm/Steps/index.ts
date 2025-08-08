@@ -11,3 +11,4 @@ export * from "./MultipleChoice";
 export * from "./CheckboxField";
 export * from "./SelectField";
 export * from "./MultipleSelectField";
+export * from "./types";

@@ -2,17 +2,18 @@ import { Box, Stack, Typography } from "@mui/material";
 import { FormControlAtom } from "../../../Atoms/Form";
 import { Input } from "../../../components/atoms/input/input";
 import { useFormContext } from "../FormContext";
-import { useState } from "react";
+import { useCallback } from "react";
 
 export const TextField = () => {
-  const { updateFormData, currentStep } = useFormContext();
-  const [value, setValue] = useState("");
+  const { updateFormData, getFormData, currentStep } = useFormContext();
+  
+  // Get current value from centralized form state
+  const currentValue = getFormData()[currentStep] || "";
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    setValue(newValue);
     updateFormData(currentStep, newValue);
-  };
+  }, [updateFormData, currentStep]);
 
   return (
     <Box width="100%">
@@ -24,7 +25,7 @@ export const TextField = () => {
               appearance="distinct"
               size="medium"
               label="Okeanos Withburga"
-              value={value}
+              value={currentValue}
               onChange={handleChange}
               sx={{
                 backgroundColor: "white",
