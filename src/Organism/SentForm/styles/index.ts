@@ -82,6 +82,8 @@ export const sentFormStyles = {
   continueButton: {
     boxShadow: "none",
     backgroundColor: "#585E72",
+    borderRadius: "100px",
+    fontWeight: "500",
     "&:disabled": {
       backgroundColor: "#E5E7EB",
       color: "#9CA3AF",

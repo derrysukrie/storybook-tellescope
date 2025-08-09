@@ -113,10 +113,3 @@ export interface SentFormProps {
   onFormDataChange?: (formData: FormData) => void;
   debounceDelay?: number;
 }
-
-// Legacy interface for backward compatibility
-export interface FormStep {
-  content: React.ReactNode;
-  onNext?: () => void;
-  id?: string;
-} 

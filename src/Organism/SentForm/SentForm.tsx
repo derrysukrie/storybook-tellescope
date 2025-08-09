@@ -7,7 +7,7 @@ import TellescopeLogo from "../../assets/tellescope-logo.svg";
 import { sentFormStyles } from "./styles";
 import { FormProvider } from "./FormContext";
 import { renderStep } from "./stepRenderer";
-import type { SentFormProps, FormData, FormStep } from "./types";
+import type { SentFormProps, FormData } from "./types";
 
 export const SentForm = ({ 
   steps, 
@@ -138,6 +138,7 @@ export const SentForm = ({
           <Box sx={sentFormStyles.buttonContainer}>
             <Button
               onClick={handleNext}
+              size="large"
               sx={sentFormStyles.continueButton}
               fullWidth
             >
