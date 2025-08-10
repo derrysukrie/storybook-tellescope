@@ -83,6 +83,7 @@ export const sentFormStyles = {
     boxShadow: "none",
     borderRadius: "100px",
     backgroundColor: "#585E72",
+    fontWeight: "500",
     "&:disabled": {
       backgroundColor: "#E5E7EB",
       color: "#9CA3AF",
