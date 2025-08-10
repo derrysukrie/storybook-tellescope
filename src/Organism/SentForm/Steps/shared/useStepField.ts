@@ -27,14 +27,20 @@ export const useStepField = (options: UseStepFieldOptions = {}) => {
   }
   validations.forEach(rule => validator.addRule(rule));
   
-  // Get current value from form context on mount
+  // Get current value from form context on mount and reset when step changes
   useEffect(() => {
     const formData = getFormData();
     const currentValue = formData[effectiveStepId];
     if (currentValue !== undefined) {
       setValue(currentValue);
+    } else {
+      // Reset to default value when step changes and no value exists
+      setValue(defaultValue || "");
     }
-  }, [effectiveStepId, getFormData]);
+    // Reset error and touched state when step changes
+    setError(null);
+    setIsTouched(false);
+  }, [effectiveStepId, getFormData, defaultValue]);
   
   const validate = useCallback((val: any): ValidationResult => {
     return validator.validate(val);

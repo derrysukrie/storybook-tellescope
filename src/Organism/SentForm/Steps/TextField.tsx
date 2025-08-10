@@ -12,7 +12,6 @@ export const TextField = ({
   required = false,
   disabled = false,
   stepId,
-  ...props 
 }: TextFieldStepProps) => {
   const { value, error, handleChange, handleBlur } = useStepField({
     stepId,

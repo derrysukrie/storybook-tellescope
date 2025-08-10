@@ -24,7 +24,18 @@ const commonOptions = {
     { value: "fr", label: "France" },
     { value: "other", label: "Other" },
   ],
-  
+  // allegies list
+  allergies: [
+    { value: "peanuts", label: "Peanuts" },
+    { value: "eggs", label: "Eggs" },
+    { value: "milk", label: "Milk" },
+    { value: "soy", label: "Soy" },
+    { value: "wheat", label: "Wheat" },
+    { value: "fish", label: "Fish" },
+    { value: "shellfish", label: "Shellfish" },
+    { value: "tree_nuts", label: "Tree Nuts" },
+    { value: "other", label: "Other" },
+  ],
   interests: [
     { value: "tech", label: "Technology" },
     { value: "health", label: "Healthcare" },
@@ -33,7 +44,11 @@ const commonOptions = {
     { value: "sports", label: "Sports" },
     { value: "travel", label: "Travel" },
   ],
-  
+  conditions: [
+    { value: "conditions", label: "Conditions" },
+    { value: "medications", label: "Medications" },
+    { value: "other", label: "Other" },
+  ],
   contactMethods: [
     { id: "email", label: "Email", value: "email" },
     { id: "phone", label: "Phone call", value: "phone" },
@@ -56,6 +71,20 @@ export const Default: Story = {
       {
         type: "intro",
         id: "welcome",
+      },
+      {
+        type: "select",
+        id: "allergies",
+        title: "Allergies",
+        options: commonOptions.allergies,
+        placeholder: "Search conditions",
+      },
+      {
+        type: "select",
+        id: "conditions",
+        title: "Conditions",
+        options: commonOptions.conditions,
+        placeholder: "Search conditions",
       },
       {
         type: "ranking",
@@ -91,6 +120,7 @@ export const Default: Story = {
         placeholder: "Choose your country",
         helperText: "This helps us provide location-specific services",
       },
+     
       {
         type: "multiSelect",
         id: "interests",
