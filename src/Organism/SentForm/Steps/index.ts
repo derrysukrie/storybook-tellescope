@@ -12,4 +12,6 @@ export * from "./CheckboxField";
 export * from "./SelectField";
 export * from "./MultipleSelectField";
 export * from "./FileUploader";
+export * from "./SignatureConsent";
+export * from "./Date";
 export * from "./types";

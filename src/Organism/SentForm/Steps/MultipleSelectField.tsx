@@ -1,7 +1,7 @@
 import { Box, MenuItem, Stack, Typography, type SelectChangeEvent } from "@mui/material";
 import { FormControlAtom } from "../../../Atoms/Form";
 import Select from "../../../components/atoms/select/select";
-import { useCallback, memo, useMemo } from "react";
+import { useCallback, memo } from "react";
 import { useFormContext } from "../FormContext";
 import type { SelectOption } from "./types";
 

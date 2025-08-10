@@ -52,10 +52,15 @@ const commonOptions = {
 export const Default: Story = {
   args: {
     steps: [
-      // ✅ Proper form structure with intro first
+   
       {
         type: "intro",
         id: "welcome",
+      },
+    
+      {
+        type: "signatureConsent",
+        id: "signatureConsent",
       },
       {
         type: "fileUpload",
@@ -150,6 +155,10 @@ export const Default: Story = {
           { value: "marketing", label: "Marketing emails" },
         ],
         helperText: "Select all that apply",
+      },
+      {
+        type: "date",
+        id: "date",
       },
     ],
     onFormDataChange: (formData) => {

@@ -82,9 +82,9 @@ export interface LongTextStepConfig {
 export interface CheckboxStepConfig {
   type: "checkbox";
   id: string;
-  title?: string;
+  title: string;
   options: Array<{ value: string; label: string }>;
-  helperText?: string;
+  helperText: string;
 }
 
 export interface FileUploadStepConfig {
@@ -105,6 +105,19 @@ export interface QuestionsGroupStepConfig {
   }[];
 }
 
+export interface SignatureConsentStepConfig {
+  type: "signatureConsent";
+  id: string;
+}
+
+export interface DateStepConfig {
+  type: "date";
+  id: string;
+  title?: string;
+  placeholder?: string;
+  helperText?: string;
+}
+
 // Union type for all step configurations
 export type StepConfig = 
   | IntroStepConfig
@@ -119,7 +132,9 @@ export type StepConfig =
   | LongTextStepConfig
   | CheckboxStepConfig
   | FileUploadStepConfig
-  | QuestionsGroupStepConfig;
+  | QuestionsGroupStepConfig
+  | SignatureConsentStepConfig
+  | DateStepConfig;
 
 // Form data type
 export interface FormData {

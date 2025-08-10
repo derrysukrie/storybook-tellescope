@@ -7,7 +7,8 @@ import TellescopeLogo from "../../assets/tellescope-logo.svg";
 import { sentFormStyles } from "./styles";
 import { FormProvider } from "./FormContext";
 import { renderStep } from "./stepRenderer";
-import type { SentFormProps, FormData } from "./types";
+import { isStepValid } from "./validation/validation";
+import type { SentFormProps, FormData } from "./types/types";
 
 export const SentForm = ({ 
   steps, 
@@ -31,6 +32,11 @@ export const SentForm = ({
   }, [currentStep, steps.length]);
 
   const isLastStep = currentStep === steps.length - 1;
+
+  // Check if current step is valid
+  const isCurrentStepValid = useMemo(() => {
+    return isStepValid(currentStepData, formData, checked);
+  }, [currentStepData, formData, checked]);
 
   // Debounced form data change handler
   const debouncedFormDataChange = useCallback((newData: FormData) => {
@@ -140,7 +146,7 @@ export const SentForm = ({
               onClick={handleNext}
               size="large"
               sx={sentFormStyles.continueButton}
-
+              disabled={!isCurrentStepValid}
               fullWidth
             >
               CONTINUE

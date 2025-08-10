@@ -2,8 +2,9 @@ import { Box } from "@mui/material";
 import { FormGroup } from "../../../Molecules/FormGroup";
 import { useState } from "react";
 import { useFormContext } from "../FormContext";
+import type { CheckboxStepConfig } from "../types/types";
 
-export const CheckboxField = () => {
+export const CheckboxField = ({ title, helperText, options }: CheckboxStepConfig) => {
   const { updateFormData, currentStep } = useFormContext();
   const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
@@ -16,14 +17,10 @@ export const CheckboxField = () => {
     <Box width="100%">
       <Box pt={"48px"}>
         <FormGroup.Checkbox
-          label="What is your favorite kind of dumpling"
+          label={title}
           labelSize="large"
-          helperText="This is a helper text"
-          options={[
-            { label: "This is a selectable  question ", value: "1" },
-            { label: "This is a selectable  question ", value: "2" },
-            { label: "This is a selectable  question ", value: "3" },
-          ]}
+          helperText={helperText}
+          options={options}
           onChange={handleChange}
           value={selectedValues}
         />

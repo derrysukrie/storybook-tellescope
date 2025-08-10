@@ -71,7 +71,7 @@ export const SelectField = memo(({
               value={currentValue}
               onChange={handleChange}
               placeholder={placeholder}
-              renderValue={renderValue}
+              // renderValue={renderValue}
               sx={{
                 backgroundColor: "white",
                 width: "100%",

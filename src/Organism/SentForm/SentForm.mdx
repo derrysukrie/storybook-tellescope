@@ -6,20 +6,11 @@ import * as SentFormStories from './SentForm.stories.tsx';
 
 # SentForm
 
-A powerful, configuration-driven multi-step form organism that provides excellent developer experience and user experience.
+A powerful, configuration-driven multi-step form organism that provides excellent developer experience and user experience with built-in validation and file upload capabilities.
 
 ## Overview
 
-The `SentForm` component is a true **Organism** that encapsulates complete form functionality. It accepts configuration instead of requiring manual component composition, making it easy to create complex multi-step forms.
-
-## Key Features
-
-- ✅ **Configuration-driven** - No manual component imports needed
-- ✅ **Type-safe** - Full TypeScript support
-- ✅ **Performance optimized** - Debounced updates, memoized components
-- ✅ **Proper UX flow** - Intro → Description → Form fields
-- ✅ **Label display** - Shows user-friendly labels while storing API-ready values
-- ✅ **Self-contained** - All step components imported internally
+The `SentForm` component is a true **Organism** that encapsulates complete form functionality. It accepts configuration instead of requiring manual component composition, making it easy to create complex multi-step forms with automatic validation and progress tracking.
 
 ## Basic Usage
 
@@ -87,7 +78,7 @@ function MyForm() {
 ## Step Types
 
 ### Intro Step
-Welcome screen that appears first.
+Welcome screen that appears first. Requires checkbox acceptance to proceed.
 
 ```tsx
 {
@@ -158,37 +149,47 @@ Radio button group for single selection.
 ```
 
 ### Text Input Steps
-Various text input types.
+Various text input types with automatic validation.
 
 ```tsx
 // Basic text input
 {
   type: "text",
   id: "name",
+  title: "What's your name?",
+  helperText: "Enter your full name",
 }
 
 // Email input
 {
   type: "email",
   id: "email",
+  title: "Email address",
+  helperText: "We'll use this to contact you",
 }
 
 // Phone input
 {
   type: "phone",
   id: "phone",
+  title: "Phone number",
+  helperText: "Enter your phone number",
 }
 
 // Number input
 {
   type: "number",
   id: "age",
+  title: "Your age",
+  helperText: "Must be between 1 and 10",
 }
 
 // Long text input
 {
   type: "longText",
   id: "description",
+  title: "Tell us more",
+  helperText: "Share additional details",
 }
 ```
 
@@ -207,6 +208,66 @@ Multiple checkbox selection.
   ],
   helperText: "Select all that apply",
 }
+```
+
+### File Upload Step
+File upload with drag & drop functionality.
+
+```tsx
+{
+  type: "fileUpload",
+  id: "documents",
+}
+```
+
+### Questions Group Step
+Multiple related questions in a single step.
+
+```tsx
+{
+  type: "questionsGroup",
+  id: "personal_info",
+  title: "Personal Information",
+  description: "Please provide your basic information",
+  questions: [
+    {
+      label: "What's your name?",
+      hint: "Enter your full name",
+      fieldKey: "name",
+    },
+    {
+      label: "What's your email?",
+      hint: "Enter your email address",
+      fieldKey: "email",
+    },
+  ],
+}
+```
+
+## Validation System
+
+The SentForm includes a comprehensive validation system that automatically manages the CONTINUE button state:
+
+### Validation Rules
+
+- **Intro Step**: Button enabled only when checkbox is checked
+- **Description Step**: Button always enabled (no input required)
+- **Text Inputs**: Button enabled when field has non-empty content
+- **Select/Choice**: Button enabled when an option is selected
+- **Multi-Select/Checkbox**: Button enabled when at least one option is selected
+- **File Upload**: Button enabled when at least one file is uploaded
+- **Questions Group**: Button enabled when ALL questions have data
+
+### Validation Behavior
+
+```tsx
+// Button states based on validation
+<Button 
+  disabled={!isCurrentStepValid} // Automatically managed
+  onClick={handleNext}
+>
+  CONTINUE
+</Button>
 ```
 
 ## Props
@@ -235,6 +296,11 @@ The form data is collected as key-value pairs where:
   contact_preference: "email",   // Value for API
   name: "John Doe",         // Text input value
   email: "john@example.com", // Email input value
+  documents: [              // File upload data
+    { id: "123", name: "document.pdf", size: 1024, status: "completed" }
+  ],
+  personal_info_name: "John", // Questions group data
+  personal_info_email: "john@example.com",
 }
 ```
 
@@ -278,7 +344,19 @@ Form data changes are debounced to prevent excessive API calls.
 All step components are memoized to prevent unnecessary re-renders.
 
 ### Optimized State Management
-Centralized form state with efficient updates.
+Centralized form state with efficient updates and validation.
+
+## File Upload Features
+
+The file upload step includes:
+
+- **Drag & Drop**: Users can drag files directly onto the upload area
+- **Click to Browse**: Traditional file selection via file dialog
+- **Multiple Files**: Support for uploading multiple files simultaneously
+- **Progress Tracking**: Visual progress indicators for uploads
+- **File Management**: Delete individual files
+- **Type Validation**: Automatic file type filtering
+- **Size Display**: Shows file sizes and upload status
 
 ## Best Practices
 
@@ -325,124 +403,44 @@ const commonOptions = {
 ```tsx
 // ✅ Good
 id: "contact_preference"
-id: "location"
-id: "interests"
+id: "personal_info"
 
-// ❌ Bad
-id: "step1"
+// ❌ Avoid
 id: "field1"
+id: "input"
 ```
 
-### 5. Handle Form Data Properly
+### 5. Group Related Questions
 ```tsx
-onComplete={(formData) => {
-  // formData contains values for API
-  // Users see labels, API gets values
-  submitToAPI(formData);
-}}
-```
-
-## Examples
-
-### Complete Form Example
-
-<Canvas>
-  <Story id="organisms-sentform--default" />
-</Canvas>
-
-### Simple Form Example
-
-```tsx
-<SentForm
-  steps={[
-    {
-      type: "intro",
-      id: "welcome",
-    },
-    {
-      type: "description",
-      id: "description",
-      description: "Let's get to know you better.",
-    },
-    {
-      type: "select",
-      id: "location",
-      title: "Where are you located?",
-      options: commonOptions.countries,
-    },
-    {
-      type: "choice",
-      id: "contact_preference",
-      label: "How should we contact you?",
-      options: commonOptions.contactMethods,
-    },
-  ]}
-  onComplete={(data) => {
-    console.log("Simple form completed:", data);
-  }}
-/>
-```
-
-## Migration from Manual Composition
-
-### Before (Manual Composition)
-```tsx
-// ❌ Verbose, requires manual imports
-import { SelectField } from "./Steps/SelectField";
-import { MultipleChoice } from "./Steps/MultipleChoice";
-
-<SentForm
-  steps={[
-    {
-      id: "location",
-      content: (
-        <SelectField
-          title="Where are you located?"
-          options={options}
-        />
-      ),
-    },
-  ]}
-/>
-```
-
-### After (Configuration-Driven)
-```tsx
-// ✅ Clean, no imports needed
-<SentForm
-  steps={[
-    {
-      type: "select",
-      id: "location",
-      title: "Where are you located?",
-      options: options,
-    },
-  ]}
-/>
+{
+  type: "questionsGroup",
+  id: "personal_info",
+  title: "Personal Information",
+  questions: [
+    { label: "Name", fieldKey: "name" },
+    { label: "Email", fieldKey: "email" },
+  ],
+}
 ```
 
 ## Troubleshooting
 
 ### Common Issues
 
-#### 1. Labels Not Displaying
-Ensure your options have both `value` and `label` properties:
+#### 1. Button Always Disabled
+Check that your step IDs are unique and validation is working:
 ```tsx
 // ✅ Correct
-options={[
-  { value: "us", label: "United States" },
-  { value: "ca", label: "Canada" },
-]}
+{ type: "text", id: "name", ... }
+{ type: "email", id: "email", ... }
 
-// ❌ Incorrect
-options={[
-  { value: "us", name: "United States" },
-  { value: "ca", name: "Canada" },
-]}
+// ❌ Incorrect (duplicate IDs)
+{ type: "text", id: "field", ... }
+{ type: "email", id: "field", ... }
 ```
 
 #### 2. Form Data Not Updating
-Check that your step IDs are unique:
+Ensure your step IDs are unique and properly configured:
 ```tsx
 // ✅ Correct
 { type: "select", id: "location", ... }
@@ -453,7 +451,20 @@ Check that your step IDs are unique:
 { type: "select", id: "location", ... }
 ```
 
-#### 3. Performance Issues
+#### 3. Questions Group Validation Issues
+Make sure all questions in a group have unique fieldKeys:
+```tsx
+{
+  type: "questionsGroup",
+  id: "info",
+  questions: [
+    { label: "Name", fieldKey: "name" },     // ✅ Unique
+    { label: "Email", fieldKey: "email" },   // ✅ Unique
+  ],
+}
+```
+
+#### 4. Performance Issues
 Use debouncing for large forms:
 ```tsx
 <SentForm
@@ -478,7 +489,9 @@ type StepConfig =
   | PhoneStepConfig
   | NumberStepConfig
   | LongTextStepConfig
-  | CheckboxStepConfig;
+  | CheckboxStepConfig
+  | FileUploadStepConfig
+  | QuestionsGroupStepConfig;
 ```
 
 ### FormData Type
@@ -499,5 +512,3 @@ interface SentFormProps {
   debounceDelay?: number;
 }
 ```
-
-The `SentForm` component provides a complete, professional form experience with excellent developer experience and user experience. 
