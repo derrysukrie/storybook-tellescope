@@ -47,7 +47,7 @@ export const renderStep = (step: StepConfig) => {
       return <PhoneNumber title={step.title} helperText={step.helperText} />;
 
     case "number":
-      return <NumberField />;
+      return <NumberField title={step.title} helperText={step.helperText} />;
 
     case "longText":
       return <LongTextField />;

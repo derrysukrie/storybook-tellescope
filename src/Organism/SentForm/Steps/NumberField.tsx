@@ -4,7 +4,12 @@ import { Input } from "../../../components/atoms/input/input";
 import { useState } from "react";
 import { useFormContext } from "../FormContext";
 
-export const NumberField = () => {
+interface NumberFieldProps {
+  title?: string;
+  helperText?: string;
+}
+
+export const NumberField = ({ title, helperText }: NumberFieldProps) => {
   const { updateFormData, currentStep } = useFormContext();
   const [value, setValue] = useState("");
 
@@ -27,7 +32,7 @@ export const NumberField = () => {
     <Box width="100%">
       <Box pt={"48px"}>
         <Stack gap={"12px"}>
-          <Typography variant="h5">Enter a number between 1 and 10</Typography>
+          <Typography variant="h5">{title}</Typography>
           <FormControlAtom variant="outlined" fullWidth>
             <Input
               appearance="distinct"
@@ -45,7 +50,7 @@ export const NumberField = () => {
             />
           </FormControlAtom>
           <Typography color="text.secondary" variant="caption">
-            The location is where you’re treatment supplies will be shipped, if prescibed
+            {helperText}
           </Typography>
         </Stack>
       </Box>

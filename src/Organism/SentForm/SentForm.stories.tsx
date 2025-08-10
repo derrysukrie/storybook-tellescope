@@ -131,6 +131,8 @@ export const Default: Story = {
       {
         type: "number",
         id: "age",
+        title: "What is your age?",
+        helperText: "We'll use this to contact you",
       },
       {
         type: "longText",
