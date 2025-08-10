@@ -1,3 +1,4 @@
+// Step Components
 export * from "./FormIntro";
 export * from "./Description";
 export * from "./Graphic";
@@ -16,4 +17,9 @@ export * from "./SignatureConsent";
 export * from "./Date";
 export * from "./Rating";
 export * from "./Ranking";
+
+// Shared utilities and components
+export * from "./shared";
+
+// Types
 export * from "./types";
