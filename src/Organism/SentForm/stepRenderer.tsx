@@ -50,7 +50,7 @@ export const renderStep = (step: StepConfig) => {
       return <NumberField title={step.title} helperText={step.helperText} />;
 
     case "longText":
-      return <LongTextField />;
+      return <LongTextField title={step.title} helperText={step.helperText} />;
 
     case "checkbox":
       return <CheckboxField />;

@@ -137,6 +137,8 @@ export const Default: Story = {
       {
         type: "longText",
         id: "description",
+        title: "What would you like to be called?",
+        helperText: "The location is where you're treatment supplies will be shipped, if prescibed",
       },
       {
         type: "checkbox",

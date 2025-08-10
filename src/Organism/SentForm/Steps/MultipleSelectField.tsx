@@ -27,22 +27,22 @@ export const MultipleSelectField = memo(({
   // Get current value from centralized form state
   const currentValue = getFormData()[currentStep] || [];
 
-  // Create value-to-label mapping for display
-  const valueToLabelMap = useMemo(() => {
-    const map = new Map<string, string>();
-    options.forEach(option => {
-      map.set(option.value, option.label);
-    });
-    return map;
-  }, [options]);
+  // // Create value-to-label mapping for display
+  // const valueToLabelMap = useMemo(() => {
+  //   const map = new Map<string, string>();
+  //   options.forEach(option => {
+  //     map.set(option.value, option.label);
+  //   });
+  //   return map;
+  // }, [options]);
 
-  // Custom renderValue function to show labels instead of values
-  const renderValue = useCallback((selected: string | string[]) => {
-    if (Array.isArray(selected)) {
-      return selected.map(val => valueToLabelMap.get(val) || val);
-    }
-    return selected;
-  }, [valueToLabelMap]);
+  // // Custom renderValue function to show labels instead of values
+  // const renderValue = useCallback((selected: string | string[]) => {
+  //   if (Array.isArray(selected)) {
+  //     return selected.map(val => valueToLabelMap.get(val) || val);
+  //   }
+  //   return selected;
+  // }, [valueToLabelMap]);
 
   const handleChange = useCallback((event: SelectChangeEvent<string | string[]>) => {
     const newValue = event.target.value as string[];
@@ -62,7 +62,7 @@ export const MultipleSelectField = memo(({
               value={currentValue}
               onChange={handleChange}
               placeholder={placeholder}
-              renderValue={renderValue}
+              // renderValue={renderValue}
               sx={{
                 backgroundColor: "white",
                 width: "100%",
