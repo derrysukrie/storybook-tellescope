@@ -90,6 +90,26 @@ export const Default: Story = {
         helperText: "Choose the plan that best fits your needs",
       },
       {
+        type: "questionsGroup",
+        title: "What type of plan are you looking for?",
+        description: "Choose the plan that best fits your needs",
+        questions: [
+          {
+            label: "What is your name?",
+            hint: "Choose the plan that best fits your needs",
+            fieldKey: "name",
+            hiddenLabel: false,
+          },
+          {
+            label: "What type of plan are you looking for?",
+            hint: "Choose the plan that best fits your needs",
+            fieldKey: "plan_type",
+            hiddenLabel: false,
+          },
+        ],
+        id: "questionsGroup",
+      },
+      {
         type: "text",
         id: "name",
       },

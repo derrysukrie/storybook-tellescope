@@ -4,21 +4,31 @@ import { Input } from "../../../components/atoms/input/input";
 import { useFormContext } from "../FormContext";
 import { useState } from "react";
 
-export const QuestionsGroup = () => {
+interface QuestionField {
+  label: string;
+  hint: string;
+  fieldKey: string;
+  hiddenLabel?: boolean;
+}
+
+interface QuestionsGroupProps {
+  title?: string;
+  description?: string;
+  questions: QuestionField[];
+}
+
+export const QuestionsGroup = ({ 
+  title = "Question group", 
+  description = "A paragraph of question group details",
+  questions 
+}: QuestionsGroupProps) => {
   const { updateFormData, currentStep } = useFormContext();
-  const [value1, setValue1] = useState("");
-  const [value2, setValue2] = useState("");
+  const [values, setValues] = useState<Record<string, string>>({});
 
-  const handleChange1 = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (fieldKey: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    setValue1(newValue);
-    updateFormData(`${currentStep}_question1`, newValue);
-  };
-
-  const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value;
-    setValue2(newValue);
-    updateFormData(`${currentStep}_question2`, newValue);
+    setValues(prev => ({ ...prev, [fieldKey]: newValue }));
+    updateFormData(`${currentStep}_${fieldKey}`, newValue);
   };
 
   return (
@@ -26,46 +36,30 @@ export const QuestionsGroup = () => {
       <Box pt={"48px"}>
         <Stack gap={"48px"}>
           <Box display={"flex"} flexDirection={"column"} gap={"16px"}>
-            <Typography variant="h5">Question group</Typography>
-            <Typography variant="body2">A paragraph of question group details</Typography>
+            <Typography variant="h5">{title}</Typography>
+            <Typography variant="body2">{description}</Typography>
           </Box>
-          <Box display={"flex"} flexDirection={"column"} gap={"12px"}>
-            <Typography variant="h5">What would you like to be called?</Typography>
-            <FormControlAtom variant="outlined" fullWidth>
-              <Input
-                appearance="distinct"
-                size="medium"
-                value={value1}
-                onChange={handleChange1}
-                sx={{
-                  backgroundColor: "white",
-                  width: "100%",
-                }}
-              />
-            </FormControlAtom>
-            <Typography color="text.secondary" variant="caption">
-              The location is where you're treatment supplies will be shipped, if prescibed
-            </Typography>
-          </Box>
-          <Box display={"flex"} flexDirection={"column"} gap={"12px"}>
-            <Typography variant="h5">What would you like to be called?</Typography>
-            <FormControlAtom variant="outlined" fullWidth>
-              <Input
-                appearance="distinct"
-                size="medium"
-                hiddenLabel
-                value={value2}
-                onChange={handleChange2}
-                sx={{
-                  backgroundColor: "white",
-                  width: "100%",
-                }}
-              />
-            </FormControlAtom>
-            <Typography color="text.secondary" variant="caption">
-              The location is where you're treatment supplies will be shipped, if prescibed
-            </Typography>
-          </Box>
+          {questions.map((question, index) => (
+            <Box key={index} display={"flex"} flexDirection={"column"} gap={"12px"}>
+              <Typography variant="h5">{question.label}</Typography>
+              <FormControlAtom variant="outlined" fullWidth>
+                <Input
+                  appearance="distinct"
+                  size="medium"
+                  hiddenLabel={question.hiddenLabel}
+                  value={values[question.fieldKey] || ""}
+                  onChange={handleChange(question.fieldKey)}
+                  sx={{
+                    backgroundColor: "white",
+                    width: "100%",
+                  }}
+                />
+              </FormControlAtom>
+              <Typography color="text.secondary" variant="caption">
+                {question.hint}
+              </Typography>
+            </Box>
+          ))}
         </Stack>
       </Box>
     </Box>

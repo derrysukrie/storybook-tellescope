@@ -92,6 +92,19 @@ export interface FileUploadStepConfig {
   id: string;
 }
 
+export interface QuestionsGroupStepConfig {
+  type: "questionsGroup";
+  id: string;
+  title: string;
+  description: string;
+  questions: {
+    label: string;
+    hint: string;
+    fieldKey: string;
+    hiddenLabel?: boolean;
+  }[];
+}
+
 // Union type for all step configurations
 export type StepConfig = 
   | IntroStepConfig
@@ -105,7 +118,8 @@ export type StepConfig =
   | NumberStepConfig
   | LongTextStepConfig
   | CheckboxStepConfig
-  | FileUploadStepConfig;
+  | FileUploadStepConfig
+  | QuestionsGroupStepConfig;
 
 // Form data type
 export interface FormData {
