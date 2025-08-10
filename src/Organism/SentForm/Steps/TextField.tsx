@@ -4,7 +4,12 @@ import { Input } from "../../../components/atoms/input/input";
 import { useFormContext } from "../FormContext";
 import { useCallback } from "react";
 
-export const TextField = () => {
+interface TextFieldProps {
+  title?: string;
+  helperText?: string;
+}
+
+export const TextField = ({ title, helperText }: TextFieldProps) => {
   const { updateFormData, getFormData, currentStep } = useFormContext();
   
   // Get current value from centralized form state
@@ -19,12 +24,12 @@ export const TextField = () => {
     <Box width="100%">
       <Box pt={"48px"}>
         <Stack gap={"12px"}>
-          <Typography variant="h5">What would you like to be called?</Typography>
+          <Typography variant="h5">{title}</Typography>
           <FormControlAtom variant="outlined" fullWidth>
             <Input
               appearance="distinct"
               size="medium"
-              label="Okeanos Withburga"
+              label={"Okeanos Withburga"}
               value={currentValue}
               onChange={handleChange}
               sx={{
@@ -34,7 +39,7 @@ export const TextField = () => {
             />
           </FormControlAtom>
           <Typography color="text.secondary" variant="caption">
-            The location is where you're treatment supplies will be shipped, if prescibed
+            {helperText}
           </Typography>
         </Stack>
       </Box>

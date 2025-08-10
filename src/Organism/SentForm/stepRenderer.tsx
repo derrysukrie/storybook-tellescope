@@ -38,13 +38,13 @@ export const renderStep = (step: StepConfig) => {
       return <MultipleChoice label={step.label} options={step.options} helperText={step.helperText} />;
 
     case "text":
-      return <TextField />;
+      return <TextField title={step.title} helperText={step.helperText} />;
 
     case "email":
-      return <EmailField />;
+      return <EmailField title={step.title} helperText={step.helperText} />;
 
     case "phone":
-      return <PhoneNumber />;
+      return <PhoneNumber title={step.title} helperText={step.helperText} />;
 
     case "number":
       return <NumberField />;

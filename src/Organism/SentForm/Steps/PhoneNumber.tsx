@@ -4,7 +4,12 @@ import { Input } from "../../../components/atoms/input/input";
 import { useState, useCallback, useMemo } from "react";
 import { useFormContext } from "../FormContext";
 
-export const PhoneNumber = () => {
+interface PhoneNumberProps {
+  title?: string;
+  helperText?: string;
+}
+
+export const PhoneNumber = ({ title, helperText }: PhoneNumberProps) => {
   const { updateFormData, currentStep } = useFormContext();
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
@@ -70,7 +75,7 @@ export const PhoneNumber = () => {
     <Box width="100%">
       <Box pt={"48px"}>
         <Stack gap={"12px"}>
-          <Typography variant="h5">What would you like to be called?</Typography>
+          <Typography variant="h5">{title}</Typography>
           
           <FormControlAtom variant="outlined" fullWidth>
             <Input

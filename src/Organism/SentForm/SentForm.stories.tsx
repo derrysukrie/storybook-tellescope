@@ -112,14 +112,21 @@ export const Default: Story = {
       {
         type: "text",
         id: "name",
+        title: "What is your name?",
+        helperText: "We'll use this to contact you",
       },
       {
         type: "email",
+        title: "What is your email?",
+        placeholder: "Enter your email",
+        helperText: "We'll use this to contact you",
         id: "email",
       },
       {
         type: "phone",
         id: "phone",
+        title: "What is your phone number?",
+        helperText: "We'll use this to contact you",
       },
       {
         type: "number",

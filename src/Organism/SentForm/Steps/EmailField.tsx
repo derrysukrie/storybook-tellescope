@@ -4,7 +4,12 @@ import { Input } from "../../../components/atoms/input/input";
 import { useFormContext } from "../FormContext";
 import { useState } from "react";
 
-export const EmailField = () => {
+interface EmailFieldProps {
+  title?: string;
+  helperText?: string;
+}
+
+export const EmailField = ({ title, helperText }: EmailFieldProps) => {
   const { updateFormData, currentStep } = useFormContext();
   const [value, setValue] = useState("");
 
@@ -18,7 +23,7 @@ export const EmailField = () => {
     <Box width="100%">
       <Box pt={"48px"}>
         <Stack gap={"12px"}>
-          <Typography variant="h5">Enter your email</Typography>
+          <Typography variant="h5">{title}</Typography>
           <FormControlAtom variant="outlined" fullWidth>
             <Input
               appearance="distinct"
@@ -35,7 +40,7 @@ export const EmailField = () => {
             />
           </FormControlAtom>
           <Typography color="text.secondary" variant="caption">
-            The location is where you're treatment supplies will be shipped, if prescibed
+            {helperText}
           </Typography>
         </Stack>
       </Box>
