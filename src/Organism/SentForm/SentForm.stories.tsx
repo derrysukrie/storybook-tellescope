@@ -57,7 +57,10 @@ export const Default: Story = {
         type: "intro",
         id: "welcome",
       },
-    
+      {
+        type: "rating",
+        id: "rating",
+      },
       {
         type: "signatureConsent",
         id: "signatureConsent",

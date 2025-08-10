@@ -118,6 +118,11 @@ export interface DateStepConfig {
   helperText?: string;
 }
 
+export interface RatingStepConfig {
+  type: "rating";
+  id: string;
+}
+
 // Union type for all step configurations
 export type StepConfig = 
   | IntroStepConfig
@@ -134,7 +139,8 @@ export type StepConfig =
   | FileUploadStepConfig
   | QuestionsGroupStepConfig
   | SignatureConsentStepConfig
-  | DateStepConfig;
+  | DateStepConfig
+  | RatingStepConfig;
 
 // Form data type
 export interface FormData {

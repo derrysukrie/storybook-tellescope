@@ -14,4 +14,5 @@ export * from "./MultipleSelectField";
 export * from "./FileUploader";
 export * from "./SignatureConsent";
 export * from "./Date";
+export * from "./Rating";
 export * from "./types";

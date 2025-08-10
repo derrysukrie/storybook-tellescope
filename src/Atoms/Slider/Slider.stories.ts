@@ -24,6 +24,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     stepper: false,
+    sx: {
+      width: 500,
+    },
   },
 };
 
@@ -35,5 +38,8 @@ export const WithStepper: Story = {
     shiftStep: 10,
     marks: true,
     stepper: true,
+    sx: {
+      width: 500,
+    },
   },
 };

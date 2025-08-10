@@ -15,6 +15,7 @@ import {
   Description,
   SignatureConsent,
   Date,
+  Rating,
 } from "./Steps";
 
 // Internal step renderer for the Organism
@@ -25,6 +26,9 @@ export const renderStep = (step: StepConfig) => {
 
     case "date":
       return <Date />;
+
+    case "rating":
+      return <Rating />;
 
     case "questionsGroup":
       return (
