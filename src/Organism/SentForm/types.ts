@@ -87,6 +87,11 @@ export interface CheckboxStepConfig {
   helperText?: string;
 }
 
+export interface FileUploadStepConfig {
+  type: "fileUpload";
+  id: string;
+}
+
 // Union type for all step configurations
 export type StepConfig = 
   | IntroStepConfig
@@ -99,7 +104,8 @@ export type StepConfig =
   | PhoneStepConfig
   | NumberStepConfig
   | LongTextStepConfig
-  | CheckboxStepConfig;
+  | CheckboxStepConfig
+  | FileUploadStepConfig;
 
 // Form data type
 export interface FormData {

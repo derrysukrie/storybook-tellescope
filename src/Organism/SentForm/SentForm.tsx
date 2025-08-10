@@ -139,6 +139,7 @@ export const SentForm = ({
             <Button
               onClick={handleNext}
               sx={sentFormStyles.continueButton}
+              size="large"
               fullWidth
             >
               CONTINUE

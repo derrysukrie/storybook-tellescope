@@ -10,16 +10,17 @@ import { CheckboxField } from "./Steps/CheckboxField";
 import { FormIntro } from "./Steps/FormIntro";
 import { Description } from "./Steps/Description";
 import type { StepConfig } from "./types";
+import { FileUploader } from "./Steps";
 
 // Internal step renderer for the Organism
 export const renderStep = (step: StepConfig) => {
   switch (step.type) {
     case "intro":
       return <FormIntro />;
-      
+
     case "description":
       return <Description description={step.description} />;
-      
+
     case "select":
       return (
         <SelectField
@@ -29,7 +30,7 @@ export const renderStep = (step: StepConfig) => {
           helperText={step.helperText}
         />
       );
-      
+
     case "multiSelect":
       return (
         <MultipleSelectField
@@ -39,7 +40,7 @@ export const renderStep = (step: StepConfig) => {
           helperText={step.helperText}
         />
       );
-      
+
     case "choice":
       return (
         <MultipleChoice
@@ -48,26 +49,28 @@ export const renderStep = (step: StepConfig) => {
           helperText={step.helperText}
         />
       );
-      
+
     case "text":
       return <TextField />;
-      
+
     case "email":
       return <EmailField />;
-      
+
     case "phone":
       return <PhoneNumber />;
-      
+
     case "number":
       return <NumberField />;
-      
+
     case "longText":
       return <LongTextField />;
-      
+
     case "checkbox":
       return <CheckboxField />;
-      
+
+    case "fileUpload":
+      return <FileUploader />;
     default:
-      throw new Error(`Unknown step type: ${(step as any).type}`);
+      return null;
   }
-}; 
+};

@@ -58,6 +58,10 @@ export const Default: Story = {
         id: "welcome",
       },
       {
+        type: "fileUpload",
+        id: "fileUpload",
+      },
+      {
         type: "description",
         id: "description",
         description: "Great, we have a variety of plans to fit your needs. Let's start with some questions about you, after that we'll find the plan that's a perfect fit!",
