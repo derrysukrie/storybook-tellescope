@@ -15,8 +15,8 @@ export const isStepValid = (step: StepConfig, formData: FormData, checked: boole
     return checked;
   }
 
-  // Skip validation for description steps
-  if (step.type === "description") {
+  // Skip validation for description and ranking steps - always allow continue
+  if (step.type === "description" || step.type === "ranking") {
     return true;
   }
 
@@ -72,6 +72,9 @@ export const isStepValid = (step: StepConfig, formData: FormData, checked: boole
 
     case "date":
       return typeof stepData === "string" && stepData.length > 0;
+
+    case "rating":
+      return typeof stepData === "number" && stepData >= 0;
 
     default:
       return true;

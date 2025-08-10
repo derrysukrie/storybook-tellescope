@@ -123,6 +123,15 @@ export interface RatingStepConfig {
   id: string;
 }
 
+export interface RankingStepConfig {
+  type: "ranking";
+  id: string;
+  items: {
+    id: string;
+    text: string;
+  }[];
+}
+
 // Union type for all step configurations
 export type StepConfig = 
   | IntroStepConfig
@@ -140,7 +149,8 @@ export type StepConfig =
   | QuestionsGroupStepConfig
   | SignatureConsentStepConfig
   | DateStepConfig
-  | RatingStepConfig;
+  | RatingStepConfig
+  | RankingStepConfig;
 
 // Form data type
 export interface FormData {

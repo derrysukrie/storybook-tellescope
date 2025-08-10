@@ -16,6 +16,7 @@ import {
   SignatureConsent,
   Date,
   Rating,
+  Ranking,
 } from "./Steps";
 
 // Internal step renderer for the Organism
@@ -24,52 +25,29 @@ export const renderStep = (step: StepConfig) => {
     case "intro":
       return <FormIntro />;
 
-    case "date":
-      return <Date />;
-
     case "rating":
       return <Rating />;
 
+    case "date":
+      return <Date />;
+
+    case "ranking":
+      return <Ranking items={step.items} />;
+
     case "questionsGroup":
-      return (
-        <QuestionsGroup
-          questions={step.questions}
-          title={step.title}
-          description={step.description}
-        />
-      );
+      return <QuestionsGroup questions={step.questions} title={step.title} description={step.description} />;
 
     case "description":
       return <Description description={step.description} />;
 
     case "select":
-      return (
-        <SelectField
-          title={step.title}
-          options={step.options}
-          placeholder={step.placeholder}
-          helperText={step.helperText}
-        />
-      );
+      return <SelectField title={step.title} options={step.options} placeholder={step.placeholder} helperText={step.helperText} />;
 
     case "multiSelect":
-      return (
-        <MultipleSelectField
-          title={step.title}
-          options={step.options}
-          placeholder={step.placeholder}
-          helperText={step.helperText}
-        />
-      );
+      return <MultipleSelectField title={step.title} options={step.options} placeholder={step.placeholder} helperText={step.helperText} />;
 
     case "choice":
-      return (
-        <MultipleChoice
-          label={step.label}
-          options={step.options}
-          helperText={step.helperText}
-        />
-      );
+      return <MultipleChoice label={step.label} options={step.options} helperText={step.helperText} />;
 
     case "text":
       return <TextField title={step.title} helperText={step.helperText} />;
@@ -90,15 +68,7 @@ export const renderStep = (step: StepConfig) => {
       return <SignatureConsent />;
 
     case "checkbox":
-      return (
-        <CheckboxField
-          id={step.id}
-          type="checkbox"
-          title={step.title}
-          helperText={step.helperText}
-          options={step.options}
-        />
-      );
+      return <CheckboxField id={step.id} type="checkbox" title={step.title} helperText={step.helperText} options={step.options} />;
 
     case "fileUpload":
       return <FileUploader />;

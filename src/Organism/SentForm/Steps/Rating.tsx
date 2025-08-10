@@ -5,7 +5,7 @@ import { useFormContext } from "../FormContext";
 export const Rating = () => {
   const { updateFormData, currentStep } = useFormContext();
 
-  const handleChange = (event: Event, newValue: number | number[]) => {
+  const handleChange = (_: Event, newValue: number | number[]) => {
     updateFormData(`${currentStep}`, newValue);
   };
 
