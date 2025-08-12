@@ -26,7 +26,7 @@ export const renderStep = (step: StepConfig) => {
       return <FormIntro />;
 
     case "rating":
-      return <Rating />;
+      return <Rating min={step.min} max={step.max} step={step.step} shiftStep={step.shiftStep} marks={step.marks}    />;
 
     case "date":
       return <Date />;
@@ -68,7 +68,7 @@ export const renderStep = (step: StepConfig) => {
       return <SignatureConsent />;
 
     case "checkbox":
-      return <CheckboxField id={step.id} type="checkbox" title={step.title} helperText={step.helperText} options={step.options} />;
+      return <CheckboxField stepId={step.id} title={step.title} helperText={step.helperText} options={step.options} />;
 
     case "fileUpload":
       return <FileUploader />;

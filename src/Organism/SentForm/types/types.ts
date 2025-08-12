@@ -83,7 +83,7 @@ export interface CheckboxStepConfig {
   type: "checkbox";
   id: string;
   title: string;
-  options: Array<{ value: string; label: string }>;
+  options: Array<{  label: string; value: string }>;
   helperText: string;
 }
 
@@ -121,6 +121,11 @@ export interface DateStepConfig {
 export interface RatingStepConfig {
   type: "rating";
   id: string;
+  min: number;
+  max: number;
+  step: number;
+  shiftStep: number;
+  marks: boolean;
 }
 
 export interface RankingStepConfig {
