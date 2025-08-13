@@ -7,6 +7,7 @@ import type { StepConfig, FormData } from "../types/types";
  * @param checked - Whether the intro checkbox is checked (for intro steps)
  * @returns boolean - True if the step is valid, false otherwise
  */
+
 export const isStepValid = (step: StepConfig, formData: FormData, checked: boolean): boolean => {
   const stepId = step.id;
 

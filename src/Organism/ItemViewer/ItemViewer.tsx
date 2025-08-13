@@ -18,6 +18,7 @@ import { mockMessages } from "../../data/mock";
  * />
  * ```
  */
+
 export const ItemViewer: React.FC<MessageProps> = React.memo(
   ({
     messages: externalMessages,
@@ -239,7 +240,7 @@ export const ItemViewer: React.FC<MessageProps> = React.memo(
           />
 
           {/* Messages List */}
-          <Messages content={messages} enableTeamChat={state.enableTeamChat} onMessageRetry={externalCallbacks?.onMessageRetry} />
+          <Messages content={messages} onMessageRetry={externalCallbacks?.onMessageRetry} />
 
           {/* Input */}
           <MessageInput

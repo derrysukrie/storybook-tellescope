@@ -1,30 +1,33 @@
-import { Box } from "@mui/material";
 import { FormGroup } from "../../../Molecules/FormGroup";
-import { useState } from "react";
-import { useFormContext } from "../FormContext";
-import type { CheckboxStepConfig } from "../types/types";
+import { StepWrapper, useStepField } from "./shared";
+import type { CheckboxFieldStepProps } from "./types";
 
-export const CheckboxField = ({ title, helperText, options }: CheckboxStepConfig) => {
-  const { updateFormData, currentStep } = useFormContext();
-  const [selectedValues, setSelectedValues] = useState<string[]>([]);
+export const CheckboxField = ({ 
+  title, 
+  helperText, 
+  options, 
+  required = false,
+  disabled = false,
+  stepId,
+  maxSelections,
+  minSelections
+}: CheckboxFieldStepProps) => {
+  const { value, error, handleChange } = useStepField({
+    stepId,
+    required,
+    defaultValue: [],
+    validations: []
+  });
 
-  const handleChange = (value: string[]) => {
-    setSelectedValues(value);
-    updateFormData(currentStep, value);
-  };
+  const selectedValues = Array.isArray(value) ? value : [];
 
   return (
-    <Box width="100%">
-      <Box pt={"48px"}>
-        <FormGroup.Checkbox
-          label={title}
-          labelSize="large"
-          helperText={helperText}
-          options={options}
-          onChange={handleChange}
-          value={selectedValues}
-        />
-      </Box>
-    </Box>
+    <StepWrapper title={title} helperText={helperText} error={error || undefined}>
+      <FormGroup.Checkbox
+        options={options}
+        onChange={handleChange}
+        value={selectedValues}
+      />
+    </StepWrapper>
   );
 };

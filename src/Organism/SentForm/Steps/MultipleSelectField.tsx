@@ -36,13 +36,21 @@ export const MultipleSelectField = memo(({
   //   return map;
   // }, [options]);
 
-  // // Custom renderValue function to show labels instead of values
-  // const renderValue = useCallback((selected: string | string[]) => {
-  //   if (Array.isArray(selected)) {
-  //     return selected.map(val => valueToLabelMap.get(val) || val);
-  //   }
-  //   return selected;
-  // }, [valueToLabelMap]);
+    // // Custom renderValue function to show labels instead of values
+    // const renderValue = useCallback((selected: string | string[]) => {
+    //   if (Array.isArray(selected)) {
+    //     return selected.map(val => valueToLabelMap.get(val) || val);
+    //   }
+    //   return selected;
+    // }, [valueToLabelMap]);
+    
+    // render placeholder if no value is selected
+    const renderValue = useCallback((selected: string | string[]) => {
+      if (Array.isArray(selected) && selected.length === 0) {
+        return placeholder;
+      }
+     
+    }, [placeholder]);
 
   const handleChange = useCallback((event: SelectChangeEvent<string | string[]>) => {
     const newValue = event.target.value as string[];
@@ -59,6 +67,7 @@ export const MultipleSelectField = memo(({
               appearance="outlined"
               size="small"
               multiple
+              displayEmpty
               value={currentValue}
               onChange={handleChange}
               placeholder={placeholder}
