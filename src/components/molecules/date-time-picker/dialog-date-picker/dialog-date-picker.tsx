@@ -25,17 +25,12 @@ export interface DialogDatePickerProps {
     /** Maximum selectable date */
     maxDate?: Date;
     /** Whether the date picker is disabled */
-    disabled?: boolean;
     /** Callback fired when the dialog is cancelled */
     onCancel?: () => void;
     /** Callback fired when the next action is triggered */
     onNext?: () => void;
     /** Callback fired when the clear action is triggered */
     onClear?: () => void;
-    /** Custom class name */
-    className?: string;
-    /** Custom styles */
-    sx?: any;
 }
 
 export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps>(
@@ -44,12 +39,9 @@ export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps
         onChange,
         minDate,
         maxDate,
-        disabled = false,
         onCancel,
         onNext,
         onClear,
-        className,
-        sx,
         ...props
     }, ref) => {
         // Use custom hook for all date picker logic
@@ -70,7 +62,6 @@ export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps
             onChange,
             minDate,
             maxDate,
-            disabled,
             onCancel,
             onNext,
             onClear
@@ -83,13 +74,11 @@ export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps
             width: DESIGN_TOKENS.width,
             border: `1px solid ${DESIGN_TOKENS.borderColor}`,
             backgroundColor: DESIGN_TOKENS.backgroundColor,
-            ...sx
-        }), [sx]);
+        }), []);
 
         return (
             <Box
                 ref={ref}
-                className={className}
                 sx={containerStyles}
                 role="dialog"
                 aria-label="Date picker"
@@ -104,7 +93,6 @@ export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps
                     onNextYear={handleNextYear}
                     onMonthChange={handleMonthChange}
                     onYearChange={handleYearChange}
-                    disabled={disabled}
                 />
 
                 <CalendarGrid
@@ -113,14 +101,12 @@ export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps
                     onDateSelect={handleDateSelect}
                     minDate={minDate}
                     maxDate={maxDate}
-                    disabled={disabled}
                 />
 
                 <CalendarFooter
                     onClear={handleClear}
                     onCancel={handleCancel}
                     onNext={handleNext}
-                    disabled={disabled}
                 />
             </Box>
         );

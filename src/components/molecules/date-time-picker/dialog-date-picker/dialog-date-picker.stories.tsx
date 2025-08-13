@@ -60,22 +60,4 @@ export const Default: Story = {
     render: () => <InteractiveDatePicker />
 };
 
-export const Disabled: Story = {
-    render: () => {
-        const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-
-        return (
-            <div style={{ padding: '20px' }}>
-                <DialogDatePicker
-                    value={selectedDate}
-                    onChange={setSelectedDate}
-                    disabled={true}
-                    onCancel={() => console.log('Cancel clicked')}
-                    onNext={() => console.log('Next clicked')}
-                    onClear={() => console.log('Clear clicked')}
-                />
-            </div>
-        );
-    }
-};
 
