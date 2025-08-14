@@ -24,18 +24,21 @@ export const Radio: StoryObj = {
 };
 
 export const Checkbox: StoryObj = {
-  render: () => (
-    <FormGroup.Checkbox
-      onChange={(values) => console.log("onChange", values)}
-      label="Checkbox Group"
-      helperText="This is a helper text"
-      options={[
-        { label: "Option 1", value: "1" },
-        { label: "Option 2", value: "2" },
-        { label: "Option 3", value: "3" },
-      ]}
-    />
-  ),
+  render: () => {
+    const [value, setValue] = React.useState<string[]>([]);
+
+    return (
+      <FormGroup.Checkbox
+        onChange={(values) => setValue(values)}
+        value={value}
+        options={[
+          { label: "Option 1", value: "1" },
+          { label: "Option 2", value: "2" },
+          { label: "Option 3", value: "3" },
+        ]}
+      />
+    );
+  },
 };
 
 export const Text: StoryObj = {
@@ -44,7 +47,13 @@ export const Text: StoryObj = {
     const [value, setValue] = React.useState<Record<string, string>>({});
 
     return (
-      <FormGroup.Text label="Text Group" helperText="This is a helper text" options={[{ label: "Option 1", value: "1" }]} value={value} onChange={setValue} />
+      <FormGroup.Text
+        label="Text Group"
+        helperText="This is a helper text"
+        options={[{ label: "Option 1", value: "1" }, { label: "Option 2", value: "2" }]}
+        value={value}
+        onChange={setValue}
+      />
     );
   },
 };
@@ -89,7 +98,13 @@ export const Switch: StoryObj = {
 // };
 
 export const TextArea: StoryObj = {
-  render: () => <FormGroup.TextArea label="Text Area Group" helperText="This is a helper text" options={[{ label: "Option 1", value: "1" }]} />,
+  render: () => (
+    <FormGroup.TextArea
+      label="Text Area Group"
+      helperText="This is a helper text"
+      options={[{ label: "Option 1", value: "1" }]}
+    />
+  ),
 };
 
 export const Select: StoryObj = {
