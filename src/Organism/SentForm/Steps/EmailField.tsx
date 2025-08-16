@@ -4,23 +4,19 @@ import { useCallback } from "react";
 import { StepWrapper, useStepField, commonValidations } from "./shared";
 import type { TextFieldStepProps } from "./types";
 
-export const EmailField = ({ 
-  title, 
-  helperText, 
-  placeholder = "Your email",
-  required = false,
-  disabled = false,
-  stepId
-}: TextFieldStepProps) => {
+export const EmailField = ({ title, helperText, placeholder = "Your email", required = false, disabled = false, stepId }: TextFieldStepProps) => {
   const { value, error, handleChange, handleBlur } = useStepField({
     stepId,
     required,
-    validations: [commonValidations.email()]
+    validations: [commonValidations.email()],
   });
 
-  const handleInputChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    handleChange(event.target.value);
-  }, [handleChange]);
+  const handleInputChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      handleChange(event.target.value);
+    },
+    [handleChange]
+  );
 
   return (
     <StepWrapper title={title} helperText={helperText} error={error || undefined}>
@@ -39,7 +35,6 @@ export const EmailField = ({
             backgroundColor: "white",
             width: "100%",
           }}
-
         />
       </FormControlAtom>
     </StepWrapper>
