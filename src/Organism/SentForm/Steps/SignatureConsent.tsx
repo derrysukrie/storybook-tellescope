@@ -1,7 +1,7 @@
 import { Typography, FormControlLabel, Stack } from "@mui/material";
 import CheckBox from "../../../components/atoms/checkbox/checkbox";
 import { useState } from "react";
-import { FormControlAtom } from "../../../Atoms/Form/FormControl";
+import { FormControlAtom } from "../../../components/atoms";
 import { Input } from "../../../components/atoms/input/input";
 import { useFormContext } from "../FormContext";
 

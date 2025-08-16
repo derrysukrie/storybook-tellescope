@@ -4,3 +4,4 @@ export * from "./Icon/Icon"
 export * from "./SectionCategory/SectionCategory";
 export * from "./Snackbar/Snackbar";
 export * from "./Slider/Slider";
+export * from "./input/input";

@@ -1,5 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { FormControlAtom } from "../../../Atoms/Form";
+import { FormControlAtom } from "../../../components/atoms";
 import Textarea from "../../../components/atoms/textarea/textarea";
 import { useFormContext } from "../FormContext";
 import { useCallback } from "react";

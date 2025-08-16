@@ -1,10 +1,10 @@
 import { Slider as MuiSlider, type SliderProps } from "@mui/material";
 
-export default function Slider({
+export const Slider = ({
   ...props
 }: SliderProps & {
   stepper?: boolean;
-}) {
+}) => {
   return (
     <MuiSlider
       {...props}

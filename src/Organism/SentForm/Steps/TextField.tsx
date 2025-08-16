@@ -1,4 +1,4 @@
-import { FormControlAtom } from "../../../Atoms/Form";
+import { FormControlAtom } from "../../../components/atoms";
 import { Input } from "../../../components/atoms/input/input";
 import { useCallback } from "react";
 import { StepWrapper, useStepField } from "./shared";

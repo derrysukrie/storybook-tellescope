@@ -35,7 +35,7 @@ const formatFileSize = (bytes: number): string => {
 };
 
 export const FileUploader = () => {
-  const { updateFormData, getFormData, currentStep } = useFormContext();
+  const { updateFormData, currentStep } = useFormContext();
   const [files, setFiles] = useState<FileItem[]>([]);
   const [isDragOver, setIsDragOver] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);

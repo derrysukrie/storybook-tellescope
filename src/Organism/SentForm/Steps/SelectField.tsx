@@ -1,5 +1,5 @@
 import { MenuItem, type SelectChangeEvent } from "@mui/material";
-import { FormControlAtom } from "../../../Atoms/Form";
+import { FormControlAtom } from "../../../components/atoms";
 import Select from "../../../components/atoms/select/select";
 import { useCallback, memo, useMemo } from "react";
 import { StepWrapper, useStepField } from "./shared";
