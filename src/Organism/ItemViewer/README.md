@@ -21,7 +21,7 @@ This document outlines the corrected architecture for the ItemViewer component, 
 ### Basic Usage
 ```tsx
 import { ItemViewer } from './ItemViewer';
-import type { MessageCallbacks } from '../../Molecules/Message';
+import type { MessageCallbacks } from '../../components/molecules/Message';
 
 const callbacks: MessageCallbacks = {
   onMessageSubmit: (content) => {
@@ -76,7 +76,7 @@ const callbacks: MessageCallbacks = {
 ### Advanced Usage with Error Handling
 ```tsx
 import { ItemViewer } from './ItemViewer';
-import type { MessageCallbacks, MessageError } from '../../Molecules/Message';
+import type { MessageCallbacks, MessageError } from '../../components/molecules/Message';
 
 const [error, setError] = useState<MessageError | null>(null);
 const [loading, setLoading] = useState({ isSubmitting: false });

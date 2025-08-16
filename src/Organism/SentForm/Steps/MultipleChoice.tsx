@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { FormGroup } from "../../../Molecules/FormGroup";
+import { FormGroup } from "../../../components/molecules/FormGroup";
 import { useFormContext } from "../FormContext";
 import { useCallback, memo } from "react";
 import type { ChoiceOption } from "./types";

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
 
-import { MessageContainer, MessageInput, Messages, useMessageState, MessageHeader } from "../../Molecules";
+import { MessageContainer, MessageInput, Messages, useMessageState, MessageHeader } from "../../components/molecules";
 
-import type { MessageProps, IMessage } from "../../Molecules/Message";
+import type { MessageProps, IMessage } from "../../components/molecules/Message";
 import { mockMessages } from "../../data/mock";
 
 /**
