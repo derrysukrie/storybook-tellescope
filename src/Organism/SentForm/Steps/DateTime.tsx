@@ -1,24 +1,39 @@
 import { Box, MenuItem, Typography } from "@mui/material";
 import DialogDatePicker from "../../../components/molecules/date-time-picker/dialog-date-picker/dialog-date-picker";
+import DialogTimePicker from "../../../components/molecules/date-time-picker/dialog-time-picker/dialog-time-picker";    
 import Select from "../../../components/atoms/select/select";
 import { useCallback, useState } from "react";
 import { useFormContext } from "../FormContext";
 
-interface DateProps {
+interface DateTimeProps {
   title?: string;
   placeholder?: string;
   minDate?: Date;
   maxDate?: Date;
 }
 
-export const Date = ({  title = "Date and Time", placeholder = "MM/DD/YYYY", minDate, maxDate }: DateProps) => {
+export const DateTime = ({  title = "Date and Time", placeholder = "MM/DD/YYYY", minDate, maxDate }: DateTimeProps) => {
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+  const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
+
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const { updateFormData, currentStep } = useFormContext();
+
 
   const handleDatePickerClose = () => {
     updateFormData(currentStep, selectedDate?.toISOString());
-    setIsDatePickerOpen((prev) => !prev);
+    setIsDatePickerOpen(false);
+    setIsTimePickerOpen(true);
+  };
+
+  const handleDatePickerOpen = () => {
+    setIsDatePickerOpen(true);
+  };
+
+  const handleTimePickerClose = () => {
+    updateFormData(currentStep, `${selectedDate?.toISOString()} ${selectedTime}`);
+    setIsTimePickerOpen(false);
   };
 
   const renderValue = useCallback((selected: string | string[]) => {
@@ -46,7 +61,7 @@ export const Date = ({  title = "Date and Time", placeholder = "MM/DD/YYYY", min
         value={selectedDate?.toLocaleDateString() || ""}
         renderValue={renderValue}
         onChange={() => {}}
-        onClick={handleDatePickerClose}
+        onClick={handleDatePickerOpen}
         sx={{
           backgroundColor: "white",
           width: "100%",
@@ -66,17 +81,28 @@ export const Date = ({  title = "Date and Time", placeholder = "MM/DD/YYYY", min
           <DialogDatePicker
             value={selectedDate}
             onChange={setSelectedDate}
-            onCancel={handleDatePickerClose}
+            onCancel={() => setIsDatePickerOpen(false)}
             onNext={handleDatePickerClose}
-            onClear={() => {
-              setSelectedDate(null);
-              handleDatePickerClose();
-            }}
             minDate={minDate}
             maxDate={maxDate}
+            onClear={() => {
+              setSelectedDate(null);
+              setIsDatePickerOpen(false);
+            }}
           />
         </Box>
       )}
+      {isTimePickerOpen && (
+        <Box mt={1}>
+          <DialogTimePicker
+            onCancel={() => setIsTimePickerOpen(false)}
+            onOk={(time) => {
+              setSelectedTime(time);
+              handleTimePickerClose();
+            }}
+          />
+        </Box>
+      )}    
     </Box>
   );
 };

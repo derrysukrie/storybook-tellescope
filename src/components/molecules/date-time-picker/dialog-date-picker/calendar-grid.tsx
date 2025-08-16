@@ -109,8 +109,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
                     const isInCurrentMonth = day.getMonth() === viewDate.getMonth();
                     const isDisabled = disabled || isDateDisabled(day, minDate, maxDate);
 
-                    // Memoized styles to prevent recreation
-                    const dayStyles = useMemo(() => ({
+                    const dayStyles = {
                         cursor: isDisabled ? 'not-allowed' : 'pointer',
                         width: DESIGN_TOKENS.daySize,
                         height: DESIGN_TOKENS.daySize,
@@ -131,7 +130,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
                         ...(isToday && !isSelected && { borderColor: DESIGN_TOKENS.todayBorderColor }),
                         opacity: isDisabled ? 0.5 : 1,
                         pointerEvents: isDisabled ? 'none' : 'auto',
-                    }), [isDisabled, isSelected, isToday, isInCurrentMonth]);
+                    };
 
                     return (
                         <Grid item xs={12 / 7} key={index}>
