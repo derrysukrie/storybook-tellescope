@@ -7,7 +7,7 @@ import {
   FormControlAtom,
   FormGroupLabel,
   FormHelperText,
-} from "../../../Atoms/Form";
+} from "../../../components/atoms";
 import { Radio } from "../../../components/atoms/radio/radio";
 
 type Option = {

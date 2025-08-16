@@ -2,7 +2,7 @@ import {
   FormControlAtom,
   FormGroupLabel,
   FormHelperText,
-} from "../../../Atoms/Form";
+} from "../../../components/atoms";
 import { Stack, TextField } from "@mui/material";
 import { useState } from "react";
 

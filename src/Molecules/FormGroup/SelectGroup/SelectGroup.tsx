@@ -1,4 +1,4 @@
-import { FormGroupLabel, FormHelperText } from "../../../Atoms/Form";
+import { FormGroupLabel, FormHelperText } from "../../../components/atoms";
 import { Stack, Select, MenuItem, FormControl } from "@mui/material";
 import { useState } from "react";
 

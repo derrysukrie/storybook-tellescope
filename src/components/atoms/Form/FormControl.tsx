@@ -1,4 +1,4 @@
-import { FormControl, type FormControlProps } from "@mui/material";
+import { FormControl } from "@mui/material";
 import type React from "react";
 
 export interface FormControlAtomProps {

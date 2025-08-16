@@ -5,7 +5,7 @@ import {
   FormControlAtom,
   FormGroupLabel,
   FormHelperText,
-} from "../../../Atoms";
+} from "../../../components/atoms";
 import Switch from "../../../components/atoms/switch/switch";
 
 type Option = {

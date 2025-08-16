@@ -3,7 +3,7 @@ import {
   FormGroup as MuiFormGroup,
   FormHelperText,
 } from "@mui/material";
-import { FormControlAtom, FormGroupLabel } from "../../../Atoms/Form";
+import { FormControlAtom, FormGroupLabel } from "../../../components/atoms";
 import CheckBox from "../../../components/atoms/checkbox/checkbox";
 import type React from "react";
 
