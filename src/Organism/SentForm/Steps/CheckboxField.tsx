@@ -6,11 +6,8 @@ export const CheckboxField = ({
   title, 
   helperText, 
   options, 
-  required = false,
-  disabled = false,
   stepId,
-  maxSelections,
-  minSelections
+  required = false,
 }: CheckboxFieldStepProps) => {
   const { value, error, handleChange } = useStepField({
     stepId,

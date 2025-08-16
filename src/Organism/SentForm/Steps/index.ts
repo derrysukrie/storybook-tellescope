@@ -17,6 +17,7 @@ export * from "./SignatureConsent";
 export * from "./Date";
 export * from "./Rating";
 export * from "./Ranking";
+export * from "./DateTime";
 
 // Shared utilities and components
 export * from "./shared";

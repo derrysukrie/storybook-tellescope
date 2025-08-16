@@ -118,7 +118,15 @@ export interface DateStepConfig {
   helperText?: string;
 }
 
-export interface RatingStepConfig {
+export interface DateTimeStepConfig {
+  type: "dateTime";
+  id: string;
+  title?: string;
+  placeholder?: string;
+  helperText?: string;
+}
+
+  export interface RatingStepConfig {
   type: "rating";
   id: string;
 }
@@ -149,6 +157,7 @@ export type StepConfig =
   | QuestionsGroupStepConfig
   | SignatureConsentStepConfig
   | DateStepConfig
+  | DateTimeStepConfig
   | RatingStepConfig
   | RankingStepConfig;
 

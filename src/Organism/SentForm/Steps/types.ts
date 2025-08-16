@@ -4,7 +4,7 @@ export interface SelectOption {
 }
 
 export interface ChoiceOption {
-  id: string;
+  id?: string;
   label: string;
   value: string;
 }

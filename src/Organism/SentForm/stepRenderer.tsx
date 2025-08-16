@@ -17,6 +17,7 @@ import {
   Date,
   Rating,
   Ranking,
+  DateTime,
 } from "./Steps";
 
 // Internal step renderer for the Organism
@@ -29,7 +30,7 @@ export const renderStep = (step: StepConfig) => {
       return <Rating />;
 
     case "date":
-      return <Date />;
+      return <Date title={step.title} placeholder={step.placeholder} />;
 
     case "ranking":
       return <Ranking items={step.items} />;
@@ -68,10 +69,13 @@ export const renderStep = (step: StepConfig) => {
       return <SignatureConsent />;
 
     case "checkbox":
-      return <CheckboxField id={step.id} type="checkbox" title={step.title} helperText={step.helperText} options={step.options} />;
+      return <CheckboxField title={step.title} helperText={step.helperText} options={step.options} />;
 
     case "fileUpload":
       return <FileUploader />;
+
+    case "dateTime":
+      return <DateTime title={step.title} placeholder={step.placeholder} />;
 
     default:
       return null;
