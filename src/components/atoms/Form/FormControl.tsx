@@ -1,4 +1,5 @@
-import { FormControl, type FormControlProps } from "@mui/material";
+import { FormControl } from "@mui/material";
+import type React from "react";
 
 export interface FormControlAtomProps {
   children: React.ReactNode;
@@ -8,7 +9,8 @@ export interface FormControlAtomProps {
   variant?: "standard" | "outlined" | "filled";
   fullWidth?: boolean;
 }
-export const FormControlAtom: React.FC<FormControlProps> = ({
+
+export const FormControlAtom: React.FC<FormControlAtomProps> = ({
   children,
   error = false,
   variant = "standard",

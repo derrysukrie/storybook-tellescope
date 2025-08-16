@@ -21,7 +21,6 @@ export const SubMenuItem: React.FC<Props> = ({
   icon,
   text,
   children,
-
   ...props
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

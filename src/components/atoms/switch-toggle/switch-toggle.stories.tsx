@@ -14,7 +14,25 @@ const meta = {
             include: [''],
         },
     },
-
+    argTypes: {
+        color: {
+            options: ["default", 'primary', 'secondary', 'info'],
+            control: { type: 'select' },
+        },
+        size: {
+            control: { type: 'select' },
+            options: ['medium', 'small'],
+        },
+        checked: {
+            control: { type: 'boolean' },
+        },
+        disabled: {
+            control: { type: 'boolean' },
+        },
+        onChange: {
+            action: 'changed',
+        },
+    },
 } satisfies Meta<typeof SwitchToggle>;
 
 export default meta;
@@ -26,8 +44,10 @@ export const ProfileTimeTrackingToggle: Story = {
         return (
             <SwitchToggle
                 color="info"
+                value="timeTracking"
+                name="timeTracking"
                 checked={checked}
-                onChange={(e) => setChecked(e.target.checked)}
+                onChange={(e, checked) => setChecked(checked)}
                 label={
                     <Stack sx={{
                         flexDirection: "row",
@@ -69,8 +89,10 @@ export const AppBarTimeTrackingToggle: Story = {
         return (
             <SwitchToggle
                 color="info"
+                value="appBarTimeTracking"
+                name="appBarTimeTracking"
                 checked={checked}
-                onChange={(e) => setChecked(e.target.checked)}
+                onChange={(e, checked) => setChecked(checked)}
                 label={
                     <Stack sx={{
                         flexDirection: "row",
@@ -142,8 +164,10 @@ export const TeamChatToggle: Story = {
         return (
             <SwitchToggle
                 color="info"
+                value="teamChat"
+                name="teamChat"
                 checked={checked}
-                onChange={(e) => setChecked(e.target.checked)}
+                onChange={(e, checked) => setChecked(checked)}
                 label={
                     <Stack sx={{
                         flexDirection: "row",

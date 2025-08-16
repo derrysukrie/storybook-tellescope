@@ -3,8 +3,11 @@ import {
   RadioGroup as MuiRadioGroup,
 
 } from "@mui/material";
-import { FormControlAtom } from "../../../../Atoms";
-import { FormGroupLabel, FormHelperText } from "../../../../Atoms";
+import {
+  FormControlAtom,
+  FormGroupLabel,
+  FormHelperText,
+} from "../../../../components/atoms";
 import { Radio } from "../../../atoms/radio/radio";
 
 type Option = {

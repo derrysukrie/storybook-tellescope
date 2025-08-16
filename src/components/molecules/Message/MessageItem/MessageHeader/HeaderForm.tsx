@@ -1,5 +1,5 @@
 import { Box, MenuItem, Stack } from "@mui/material";
-import { FormControlAtom } from "../../../../../Atoms";
+import { FormControlAtom } from "../../../../atoms";
 import { Input } from "../../../../atoms/input/input";
 import Select from "../../../../atoms/select/select";
 import type { HeaderFormProps } from "./types";

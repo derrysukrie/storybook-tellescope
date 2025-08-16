@@ -1,6 +1,6 @@
 import { Box, MenuItem, Stack, Typography } from "@mui/material";
 import { InfoOutlined, PersonAddAlt, ChatBubbleOutline, MailOutline, TextsmsOutlined, GroupOutlined, AddOutlined, GroupAddOutlined } from "@mui/icons-material";
-import { Icon } from "../../../../../Atoms";
+import { Icon } from "../../../../atoms";
 import { Button } from "../../../../atoms/button/button";
 import Select from "../../../../atoms/select/select";
 import { TeamChatSwitch } from "../TeamChatSwitch";

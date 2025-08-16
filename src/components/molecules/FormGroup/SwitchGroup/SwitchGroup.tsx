@@ -5,8 +5,8 @@ import {
   FormControlAtom,
   FormGroupLabel,
   FormHelperText,
-} from "../../../../Atoms";
-import Switch from "../../../atoms/switch/switch";
+} from "../../../../components/atoms";
+import Switch from "../../../../components/atoms/switch/switch";
 
 type Option = {
   label: string;

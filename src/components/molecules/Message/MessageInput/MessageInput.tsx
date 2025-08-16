@@ -1,7 +1,7 @@
 import { Box, InputBase, Stack } from "@mui/material";
 import { useCallback, useEffect, memo } from "react";
 import { IconButton } from "../../../atoms/button/icon-button";
-import { Icon } from "../../../../Atoms";
+import { Icon } from "../../../atoms";
 import { AddCircleOutline, EmojiEmotionsOutlined, Mic } from "@mui/icons-material";
 import { Toolbar } from "../MessageToolbar/MessageToolbar";
 import { styles, useMessageInputStyles } from "./styles/maps";

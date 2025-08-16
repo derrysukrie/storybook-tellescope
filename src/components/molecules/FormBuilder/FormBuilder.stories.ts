@@ -33,5 +33,6 @@ export const Default: Story = {
   args: {
     type: 'tellescope-soft',
     selected: false,
+    onEdit: () => console.log('edit'),
   },
 };

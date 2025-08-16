@@ -1,6 +1,6 @@
 import { Stack, Select, MenuItem, FormControl } from "@mui/material";
 import { useState } from "react";
-import { FormGroupLabel, FormHelperText } from "../../../../Atoms";
+import { FormGroupLabel, FormHelperText } from "../../../../components/atoms";
 
 type Option = {
   label: string;

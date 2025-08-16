@@ -1,6 +1,6 @@
 import { Stack, FormControl, Box, Typography } from "@mui/material";
 import { useState } from "react";
-import { FormGroupLabel, FormHelperText } from "../../../../Atoms";
+import { FormGroupLabel, FormHelperText } from "../../../../components/atoms";
 
 type SelectableOption = {
   label: string;
