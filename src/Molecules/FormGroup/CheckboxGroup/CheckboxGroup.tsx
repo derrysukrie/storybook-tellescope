@@ -1,5 +1,9 @@
-import { FormControlLabel, FormGroup as MuiFormGroup } from "@mui/material";
-import { FormControlAtom } from "../../../Atoms/Form";
+import {
+  FormControlLabel,
+  FormGroup as MuiFormGroup,
+  FormHelperText,
+} from "@mui/material";
+import { FormControlAtom, FormGroupLabel } from "../../../Atoms/Form";
 import CheckBox from "../../../components/atoms/checkbox/checkbox";
 import type React from "react";
 
@@ -14,6 +18,8 @@ export interface CheckboxGroupProps {
   /** Currently selected values */
   value?: string[];
   /** Callback when selection changes */
+  label?: string;
+  labelSize?: "default" | "large";
   onChange: (value: string[]) => void;
   /** Whether the component is disabled */
   disabled?: boolean;
@@ -21,6 +27,8 @@ export interface CheckboxGroupProps {
   row?: boolean;
   /** Custom styling */
   sx?: React.ComponentProps<typeof MuiFormGroup>["sx"];
+  /** Helper text to display below the component */
+  helperText?: string;
 }
 
 export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
@@ -30,6 +38,9 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   disabled = false,
   row = false,
   sx,
+  label,
+  labelSize = "default",
+  helperText,
 }) => {
   const handleCheckboxChange = (checkboxValue: string) => {
     const currentValues = Array.isArray(value) ? value : [];
@@ -46,6 +57,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
 
   return (
     <FormControlAtom variant="standard">
+      <FormGroupLabel labelSize={labelSize}>{label}</FormGroupLabel>
       <MuiFormGroup row={row} sx={sx}>
         {options.map((option) => {
           const checked = isChecked(option.value);
@@ -65,6 +77,7 @@ export const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
             />
           );
         })}
+        {helperText && <FormHelperText>{helperText}</FormHelperText>}
       </MuiFormGroup>
     </FormControlAtom>
   );

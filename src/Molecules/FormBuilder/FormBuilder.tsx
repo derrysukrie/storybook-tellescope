@@ -1,4 +1,4 @@
-import { Box, styled, Typography } from "@mui/material";
+import { Box, IconButton, styled, Typography } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import { MoreHoriz } from "@mui/icons-material";
 
@@ -6,6 +6,7 @@ interface FormBuilderProps {
   /**
    * The type of form builder with different color schemes
    */
+  onEdit: () => void;
   type: "tellescope-soft" | "tellescope" | "agua";
   /**
    * Whether the component is in selected state
@@ -75,7 +76,7 @@ const FormFooter = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const FormBuilder = ({ selected = false, type }: FormBuilderProps) => {
+export const FormBuilder = ({ selected = false, type, onEdit }: FormBuilderProps) => {
   const colors = colorSchemes[type];
   
   return (
@@ -94,7 +95,9 @@ export const FormBuilder = ({ selected = false, type }: FormBuilderProps) => {
       </FormHeader>
       <FormFooter>
         <Typography>{colors.title}</Typography>
-        <MoreHoriz />
+        <IconButton onClick={onEdit}>
+          <MoreHoriz />
+        </IconButton>
       </FormFooter>
     </FormWrapper>
   );

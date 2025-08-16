@@ -30,7 +30,7 @@ export const Default: Story = {
     const handleClose = () => setAnchorEl(null);
 
     return (
-      <>
+      <div>
         <Button onClick={(e) => setAnchorEl(e.currentTarget)}>Open Menu</Button>
         <Menu
           {...args}
@@ -87,7 +87,7 @@ export const Default: Story = {
             Documents
           </Menu.Switch>
         </Menu>
-      </>
+      </div>
     );
   },
   args: {
@@ -107,7 +107,7 @@ export const Dense: Story = {
     const handleClose = () => setAnchorEl(null);
 
     return (
-      <>
+      <div>
         <Button onClick={(e) => setAnchorEl(e.currentTarget)}>
           Open Dense Menu
         </Button>
@@ -160,7 +160,7 @@ export const Dense: Story = {
             Documents
           </Menu.Switch>
         </Menu>
-      </>
+      </div>
     );
   },
   args: {
@@ -177,7 +177,7 @@ export const SecondaryMenu: Story = {
     const handleClose = () => setAnchorEl(null);
 
     return (
-      <>
+      <div>
         <Button onClick={(e) => setAnchorEl(e.currentTarget)}>Open Menu</Button>
         <Menu {...args} anchorEl={anchorEl} open={open} onClose={handleClose}>
           <Menu.SubMenu text="More options">
@@ -187,7 +187,7 @@ export const SecondaryMenu: Story = {
 
           <Menu.Item>Logout</Menu.Item>
         </Menu>
-      </>
+      </div>
     );
   },
   args: {
