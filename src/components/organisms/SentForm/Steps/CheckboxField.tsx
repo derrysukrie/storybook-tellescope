@@ -1,4 +1,4 @@
-import { FormGroup } from "../../../components/molecules";
+import { FormGroup } from "../../../molecules";
 import { StepWrapper, useStepField } from "./shared";
 import type { CheckboxFieldStepProps } from "./types";
 

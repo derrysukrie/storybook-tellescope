@@ -1,9 +1,9 @@
 import { Box, FormControlLabel, Typography } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
-import CheckBox from "../../components/atoms/checkbox/checkbox";
-import { Button } from "../../components/atoms/button/button";
+import CheckBox from "../../atoms/checkbox/checkbox";
+import { Button } from "../../atoms/button/button";
 import { useState, useCallback, useMemo, useRef, useEffect } from "react";
-import TellescopeLogo from "../../assets/tellescope-logo.svg";
+import TellescopeLogo from "../../../assets/tellescope-logo.svg";
 import { sentFormStyles } from "./styles";
 import { FormProvider } from "./FormContext";
 import { renderStep } from "./stepRenderer";

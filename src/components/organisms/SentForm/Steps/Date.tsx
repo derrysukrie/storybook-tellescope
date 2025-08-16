@@ -1,6 +1,6 @@
 import { Box, MenuItem, Typography } from "@mui/material";
-import DialogDatePicker from "../../../components/molecules/date-time-picker/dialog-date-picker/dialog-date-picker";
-import Select from "../../../components/atoms/select/select";
+import DialogDatePicker from "../../../molecules/date-time-picker/dialog-date-picker/dialog-date-picker";
+import Select from "../../../atoms/select/select";
 import { useCallback, useState } from "react";
 import { useFormContext } from "../FormContext";
 

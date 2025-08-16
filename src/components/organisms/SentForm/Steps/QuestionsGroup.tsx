@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
-import { FormControlAtom } from "../../../components/atoms";
-import { Input } from "../../../components/atoms/input/input";
+import { FormControlAtom } from "../../../atoms";
+import { Input } from "../../../atoms/input/input";
 import { useFormContext } from "../FormContext";
 import { useState } from "react";
 

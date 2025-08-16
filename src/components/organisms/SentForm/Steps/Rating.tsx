@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 
 import { useFormContext } from "../FormContext";
-import { Slider } from "../../../components/atoms";
+import { Slider } from "../../../atoms";
 
 interface RatingProps {
   min: number;

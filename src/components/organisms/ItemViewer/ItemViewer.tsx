@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Box } from "@mui/material";
 
-import { MessageContainer, MessageInput, Messages, useMessageState, MessageHeader } from "../../components/molecules";
+import { MessageContainer, MessageInput, Messages, useMessageState, MessageHeader } from "../../molecules";
 
-import type { MessageProps, IMessage } from "../../components/molecules/Message";
-import { mockMessages } from "../../data/mock";
+import type { MessageProps, IMessage } from "../../molecules/Message";
+import { mockMessages } from "../../../data/mock";
 
 /**
  * Unified Message component for displaying and composing chat messages

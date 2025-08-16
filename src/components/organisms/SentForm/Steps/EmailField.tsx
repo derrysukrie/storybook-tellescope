@@ -1,5 +1,5 @@
-import { FormControlAtom } from "../../../components/atoms";
-import { Input } from "../../../components/atoms";
+import { FormControlAtom } from "../../../atoms";
+import { Input } from "../../../atoms";
 import { useCallback } from "react";
 import { StepWrapper, useStepField, commonValidations } from "./shared";
 import type { TextFieldStepProps } from "./types";

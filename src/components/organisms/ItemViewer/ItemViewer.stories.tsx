@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 // import { fn } from 'storybook/test';
 
 import { ItemViewer } from "./ItemViewer";
-import { generateSampleMessages } from "../../data/mock";
+import { generateSampleMessages } from "../../../data/mock";
 
 const meta: Meta<typeof ItemViewer> = {
   title: "Organisms/ItemViewer",
