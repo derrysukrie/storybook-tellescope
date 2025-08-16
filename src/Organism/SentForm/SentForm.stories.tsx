@@ -106,6 +106,11 @@ export const Default: Story = {
       {
         type: "rating",
         id: "rating",
+        min: 0,
+        max: 12,
+        step: 1,
+        shiftStep: 1,
+        marks: true,
       },
       {
         type: "signatureConsent",
@@ -200,9 +205,9 @@ export const Default: Story = {
         id: "preferences",
         title: "What are your preferences?",
         options: [
-          { value: "newsletter", label: "Receive newsletter" },
-          { value: "updates", label: "Product updates" },
-          { value: "marketing", label: "Marketing emails" },
+          { label: "Receive newsletter", value: "newsletter" },
+          { label: "Product updates", value: "updates" },
+          { label: "Marketing emails", value: "marketing" },
         ],
         helperText: "Select all that apply",
       },

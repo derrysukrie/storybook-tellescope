@@ -27,7 +27,7 @@ export const renderStep = (step: StepConfig) => {
       return <FormIntro />;
 
     case "rating":
-      return <Rating />;
+      return <Rating min={step.min} max={step.max} step={step.step} shiftStep={step.shiftStep} marks={step.marks}    />;
 
     case "date":
       return <Date title={step.title} placeholder={step.placeholder} />;

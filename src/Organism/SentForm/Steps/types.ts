@@ -4,7 +4,6 @@ export interface SelectOption {
 }
 
 export interface ChoiceOption {
-  id?: string;
   label: string;
   value: string;
 }
@@ -55,10 +54,11 @@ export interface DateFieldStepProps extends BaseStepProps {
 }
 
 export interface RatingStepProps extends BaseStepProps {
-  maxRating: number;
-  allowHalf?: boolean;
-  showLabels?: boolean;
-  labels?: string[];
+  min: number;
+  max: number;
+  step: number;
+  shiftStep: number;
+  marks: boolean;
 }
 
 export interface RankingStepProps extends BaseStepProps {

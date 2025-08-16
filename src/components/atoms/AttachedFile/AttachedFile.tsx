@@ -1,14 +1,42 @@
 import { Cancel } from "@mui/icons-material";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import type React from "react";
 
-export const AttachedFile: React.FC<any> = () => {
+export interface AttachedFileProps {
+  /**
+   * File name to display
+   */
+  fileName?: string;
+  /**
+   * File extension/type to display
+   */
+  fileType?: string;
+  /**
+   * Callback function when remove button is clicked
+   */
+  onRemove?: () => void;
+}
+
+export const AttachedFile: React.FC<AttachedFileProps> = ({
+  fileName = "file...",
+  fileType = "jpeg",
+  onRemove,
+}) => {
+  const theme = useTheme();
+  
+  const handleRemove = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (onRemove) {
+      onRemove();
+    }
+  };
+
   return (
     <Box
       component="div"
       sx={{
-        bgcolor: "#F5F5F5",
-        border: "solid 1px rgba(0, 0, 0, 0.12)",
+        bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : "#F5F5F5",
+        border: `solid 1px ${theme.palette.divider}`,
         borderRadius: "16px",
         maxWidth: "56px",
         height: "56px",
@@ -17,17 +45,21 @@ export const AttachedFile: React.FC<any> = () => {
       }}
     >
       <Typography
-        sx={{ fontSize: "0.875rem", color: "rgba(26, 27, 33, 0.87)" }}
+        sx={{ fontSize: "0.875rem", color: theme.palette.text.primary }}
+        noWrap
+        title={fileName}
       >
-        file...
+        {fileName}
       </Typography>
-      <Typography sx={{ fontSize: "0.875rem", color: "rgba(0, 0, 0, 0.38)" }}>
-        jpeg
+      <Typography sx={{ fontSize: "0.875rem", color: theme.palette.text.secondary }}>
+        {fileType}
       </Typography>
 
       <IconButton
         size="small"
         sx={{ position: "absolute", top: "-7px", right: "-7.5px" }}
+        onClick={handleRemove}
+        aria-label={`Remove ${fileName}`}
       >
         <Cancel sx={{ fontSize: "16px", color: "rgba(0, 0, 0, 0.56)" }} />
       </IconButton>

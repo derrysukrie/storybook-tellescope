@@ -2,33 +2,43 @@ import { Box, Typography } from "@mui/material";
 import Slider from "../../../Atoms/Slider/Slider";
 import { useFormContext } from "../FormContext";
 
-export const Rating = () => {
-  const { updateFormData, currentStep } = useFormContext();
+interface RatingProps {
+  min: number;
+  max: number;
+  step: number;
+  shiftStep: number;
+  marks: boolean;
+}
+export const Rating = (props: RatingProps) => {
+  const { updateFormData, currentStep, getFormData } = useFormContext();
 
   const handleChange = (_: Event, newValue: number | number[]) => {
     updateFormData(`${currentStep}`, newValue);
   };
+
+  // Get the current rating value for this step
+  const currentRating = getFormData()[currentStep] || props.min;
 
   return (
     <Box>
       <Typography pt={"48px"} pb={"24px"} variant="h5">
         Rating question
       </Typography>
-      <Slider 
-        onChange={handleChange} 
-        min={0} 
-        max={12} 
-        step={1} 
-        shiftStep={1} 
-        marks={true} 
-        stepper={true} 
+      <Slider
+        onChange={handleChange}
+        min={props.min}
+        max={props.max}
+        step={props.step}
+        shiftStep={props.shiftStep}
+        marks={true}
+        stepper={true}
       />
       <Box sx={{ display: "flex", justifyContent: "space-between", mt: 1 }}>
         <Typography variant="body2" color="text.secondary">
-          0
+          {currentRating}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          12
+          {props.max}
         </Typography>
       </Box>
     </Box>

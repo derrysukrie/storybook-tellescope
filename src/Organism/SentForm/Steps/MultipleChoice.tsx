@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { FormGroup } from "../../../Molecules/FormGroup";
+import { FormGroup } from "../../../components/molecules/FormGroup";
 import { useFormContext } from "../FormContext";
 import { useCallback, memo } from "react";
 import type { ChoiceOption } from "./types";
@@ -13,9 +13,9 @@ interface MultipleChoiceProps {
 export const MultipleChoice = memo(({ 
   label = "Select your location",
   options = [
-    { id: "1", label: "This is a selectable question", value: "1" },
-    { id: "2", label: "This is a selectable question", value: "2" },
-    { id: "3", label: "This is a selectable question", value: "3" },
+    { label: "This is a selectable question", value: "1" },
+    { label: "This is a selectable question", value: "2" },
+    { label: "This is a selectable question", value: "3" },
   ],
   helperText = "This is a helper text"
 }: MultipleChoiceProps) => {
