@@ -1,5 +1,44 @@
 import type { StepConfig, FormData } from "../types/types";
 
+// Helper functions for validation
+const isValidString = (value: any): boolean => {
+  return typeof value === "string" && value.trim().length > 0;
+};
+
+const isValidNonEmptyString = (value: any): boolean => {
+  return typeof value === "string" && value.length > 0;
+};
+
+const isValidArray = (value: any): boolean => {
+  return Array.isArray(value) && value.length > 0;
+};
+
+const isValidObject = (value: any): boolean => {
+  return typeof value === "object" && value !== null;
+};
+
+const isValidNumber = (value: any): boolean => {
+  return typeof value === "number" && value >= 0;
+};
+
+// Validation for object-based steps
+const validateTimeStep = (stepData: any): boolean => {
+  if (!isValidObject(stepData)) return false;
+  
+  return isValidNonEmptyString(stepData.hour) &&
+         isValidNonEmptyString(stepData.minute) &&
+         isValidNonEmptyString(stepData.amPm);
+};
+
+const validateAddressStep = (stepData: any): boolean => {
+  if (!isValidObject(stepData)) return false;
+  
+  return isValidString(stepData.addressLine1) &&
+         isValidString(stepData.city) &&
+         isValidNonEmptyString(stepData.state) &&
+         isValidString(stepData.zipCode);
+};
+
 /**
  * Validation function to check if step has valid data
  * @param step - The current step configuration
@@ -7,7 +46,6 @@ import type { StepConfig, FormData } from "../types/types";
  * @param checked - Whether the intro checkbox is checked (for intro steps)
  * @returns boolean - True if the step is valid, false otherwise
  */
-
 export const isStepValid = (step: StepConfig, formData: FormData, checked: boolean): boolean => {
   const stepId = step.id;
 
@@ -23,12 +61,8 @@ export const isStepValid = (step: StepConfig, formData: FormData, checked: boole
 
   // Handle questions group separately since data is stored with individual keys
   if (step.type === "questionsGroup") {
-    // For questions group, check if ALL questions have data
     const questionKeys = step.questions.map(q => `${stepId}_${q.fieldKey}`);
-    return questionKeys.every(key => {
-      const value = formData[key];
-      return typeof value === "string" && value.trim().length > 0;
-    });
+    return questionKeys.every(key => isValidString(formData[key]));
   }
 
   // Handle signature consent step - requires both checkbox and signature
@@ -36,9 +70,7 @@ export const isStepValid = (step: StepConfig, formData: FormData, checked: boole
     const consentValue = formData[`${stepId}_consent`];
     const signatureValue = formData[`${stepId}_signature`];
     
-    return consentValue === true && 
-           typeof signatureValue === "string" && 
-           signatureValue.trim().length > 0;
+    return consentValue === true && isValidString(signatureValue);
   }
 
   // For other step types, check if step data exists and is not empty
@@ -54,28 +86,30 @@ export const isStepValid = (step: StepConfig, formData: FormData, checked: boole
     case "phone":
     case "number":
     case "longText":
-      return typeof stepData === "string" && stepData.trim().length > 0;
+      return isValidString(stepData);
 
     case "select":
-      return typeof stepData === "string" && stepData.length > 0;
+      return isValidNonEmptyString(stepData);
 
     case "multiSelect":
-      return Array.isArray(stepData) && stepData.length > 0;
+    case "checkbox":
+    case "fileUpload":
+      return isValidArray(stepData);
 
     case "choice":
-      return typeof stepData === "string" && stepData.length > 0;
-
-    case "checkbox":
-      return Array.isArray(stepData) && stepData.length > 0;
-
-    case "fileUpload":
-      return Array.isArray(stepData) && stepData.length > 0;
+      return isValidNonEmptyString(stepData);
 
     case "date":
-      return typeof stepData === "string" && stepData.length > 0;
+      return isValidNonEmptyString(stepData);
+
+    case "time":
+      return validateTimeStep(stepData);
+
+    case "address":
+      return validateAddressStep(stepData);
 
     case "rating":
-      return typeof stepData === "number" && stepData >= 0;
+      return isValidNumber(stepData);
 
     default:
       return true;

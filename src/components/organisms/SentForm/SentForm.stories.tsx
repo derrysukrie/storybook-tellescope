@@ -73,9 +73,14 @@ export const Default: Story = {
         id: "welcome",
       },
       {
+        type: "time",
+        id: "time",
+      },
+       {
         type: "address",
         id: "address",
       },
+     
       {
         type: "date",
         id: "date",

@@ -19,6 +19,7 @@ import {
   Ranking,
   DateTime,
   Address,
+  Time,
 } from "./Steps";
 
 // Internal step renderer for the Organism
@@ -28,7 +29,10 @@ export const renderStep = (step: StepConfig) => {
       return <FormIntro />;
 
     case "rating":
-      return <Rating min={step.min} max={step.max} step={step.step} shiftStep={step.shiftStep} marks={step.marks}    />;
+      return <Rating min={step.min} max={step.max} step={step.step} shiftStep={step.shiftStep} marks={step.marks} />;
+
+    case "time":
+      return <Time />;
 
     case "date":
       return <Date title={step.title} placeholder={step.placeholder} />;

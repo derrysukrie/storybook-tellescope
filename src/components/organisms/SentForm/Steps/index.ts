@@ -19,6 +19,7 @@ export * from "./Rating";
 export * from "./Ranking";
 export * from "./DateTime";
 export * from "./Address";
+export * from "./Time";
 
 // Shared utilities and components
 export * from "./shared";
