@@ -21,6 +21,7 @@ export * from "./DateTime";
 export * from "./Address";
 export * from "./Time";
 export * from "./Insurance";
+export * from "./Height";
 
 // Shared utilities and components
 export * from "./shared";

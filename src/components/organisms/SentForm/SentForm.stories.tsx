@@ -73,6 +73,10 @@ export const Default: Story = {
         id: "welcome",
       },
       {
+        type: "height",
+        id: "height",
+      },
+      {
         type: "insurance",
         id: "insurance",
       },
