@@ -168,4 +168,6 @@ export const Time = () => {
 };
 
 // Add default export for lazy loading
+// This format works better with dynamic imports
+Time.displayName = 'Time';
 export default { Time };

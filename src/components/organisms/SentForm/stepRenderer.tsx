@@ -4,7 +4,14 @@ import { StepSkeleton } from './Steps/StepSkeleton';
 
 // Helper function to create lazy loaded components
 const lazyLoad = (path: string, exportName: string) => 
-  lazy(() => import(`./Steps/${path}`).then(module => ({ default: module[exportName] })));
+  lazy(() => 
+    import(`./Steps/${path}.tsx`)
+      .then(module => ({ default: module[exportName] }))
+      .catch(error => {
+        console.error(`Error loading module ${path}:`, error);
+        return import(`./Steps/StepSkeleton`).then(module => ({ default: module.StepSkeleton }));
+      })
+  );
 
 // Lazy load step components
 const FormIntro = lazyLoad('FormIntro', 'FormIntro');

@@ -2,7 +2,8 @@ import { Box, FormControlLabel, Typography } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import CheckBox from "../../atoms/checkbox/checkbox";
 import { Button } from "../../atoms/button/button";
-import { useState, useCallback, useMemo, useRef, useEffect, Suspense } from "react";
+import { useState, useCallback, useMemo, useRef, useEffect, Suspense, Component } from "react";
+import type { ErrorInfo, ReactNode } from "react";
 import TellescopeLogo from "../../../assets/tellescope-logo.svg";
 import { sentFormStyles } from "./styles";
 import { FormProvider } from "./FormContext";
@@ -10,6 +11,33 @@ import { renderStep } from "./stepRenderer";
 import { isStepValid } from "./validation/validation";
 import type { SentFormProps, FormData } from "./types/types";
 import { StepSkeleton } from "./Steps/StepSkeleton";
+
+// Error boundary component to catch errors in lazy-loaded components
+class ErrorBoundary extends Component<
+  { children: ReactNode; fallback: ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: ReactNode; fallback: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(_: Error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    console.error("Error in component:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+
+    return this.props.children;
+  }
+}
 
 export const SentForm = ({ 
   steps, 
@@ -106,9 +134,25 @@ export const SentForm = ({
         <Box sx={sentFormStyles.contentContainer}>
           <Box sx={sentFormStyles.contentBox}>
             <FormProvider value={formContext}>
-              <Suspense fallback={<StepSkeleton />}>
-                {renderStep(currentStepData)}
-              </Suspense>
+              <ErrorBoundary fallback={
+                <Box sx={{ p: 2, textAlign: 'center' }}>
+                  <Typography color="error" variant="body1">
+                    Failed to load form step. Please try refreshing the page.
+                  </Typography>
+                  <Button 
+                    size="small" 
+                    color="primary" 
+                    sx={{ mt: 2 }} 
+                    onClick={() => window.location.reload()}
+                  >
+                    Refresh
+                  </Button>
+                </Box>
+              }>
+                <Suspense fallback={<StepSkeleton />}>
+                  {renderStep(currentStepData)}
+                </Suspense>
+              </ErrorBoundary>
             </FormProvider>
           </Box>
         </Box>
