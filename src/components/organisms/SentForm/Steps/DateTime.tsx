@@ -42,10 +42,10 @@ export const DateTime = ({  title = "Date and Time", placeholder = "MM/DD/YYYY",
       if (!selected) {
         return <span style={{ color: "#999999" }}>{placeholder}</span>;
       }
-      return <span style={{ color: "#999999" }}>{selected}</span>;
+      return <span style={{ color: "#999999" }}>{selected} at {selectedTime}</span>;
     }
     return selected;
-  }, []);
+  }, [selectedTime]);
 
   return (
     <Box>
