@@ -73,6 +73,10 @@ export const Default: Story = {
         id: "welcome",
       },
       {
+        type: "address",
+        id: "address",
+      },
+      {
         type: "date",
         id: "date",
       },
@@ -215,6 +219,7 @@ export const Default: Story = {
         type: "date",
         id: "date",
       },
+     
     ],
     onFormDataChange: (formData) => {
       console.log("Form data updated:", formData);

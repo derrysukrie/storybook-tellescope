@@ -18,6 +18,7 @@ import {
   Rating,
   Ranking,
   DateTime,
+  Address,
 } from "./Steps";
 
 // Internal step renderer for the Organism
@@ -76,6 +77,9 @@ export const renderStep = (step: StepConfig) => {
 
     case "dateTime":
       return <DateTime title={step.title} placeholder={step.placeholder} />;
+
+    case "address":
+      return <Address />;
 
     default:
       return null;

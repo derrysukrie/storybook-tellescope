@@ -145,6 +145,11 @@ export interface RankingStepConfig {
   }[];
 }
 
+export interface AddressStepConfig {
+  type: "address";
+  id:string
+}
+
 // Union type for all step configurations
 export type StepConfig = 
   | IntroStepConfig
@@ -164,7 +169,8 @@ export type StepConfig =
   | DateStepConfig
   | DateTimeStepConfig
   | RatingStepConfig
-  | RankingStepConfig;
+  | RankingStepConfig
+  | AddressStepConfig;
 
 // Form data type
 export interface FormData {

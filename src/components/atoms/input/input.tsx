@@ -56,7 +56,7 @@ export const Input = (props: InputProps) => {
         const hasStartAdornment = !!startIcon;
         const pos = getPos("outlined");
         return (
-            <FormControl variant={"outlined"} size={size} error={error} {...FormControlProps}>
+            <FormControl fullWidth variant={"outlined"} size={size} error={error} {...FormControlProps}>
                 <MuiTextField
                     variant={"outlined"}
                     value={currentValue}

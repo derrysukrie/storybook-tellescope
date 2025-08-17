@@ -5,3 +5,4 @@ export * from "./SectionCategory/SectionCategory";
 export * from "./Snackbar/Snackbar";
 export * from "./Slider/Slider";
 export * from "./input/input";
+export { default as Select } from "./select/select";
