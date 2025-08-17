@@ -29,7 +29,7 @@ const validationRules = {
   requiresNumber: ["rating"],
   
   // Special validation steps
-  specialValidation: ["questionsGroup", "signatureConsent", "time", "address"]
+  specialValidation: ["questionsGroup", "signatureConsent", "time", "address", "insurance"]
 };
 
 // Special validation functions
@@ -53,6 +53,14 @@ const validateAddress = (stepData: any): boolean => {
          hasValue(stepData?.city) && 
          hasValue(stepData?.state) && 
          hasValue(stepData?.zipCode);
+};
+
+const validateInsurance = (stepData: any): boolean => {
+  return hasValue(stepData?.insurer) &&
+         hasValue(stepData?.memberId) &&
+         hasValue(stepData?.planName) &&
+         hasValue(stepData?.planStartDate) &&
+         hasValue(stepData?.relationshipToPolicyOwner);
 };
 
 /**
@@ -86,6 +94,10 @@ export const isStepValid = (step: StepConfig, formData: FormData, checked: boole
 
   if (type === "address") {
     return validateAddress(formData[id]);
+  }
+
+  if (type === "insurance") {
+    return validateInsurance(formData[id]);
   }
 
   // Get step data

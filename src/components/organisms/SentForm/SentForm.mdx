@@ -6,101 +6,171 @@ import * as SentFormStories from './SentForm.stories.tsx';
 
 # SentForm
 
-A powerful, configuration-driven multi-step form organism that provides excellent developer experience and user experience with built-in validation and file upload capabilities.
-
-## Overview
-
-The `SentForm` component is a true **Organism** that encapsulates complete form functionality. It accepts configuration instead of requiring manual component composition, making it easy to create complex multi-step forms with automatic validation and progress tracking.
+A multi-step form component that renders different step types based on configuration.
 
 ## Basic Usage
 
 ```tsx
-import { SentForm } from './Organism/SentForm';
-
-// Common options for reusability
-const commonOptions = {
-  countries: [
-    { value: "us", label: "United States" },
-    { value: "ca", label: "Canada" },
-    { value: "uk", label: "United Kingdom" },
-  ],
-  contactMethods: [
-    { id: "email", label: "Email", value: "email" },
-    { id: "phone", label: "Phone call", value: "phone" },
-  ],
-};
+import { SentForm } from './SentForm';
 
 function MyForm() {
   return (
     <SentForm
       steps={[
-        // Always start with intro
         {
           type: "intro",
           id: "welcome",
         },
-        // Add context
         {
-          type: "description",
-          id: "description",
-          description: "Let's get to know you better to find the perfect plan.",
-        },
-        // Form fields
-        {
-          type: "select",
-          id: "location",
-          title: "Where are you located?",
-          options: commonOptions.countries,
-          placeholder: "Choose your country",
-          helperText: "This helps us provide location-specific services",
+          type: "text",
+          id: "name",
+          title: "What's your name?",
+          helperText: "Enter your full name",
         },
         {
-          type: "choice",
-          id: "contact_preference",
-          label: "How would you prefer to be contacted?",
-          options: commonOptions.contactMethods,
-          helperText: "We'll use this as your primary contact method",
+          type: "email",
+          id: "email",
+          title: "Email address",
+          helperText: "We'll use this to contact you",
         },
       ]}
       onFormDataChange={(formData) => {
         console.log("Form data updated:", formData);
-        // formData = { location: "us", contact_preference: "email" }
       }}
       onComplete={(formData) => {
         console.log("Form completed:", formData);
-        // Send to API with values, not labels
       }}
     />
   );
 }
 ```
 
+## Props
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `steps` | `StepConfig[]` | ✅ | - | Array of step configurations |
+| `onComplete` | `(data: FormData) => void` | ❌ | - | Callback when form is completed |
+| `onFormDataChange` | `(formData: FormData) => void` | ❌ | - | Callback when form data changes |
+| `debounceDelay` | `number` | ❌ | `300` | Debounce delay in milliseconds |
+
 ## Step Types
 
 ### Intro Step
-Welcome screen that appears first. Requires checkbox acceptance to proceed.
+Welcome screen with checkbox acceptance.
 
 ```tsx
 {
   type: "intro",
   id: "welcome",
+  title?: string,
+  subtitle?: string,
 }
 ```
 
 ### Description Step
-Provides context and explanation to users.
+Displays explanatory text.
 
 ```tsx
 {
   type: "description",
   id: "description",
-  description: "Great, we have a variety of plans to fit your needs...",
+  description: "Let's get to know you better...",
 }
 ```
 
-### Select Step
-Single choice dropdown with labels displayed to users.
+### Text Input Steps
 
+#### Basic Text
+```tsx
+{
+  type: "text",
+  id: "name",
+  title?: string,
+  placeholder?: string,
+  helperText?: string,
+}
+```
+
+#### Email
+```tsx
+{
+  type: "email",
+  id: "email",
+  title?: string,
+  placeholder?: string,
+  helperText?: string,
+}
+```
+
+#### Phone
+```tsx
+{
+  type: "phone",
+  id: "phone",
+  title?: string,
+  placeholder?: string,
+  helperText?: string,
+}
+```
+
+#### Number
+```tsx
+{
+  type: "number",
+  id: "age",
+  title?: string,
+  placeholder?: string,
+  helperText?: string,
+}
+```
+
+#### Long Text
+```tsx
+{
+  type: "longText",
+  id: "description",
+  title?: string,
+  placeholder?: string,
+  helperText?: string,
+}
+```
+
+### Date & Time Steps
+
+#### Date
+```tsx
+{
+  type: "date",
+  id: "birthdate",
+  title?: string,
+  placeholder?: string,
+  helperText?: string,
+}
+```
+
+#### DateTime
+```tsx
+{
+  type: "dateTime",
+  id: "appointment",
+  title?: string,
+  placeholder?: string,
+  helperText?: string,
+}
+```
+
+#### Time
+```tsx
+{
+  type: "time",
+  id: "preferred_time",
+}
+```
+
+### Selection Steps
+
+#### Single Select
 ```tsx
 {
   type: "select",
@@ -110,14 +180,12 @@ Single choice dropdown with labels displayed to users.
     { value: "us", label: "United States" },
     { value: "ca", label: "Canada" },
   ],
-  placeholder: "Choose your country",
-  helperText: "This helps us provide location-specific services",
+  placeholder?: string,
+  helperText?: string,
 }
 ```
 
-### Multi-Select Step
-Multiple choice dropdown with chips display.
-
+#### Multi Select
 ```tsx
 {
   type: "multiSelect",
@@ -127,14 +195,12 @@ Multiple choice dropdown with chips display.
     { value: "tech", label: "Technology" },
     { value: "health", label: "Healthcare" },
   ],
-  placeholder: "Select multiple interests",
-  helperText: "Choose all that apply",
+  placeholder?: string,
+  helperText?: string,
 }
 ```
 
-### Choice Step
-Radio button group for single selection.
-
+#### Choice (Radio Buttons)
 ```tsx
 {
   type: "choice",
@@ -144,75 +210,27 @@ Radio button group for single selection.
     { id: "email", label: "Email", value: "email" },
     { id: "phone", label: "Phone call", value: "phone" },
   ],
-  helperText: "We'll use this as your primary contact method",
+  helperText?: string,
 }
 ```
 
-### Text Input Steps
-Various text input types with automatic validation.
-
-```tsx
-// Basic text input
-{
-  type: "text",
-  id: "name",
-  title: "What's your name?",
-  helperText: "Enter your full name",
-}
-
-// Email input
-{
-  type: "email",
-  id: "email",
-  title: "Email address",
-  helperText: "We'll use this to contact you",
-}
-
-// Phone input
-{
-  type: "phone",
-  id: "phone",
-  title: "Phone number",
-  helperText: "Enter your phone number",
-}
-
-// Number input
-{
-  type: "number",
-  id: "age",
-  title: "Your age",
-  helperText: "Must be between 1 and 10",
-}
-
-// Long text input
-{
-  type: "longText",
-  id: "description",
-  title: "Tell us more",
-  helperText: "Share additional details",
-}
-```
-
-### Checkbox Step
-Multiple checkbox selection.
-
+#### Checkbox
 ```tsx
 {
   type: "checkbox",
   id: "preferences",
   title: "What are your preferences?",
   options: [
-    { value: "newsletter", label: "Receive newsletter" },
-    { value: "updates", label: "Product updates" },
-    { value: "marketing", label: "Marketing emails" },
+    { label: "Receive newsletter", value: "newsletter" },
+    { label: "Product updates", value: "updates" },
   ],
   helperText: "Select all that apply",
 }
 ```
 
-### File Upload Step
-File upload with drag & drop functionality.
+### Special Steps
 
+#### File Upload
 ```tsx
 {
   type: "fileUpload",
@@ -220,8 +238,60 @@ File upload with drag & drop functionality.
 }
 ```
 
-### Questions Group Step
-Multiple related questions in a single step.
+#### Address
+```tsx
+{
+  type: "address",
+  id: "home_address",
+}
+```
+
+#### Insurance
+```tsx
+{
+  type: "insurance",
+  id: "insurance_info",
+}
+```
+
+#### Signature Consent
+```tsx
+{
+  type: "signatureConsent",
+  id: "consent",
+}
+```
+
+### Rating & Ranking
+
+#### Rating
+```tsx
+{
+  type: "rating",
+  id: "satisfaction",
+  min: 0,
+  max: 10,
+  step: 1,
+  shiftStep: 1,
+  marks: true,
+}
+```
+
+#### Ranking
+```tsx
+{
+  type: "ranking",
+  id: "priorities",
+  items: [
+    { id: "1", text: "Item 1" },
+    { id: "2", text: "Item 2" },
+    { id: "3", text: "Item 3" },
+  ],
+}
+```
+
+### Questions Group
+Multiple related questions in one step.
 
 ```tsx
 {
@@ -234,281 +304,76 @@ Multiple related questions in a single step.
       label: "What's your name?",
       hint: "Enter your full name",
       fieldKey: "name",
+      hiddenLabel?: boolean,
     },
     {
       label: "What's your email?",
       hint: "Enter your email address",
       fieldKey: "email",
+      hiddenLabel?: boolean,
     },
   ],
 }
 ```
 
-## Validation System
+## Form Data Structure
 
-The SentForm includes a comprehensive validation system that automatically manages the CONTINUE button state:
-
-### Validation Rules
-
-- **Intro Step**: Button enabled only when checkbox is checked
-- **Description Step**: Button always enabled (no input required)
-- **Text Inputs**: Button enabled when field has non-empty content
-- **Select/Choice**: Button enabled when an option is selected
-- **Multi-Select/Checkbox**: Button enabled when at least one option is selected
-- **File Upload**: Button enabled when at least one file is uploaded
-- **Questions Group**: Button enabled when ALL questions have data
-
-### Validation Behavior
+Form data is collected as key-value pairs where keys are step IDs:
 
 ```tsx
-// Button states based on validation
-<Button 
-  disabled={!isCurrentStepValid} // Automatically managed
-  onClick={handleNext}
->
-  CONTINUE
-</Button>
-```
-
-## Props
-
-The `SentForm` component accepts the following props:
-
-| Prop | Type | Required | Default | Description |
-|------|------|----------|---------|-------------|
-| `steps` | `StepConfig[]` | ✅ | - | Array of step configurations |
-| `onComplete` | `(data: FormData) => void` | ❌ | - | Callback when form is completed |
-| `onFormDataChange` | `(formData: FormData) => void` | ❌ | - | Callback when form data changes (debounced) |
-| `debounceDelay` | `number` | ❌ | `300` | Debounce delay in milliseconds |
-
-## Data Flow
-
-### Form Data Structure
-The form data is collected as key-value pairs where:
-- **Keys** are the step IDs
-- **Values** are the selected values (not labels)
-
-```tsx
-// Example form data
 {
-  location: "us",           // Value for API
-  interests: ["tech", "health"], // Values for API
-  contact_preference: "email",   // Value for API
-  name: "John Doe",         // Text input value
-  email: "john@example.com", // Email input value
-  documents: [              // File upload data
-    { id: "123", name: "document.pdf", size: 1024, status: "completed" }
-  ],
+  name: "John Doe",
+  email: "john@example.com",
+  location: "us",
+  interests: ["tech", "health"],
+  documents: [/* file upload data */],
   personal_info_name: "John", // Questions group data
   personal_info_email: "john@example.com",
 }
 ```
 
-### Callbacks
+## Validation
 
-#### onFormDataChange
-Called whenever form data changes (debounced for performance).
+- **Intro Step**: Requires checkbox to be checked
+- **Text Inputs**: Requires non-empty content
+- **Select/Choice**: Requires an option to be selected
+- **Multi-Select/Checkbox**: Requires at least one option selected
+- **File Upload**: Requires at least one file
+- **Questions Group**: Requires all questions to have data
 
+The CONTINUE button is automatically disabled until the current step is valid.
+
+## Examples
+
+### Simple Contact Form
 ```tsx
-onFormDataChange={(formData) => {
-  console.log("Form data updated:", formData);
-  // Use for real-time validation or API updates
-}}
+const steps = [
+  { type: "intro", id: "welcome" },
+  { type: "text", id: "name", title: "What's your name?" },
+  { type: "email", id: "email", title: "Email address" },
+  { type: "phone", id: "phone", title: "Phone number" },
+];
 ```
 
-#### onComplete
-Called when the form is completed.
-
+### Survey Form
 ```tsx
-onComplete={(formData) => {
-  console.log("Form completed:", formData);
-  // Send to API with the collected values
-  submitToAPI(formData);
-}}
+const steps = [
+  { type: "intro", id: "welcome" },
+  { type: "description", id: "intro", description: "Help us improve our service" },
+  { type: "select", id: "age_group", title: "Age group", options: ageOptions },
+  { type: "multiSelect", id: "interests", title: "Interests", options: interestOptions },
+  { type: "rating", id: "satisfaction", min: 1, max: 5, step: 1, shiftStep: 1, marks: true },
+];
 ```
 
-## Performance Features
-
-### Debounced Updates
-Form data changes are debounced to prevent excessive API calls.
-
+### Complex Form
 ```tsx
-<SentForm
-  debounceDelay={500} // 500ms debounce (default: 300ms)
-  onFormDataChange={handleDataChange}
-  steps={steps}
-/>
-```
-
-### Memoized Components
-All step components are memoized to prevent unnecessary re-renders.
-
-### Optimized State Management
-Centralized form state with efficient updates and validation.
-
-## File Upload Features
-
-The file upload step includes:
-
-- **Drag & Drop**: Users can drag files directly onto the upload area
-- **Click to Browse**: Traditional file selection via file dialog
-- **Multiple Files**: Support for uploading multiple files simultaneously
-- **Progress Tracking**: Visual progress indicators for uploads
-- **File Management**: Delete individual files
-- **Type Validation**: Automatic file type filtering
-- **Size Display**: Shows file sizes and upload status
-
-## Best Practices
-
-### 1. Always Start with Intro
-```tsx
-steps={[
-  {
-    type: "intro",
-    id: "welcome",
-  },
-  // ... other steps
-]}
-```
-
-### 2. Use Reusable Options
-```tsx
-const commonOptions = {
-  countries: [
-    { value: "us", label: "United States" },
-    { value: "ca", label: "Canada" },
-  ],
-};
-
-// Reuse across multiple forms
-{
-  type: "select",
-  id: "location",
-  options: commonOptions.countries,
-}
-```
-
-### 3. Provide Helpful Text
-```tsx
-{
-  type: "select",
-  id: "location",
-  title: "Where are you located?",
-  placeholder: "Choose your country",
-  helperText: "This helps us provide location-specific services",
-}
-```
-
-### 4. Use Descriptive IDs
-```tsx
-// ✅ Good
-id: "contact_preference"
-id: "personal_info"
-
-// ❌ Avoid
-id: "field1"
-id: "input"
-```
-
-### 5. Group Related Questions
-```tsx
-{
-  type: "questionsGroup",
-  id: "personal_info",
-  title: "Personal Information",
-  questions: [
-    { label: "Name", fieldKey: "name" },
-    { label: "Email", fieldKey: "email" },
-  ],
-}
-```
-
-## Troubleshooting
-
-### Common Issues
-
-#### 1. Button Always Disabled
-Check that your step IDs are unique and validation is working:
-```tsx
-// ✅ Correct
-{ type: "text", id: "name", ... }
-{ type: "email", id: "email", ... }
-
-// ❌ Incorrect (duplicate IDs)
-{ type: "text", id: "field", ... }
-{ type: "email", id: "field", ... }
-```
-
-#### 2. Form Data Not Updating
-Ensure your step IDs are unique and properly configured:
-```tsx
-// ✅ Correct
-{ type: "select", id: "location", ... }
-{ type: "select", id: "country", ... }
-
-// ❌ Incorrect (duplicate IDs)
-{ type: "select", id: "location", ... }
-{ type: "select", id: "location", ... }
-```
-
-#### 3. Questions Group Validation Issues
-Make sure all questions in a group have unique fieldKeys:
-```tsx
-{
-  type: "questionsGroup",
-  id: "info",
-  questions: [
-    { label: "Name", fieldKey: "name" },     // ✅ Unique
-    { label: "Email", fieldKey: "email" },   // ✅ Unique
-  ],
-}
-```
-
-#### 4. Performance Issues
-Use debouncing for large forms:
-```tsx
-<SentForm
-  debounceDelay={500}
-  onFormDataChange={handleDataChange}
-/>
-```
-
-## API Reference
-
-### StepConfig Types
-
-```tsx
-type StepConfig = 
-  | IntroStepConfig
-  | DescriptionStepConfig
-  | SelectStepConfig
-  | MultiSelectStepConfig
-  | ChoiceStepConfig
-  | TextStepConfig
-  | EmailStepConfig
-  | PhoneStepConfig
-  | NumberStepConfig
-  | LongTextStepConfig
-  | CheckboxStepConfig
-  | FileUploadStepConfig
-  | QuestionsGroupStepConfig;
-```
-
-### FormData Type
-
-```tsx
-interface FormData {
-  [stepId: string]: any;
-}
-```
-
-### SentFormProps
-
-```tsx
-interface SentFormProps {
-  steps: StepConfig[];
-  onComplete?: (data: FormData) => void;
-  onFormDataChange?: (formData: FormData) => void;
-  debounceDelay?: number;
-}
+const steps = [
+  { type: "intro", id: "welcome" },
+  { type: "questionsGroup", id: "personal", title: "Personal Info", questions: personalQuestions },
+  { type: "address", id: "address" },
+  { type: "date", id: "birthdate", title: "Date of birth" },
+  { type: "fileUpload", id: "documents" },
+  { type: "signatureConsent", id: "consent" },
+];
 ```

@@ -73,6 +73,10 @@ export const Default: Story = {
         id: "welcome",
       },
       {
+        type: "insurance",
+        id: "insurance",
+      },
+      {
         type: "time",
         id: "time",
       },
@@ -224,7 +228,7 @@ export const Default: Story = {
         type: "date",
         id: "date",
       },
-     
+    
     ],
     onFormDataChange: (formData) => {
       console.log("Form data updated:", formData);

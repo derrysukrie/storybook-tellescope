@@ -67,6 +67,14 @@ export interface RankingStepProps extends BaseStepProps {
   minSelections?: number;
 }
 
+export interface InsuranceStepProps extends BaseStepProps {
+  insurer: string;
+  memberId: string;
+  planName: string;
+  planStartDate: string;
+  relationshipToPolicyOwner: string;
+}
+
 // Form validation types
 export interface ValidationRule {
   type: 'required' | 'email' | 'minLength' | 'maxLength' | 'pattern' | 'custom';

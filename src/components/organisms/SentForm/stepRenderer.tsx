@@ -20,6 +20,7 @@ import {
   DateTime,
   Address,
   Time,
+  Insurance,
 } from "./Steps";
 
 // Helper function for steps with title and helperText
@@ -42,7 +43,7 @@ export const renderStep = (step: StepConfig) => {
   if (type === "fileUpload") return <FileUploader />;
   if (type === "address") return <Address />;
   if (type === "time") return <Time />;
-
+  if (type === "insurance") return <Insurance />;
   // Steps with title and helperText only
   if (type === "text") return renderTextStep(TextField, step);
   if (type === "email") return renderTextStep(EmailField, step);

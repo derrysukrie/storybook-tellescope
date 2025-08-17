@@ -155,6 +155,11 @@ export interface TimeStepConfig {
   id: string;
 }
 
+export interface InsuranceStepConfig {
+  type: "insurance";
+  id: string;
+}
+
 // Union type for all step configurations
 export type StepConfig = 
   | IntroStepConfig
@@ -176,7 +181,8 @@ export type StepConfig =
   | RatingStepConfig
   | RankingStepConfig
   | AddressStepConfig
-  | TimeStepConfig;
+  | TimeStepConfig
+  | InsuranceStepConfig;
 
 // Form data type
 export interface FormData {
