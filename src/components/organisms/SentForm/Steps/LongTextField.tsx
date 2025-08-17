@@ -5,10 +5,10 @@ import { useFormContext } from "../FormContext";
 import { useCallback } from "react";
 
 export const LongTextField = ({ title, helperText }: { title?: string; helperText?: string }) => {
-  const { updateFormData, getFormData, currentStep } = useFormContext();
+  const { updateFormData, formData, currentStep } = useFormContext();
   
   // Get current value from centralized form state
-  const currentValue = getFormData()[currentStep] || "";
+  const currentValue = formData[currentStep] || "";
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;

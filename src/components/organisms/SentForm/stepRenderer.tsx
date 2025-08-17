@@ -22,70 +22,112 @@ import {
   Time,
 } from "./Steps";
 
-// Internal step renderer for the Organism
+// Helper function for steps with title and helperText
+const renderTextStep = (Component: any, step: any) => (
+  <Component title={step.title} helperText={step.helperText} />
+);
+
+// Helper function for steps with title and placeholder
+const renderDateStep = (Component: any, step: any) => (
+  <Component title={step.title} placeholder={step.placeholder} />
+);
+
+// Simplified step renderer with better organization
 export const renderStep = (step: StepConfig) => {
-  switch (step.type) {
-    case "intro":
-      return <FormIntro />;
+  const { type } = step;
 
-    case "rating":
-      return <Rating min={step.min} max={step.max} step={step.step} shiftStep={step.shiftStep} marks={step.marks} />;
+  // Steps with no props
+  if (type === "intro") return <FormIntro />;
+  if (type === "signatureConsent") return <SignatureConsent />;
+  if (type === "fileUpload") return <FileUploader />;
+  if (type === "address") return <Address />;
+  if (type === "time") return <Time />;
 
-    case "time":
-      return <Time />;
+  // Steps with title and helperText only
+  if (type === "text") return renderTextStep(TextField, step);
+  if (type === "email") return renderTextStep(EmailField, step);
+  if (type === "phone") return renderTextStep(PhoneNumber, step);
+  if (type === "number") return renderTextStep(NumberField, step);
+  if (type === "longText") return renderTextStep(LongTextField, step);
 
-    case "date":
-      return <Date title={step.title} placeholder={step.placeholder} />;
+  // Steps with title and placeholder
+  if (type === "date") return renderDateStep(Date, step);
+  if (type === "dateTime") return renderDateStep(DateTime, step);
 
-    case "ranking":
-      return <Ranking items={step.items} />;
-
-    case "questionsGroup":
-      return <QuestionsGroup questions={step.questions} title={step.title} description={step.description} />;
-
-    case "description":
-      return <Description description={step.description} />;
-
-    case "select":
-      return <SelectField title={step.title} options={step.options} placeholder={step.placeholder} helperText={step.helperText} />;
-
-    case "multiSelect":
-      return <MultipleSelectField title={step.title} options={step.options} placeholder={step.placeholder} helperText={step.helperText} />;
-
-    case "choice":
-      return <MultipleChoice label={step.label} options={step.options} helperText={step.helperText} />;
-
-    case "text":
-      return <TextField title={step.title} helperText={step.helperText} />;
-
-    case "email":
-      return <EmailField title={step.title} helperText={step.helperText} />;
-
-    case "phone":
-      return <PhoneNumber title={step.title} helperText={step.helperText} />;
-
-    case "number":
-      return <NumberField title={step.title} helperText={step.helperText} />;
-
-    case "longText":
-      return <LongTextField title={step.title} helperText={step.helperText} />;
-
-    case "signatureConsent":
-      return <SignatureConsent />;
-
-    case "checkbox":
-      return <CheckboxField title={step.title} helperText={step.helperText} options={step.options} />;
-
-    case "fileUpload":
-      return <FileUploader />;
-
-    case "dateTime":
-      return <DateTime title={step.title} placeholder={step.placeholder} />;
-
-    case "address":
-      return <Address />;
-
-    default:
-      return null;
+  // Steps with specific props
+  if (type === "rating") {
+    return (
+      <Rating
+        min={step.min}
+        max={step.max}
+        step={step.step}
+        shiftStep={step.shiftStep}
+        marks={step.marks}
+      />
+    );
   }
+
+  if (type === "ranking") {
+    return <Ranking items={step.items} />;
+  }
+
+  if (type === "questionsGroup") {
+    return (
+      <QuestionsGroup
+        questions={step.questions}
+        title={step.title}
+        description={step.description}
+      />
+    );
+  }
+
+  if (type === "description") {
+    return <Description description={step.description} />;
+  }
+
+  if (type === "select") {
+    return (
+      <SelectField
+        title={step.title}
+        options={step.options}
+        placeholder={step.placeholder}
+        helperText={step.helperText}
+      />
+    );
+  }
+
+  if (type === "multiSelect") {
+    return (
+      <MultipleSelectField
+        title={step.title}
+        options={step.options}
+        placeholder={step.placeholder}
+        helperText={step.helperText}
+      />
+    );
+  }
+
+  if (type === "choice") {
+    return (
+      <MultipleChoice
+        label={step.label}
+        options={step.options}
+        helperText={step.helperText}
+      />
+    );
+  }
+
+  if (type === "checkbox") {
+    return (
+      <CheckboxField
+        title={step.title}
+        helperText={step.helperText}
+        options={step.options}
+      />
+    );
+  }
+
+  // Unknown step type
+  console.warn(`Unknown step type: ${type}`);
+  return null;
 };

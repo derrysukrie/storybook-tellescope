@@ -59,33 +59,22 @@ export const SentForm = ({
     });
   }, [debouncedFormDataChange]);
 
-  // Function to get current form data
-  const getFormData = useCallback(() => {
-    return formData;
-  }, [formData]);
-
-  // Function to get all step values
-  const getAllStepValues = useCallback(() => {
-    return formData;
-  }, [formData]);
-
   const handleNext = useCallback(() => {
     if (isLastStep) {
       // Log all collected form data when completing
-      console.log("All form data:", getAllStepValues());
-      onComplete?.(getAllStepValues());
+      console.log("All form data:", formData);
+      onComplete?.(formData);
     } else {
       setCurrentStep(currentStep + 1);
     }
-  }, [isLastStep, getAllStepValues, onComplete, currentStep]);
+  }, [isLastStep, formData, onComplete, currentStep]);
 
   // Memoize context value to prevent unnecessary re-renders
   const formContext = useMemo(() => ({
     updateFormData,
-    getFormData,
-    getAllStepValues,
+    formData,
     currentStep: currentStepData.id || `step-${currentStep}`,
-  }), [updateFormData, getFormData, getAllStepValues, currentStepData.id, currentStep]);
+  }), [updateFormData, formData, currentStepData.id, currentStep]);
 
   // Cleanup debounce timer on unmount
   useEffect(() => {

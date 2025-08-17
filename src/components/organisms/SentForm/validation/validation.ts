@@ -1,117 +1,114 @@
 import type { StepConfig, FormData } from "../types/types";
 
-// Helper functions for validation
-const isValidString = (value: any): boolean => {
-  return typeof value === "string" && value.trim().length > 0;
+// Simple validation helpers
+const hasValue = (value: any): boolean => {
+  if (value === null || value === undefined) return false;
+  if (typeof value === "string") return value.trim().length > 0;
+  if (Array.isArray(value)) return value.length > 0;
+  if (typeof value === "number") return value >= 0;
+  if (typeof value === "boolean") return value === true;
+  if (typeof value === "object") return Object.keys(value).length > 0;
+  return false;
 };
 
-const isValidNonEmptyString = (value: any): boolean => {
-  return typeof value === "string" && value.length > 0;
-};
-
-const isValidArray = (value: any): boolean => {
-  return Array.isArray(value) && value.length > 0;
-};
-
-const isValidObject = (value: any): boolean => {
-  return typeof value === "object" && value !== null;
-};
-
-const isValidNumber = (value: any): boolean => {
-  return typeof value === "number" && value >= 0;
-};
-
-// Validation for object-based steps
-const validateTimeStep = (stepData: any): boolean => {
-  if (!isValidObject(stepData)) return false;
+// Validation rules for each step type
+const validationRules = {
+  // Steps that always allow continue
+  alwaysValid: ["description", "ranking"],
   
-  return isValidNonEmptyString(stepData.hour) &&
-         isValidNonEmptyString(stepData.minute) &&
-         isValidNonEmptyString(stepData.amPm);
+  // Steps that require checkbox to be checked
+  requiresCheckbox: ["intro"],
+  
+  // Steps that require string values
+  requiresString: ["text", "email", "phone", "number", "longText", "select", "choice", "date"],
+  
+  // Steps that require arrays
+  requiresArray: ["multiSelect", "checkbox", "fileUpload"],
+  
+  // Steps that require numbers
+  requiresNumber: ["rating"],
+  
+  // Special validation steps
+  specialValidation: ["questionsGroup", "signatureConsent", "time", "address"]
 };
 
-const validateAddressStep = (stepData: any): boolean => {
-  if (!isValidObject(stepData)) return false;
-  
-  return isValidString(stepData.addressLine1) &&
-         isValidString(stepData.city) &&
-         isValidNonEmptyString(stepData.state) &&
-         isValidString(stepData.zipCode);
+// Special validation functions
+const validateQuestionsGroup = (step: any, formData: FormData): boolean => {
+  const questionKeys = step.questions.map((q: any) => `${step.id}_${q.fieldKey}`);
+  return questionKeys.every((key: string) => hasValue(formData[key]));
+};
+
+const validateSignatureConsent = (stepId: string, formData: FormData): boolean => {
+  const consent = formData[`${stepId}_consent`];
+  const signature = formData[`${stepId}_signature`];
+  return consent === true && hasValue(signature);
+};
+
+const validateTime = (stepData: any): boolean => {
+  return hasValue(stepData?.hour) && hasValue(stepData?.minute) && hasValue(stepData?.amPm);
+};
+
+const validateAddress = (stepData: any): boolean => {
+  return hasValue(stepData?.addressLine1) && 
+         hasValue(stepData?.city) && 
+         hasValue(stepData?.state) && 
+         hasValue(stepData?.zipCode);
 };
 
 /**
- * Validation function to check if step has valid data
- * @param step - The current step configuration
- * @param formData - The current form data
- * @param checked - Whether the intro checkbox is checked (for intro steps)
- * @returns boolean - True if the step is valid, false otherwise
+ * Simplified validation function
  */
 export const isStepValid = (step: StepConfig, formData: FormData, checked: boolean): boolean => {
-  const stepId = step.id;
+  const { type, id } = step;
 
-  // Handle intro step - requires checkbox to be checked
-  if (step.type === "intro") {
-    return checked;
-  }
-
-  // Skip validation for description and ranking steps - always allow continue
-  if (step.type === "description" || step.type === "ranking") {
+  // Always valid steps
+  if (validationRules.alwaysValid.includes(type)) {
     return true;
   }
 
-  // Handle questions group separately since data is stored with individual keys
-  if (step.type === "questionsGroup") {
-    const questionKeys = step.questions.map(q => `${stepId}_${q.fieldKey}`);
-    return questionKeys.every(key => isValidString(formData[key]));
+  // Steps requiring checkbox
+  if (validationRules.requiresCheckbox.includes(type)) {
+    return checked;
   }
 
-  // Handle signature consent step - requires both checkbox and signature
-  if (step.type === "signatureConsent") {
-    const consentValue = formData[`${stepId}_consent`];
-    const signatureValue = formData[`${stepId}_signature`];
-    
-    return consentValue === true && isValidString(signatureValue);
+  // Special validation cases
+  if (type === "questionsGroup") {
+    return validateQuestionsGroup(step, formData);
   }
 
-  // For other step types, check if step data exists and is not empty
-  const stepData = formData[stepId];
-  if (stepData === undefined || stepData === null) {
+  if (type === "signatureConsent") {
+    return validateSignatureConsent(id, formData);
+  }
+
+  if (type === "time") {
+    return validateTime(formData[id]);
+  }
+
+  if (type === "address") {
+    return validateAddress(formData[id]);
+  }
+
+  // Get step data
+  const stepData = formData[id];
+  
+  // Check if data exists
+  if (!hasValue(stepData)) {
     return false;
   }
 
-  // Handle different step types
-  switch (step.type) {
-    case "text":
-    case "email":
-    case "phone":
-    case "number":
-    case "longText":
-      return isValidString(stepData);
-
-    case "select":
-      return isValidNonEmptyString(stepData);
-
-    case "multiSelect":
-    case "checkbox":
-    case "fileUpload":
-      return isValidArray(stepData);
-
-    case "choice":
-      return isValidNonEmptyString(stepData);
-
-    case "date":
-      return isValidNonEmptyString(stepData);
-
-    case "time":
-      return validateTimeStep(stepData);
-
-    case "address":
-      return validateAddressStep(stepData);
-
-    case "rating":
-      return isValidNumber(stepData);
-
-    default:
-      return true;
+  // Apply type-specific validation
+  if (validationRules.requiresString.includes(type)) {
+    return typeof stepData === "string" && stepData.trim().length > 0;
   }
+
+  if (validationRules.requiresArray.includes(type)) {
+    return Array.isArray(stepData) && stepData.length > 0;
+  }
+
+  if (validationRules.requiresNumber.includes(type)) {
+    return typeof stepData === "number" && stepData >= 0;
+  }
+
+  // Default to valid if no specific rules apply
+  return true;
 }; 

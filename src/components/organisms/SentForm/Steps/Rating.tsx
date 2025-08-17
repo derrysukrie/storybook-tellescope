@@ -11,14 +11,14 @@ interface RatingProps {
   marks: boolean;
 }
 export const Rating = (props: RatingProps) => {
-  const { updateFormData, currentStep, getFormData } = useFormContext();
+  const { updateFormData, currentStep, formData } = useFormContext();
 
   const handleChange = (_: Event, newValue: number | number[]) => {
     updateFormData(`${currentStep}`, newValue);
   };
 
   // Get the current rating value for this step
-  const currentRating = getFormData()[currentStep] || props.min;
+  const currentRating = formData[currentStep] || props.min;
 
   return (
     <Box>

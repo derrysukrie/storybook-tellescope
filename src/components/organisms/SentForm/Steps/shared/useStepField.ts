@@ -12,7 +12,7 @@ interface UseStepFieldOptions {
 
 export const useStepField = (options: UseStepFieldOptions = {}) => {
   const { stepId, validations = [], defaultValue, required = false } = options;
-  const { updateFormData, getFormData, currentStep } = useFormContext();
+  const { updateFormData, formData, currentStep } = useFormContext();
   
   const [value, setValue] = useState(defaultValue || "");
   const [error, setError] = useState<string | null>(null);
@@ -28,8 +28,7 @@ export const useStepField = (options: UseStepFieldOptions = {}) => {
   validations.forEach(rule => validator.addRule(rule));
   
   // Get current value from form context on mount and reset when step changes
-  useEffect(() => {
-    const formData = getFormData();
+  useEffect(() => { 
     const currentValue = formData[effectiveStepId];
     if (currentValue !== undefined) {
       setValue(currentValue);
@@ -40,7 +39,7 @@ export const useStepField = (options: UseStepFieldOptions = {}) => {
     // Reset error and touched state when step changes
     setError(null);
     setIsTouched(false);
-  }, [effectiveStepId, getFormData, defaultValue]);
+  }, [effectiveStepId, formData, defaultValue]);
   
   const validate = useCallback((val: any): ValidationResult => {
     return validator.validate(val);

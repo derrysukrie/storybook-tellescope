@@ -19,10 +19,10 @@ export const MultipleChoice = memo(({
   ],
   helperText = "This is a helper text"
 }: MultipleChoiceProps) => {
-  const { updateFormData, getFormData, currentStep } = useFormContext();
+  const { updateFormData, formData, currentStep } = useFormContext();
   
   // Get current value from centralized form state
-  const currentValue = getFormData()[currentStep] || "";
+  const currentValue = formData[currentStep] || "";
 
   const handleChange = useCallback((value: string | string[]) => {
     const selectedValue = Array.isArray(value) ? value[0] || "" : value;

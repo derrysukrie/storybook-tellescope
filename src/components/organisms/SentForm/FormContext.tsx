@@ -3,8 +3,7 @@ import type { ReactNode } from 'react';
 
 export interface FormContextType {
   updateFormData: (stepId: string, value: any) => void;
-  getFormData: () => Record<string, any>;
-  getAllStepValues: () => Record<string, any>;
+  formData: Record<string, any>;
   currentStep: string;
 }
 

@@ -22,10 +22,10 @@ export const MultipleSelectField = memo(({
   placeholder = "Select an option",
   helperText = "The location is where you're treatment supplies will be shipped, if prescibed"
 }: MultipleSelectFieldProps) => {
-  const { updateFormData, getFormData, currentStep } = useFormContext();
+  const { updateFormData, formData, currentStep } = useFormContext();
   
   // Get current value from centralized form state
-  const currentValue = getFormData()[currentStep] || [];
+  const currentValue = formData[currentStep] || [];
 
   // // Create value-to-label mapping for display
   // const valueToLabelMap = useMemo(() => {
