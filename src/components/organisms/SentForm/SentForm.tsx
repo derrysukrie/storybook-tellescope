@@ -2,13 +2,14 @@ import { Box, FormControlLabel, Typography } from "@mui/material";
 import LinearProgress from "@mui/material/LinearProgress";
 import CheckBox from "../../atoms/checkbox/checkbox";
 import { Button } from "../../atoms/button/button";
-import { useState, useCallback, useMemo, useRef, useEffect } from "react";
+import { useState, useCallback, useMemo, useRef, useEffect, Suspense } from "react";
 import TellescopeLogo from "../../../assets/tellescope-logo.svg";
 import { sentFormStyles } from "./styles";
 import { FormProvider } from "./FormContext";
 import { renderStep } from "./stepRenderer";
 import { isStepValid } from "./validation/validation";
 import type { SentFormProps, FormData } from "./types/types";
+import { StepSkeleton } from "./Steps/StepSkeleton";
 
 export const SentForm = ({ 
   steps, 
@@ -105,7 +106,9 @@ export const SentForm = ({
         <Box sx={sentFormStyles.contentContainer}>
           <Box sx={sentFormStyles.contentBox}>
             <FormProvider value={formContext}>
-              {renderStep(currentStepData)}
+              <Suspense fallback={<StepSkeleton />}>
+                {renderStep(currentStepData)}
+              </Suspense>
             </FormProvider>
           </Box>
         </Box>

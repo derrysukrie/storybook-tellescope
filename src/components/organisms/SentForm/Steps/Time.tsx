@@ -166,3 +166,6 @@ export const Time = () => {
     </StepWrapper>
   );
 };
+
+// Add default export for lazy loading
+export default { Time };

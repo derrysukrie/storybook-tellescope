@@ -1,4 +1,10 @@
-// Step Components
+// Export shared utilities and components that are needed immediately
+export * from "./shared";
+export * from "./types";
+export * from "./StepSkeleton";
+
+// These exports are kept for backward compatibility with existing code
+// but the actual components will be lazy loaded in stepRenderer.tsx
 export * from "./FormIntro";
 export * from "./Description";
 export * from "./Graphic";
@@ -22,9 +28,3 @@ export * from "./Address";
 export * from "./Time";
 export * from "./Insurance";
 export * from "./Height";
-
-// Shared utilities and components
-export * from "./shared";
-
-// Types
-export * from "./types";
