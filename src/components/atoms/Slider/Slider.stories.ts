@@ -42,5 +42,8 @@ export const WithStepper: Story = {
     sx: {
       width: 500,
     },
+    onChange: (event, value) => {
+      console.log(value);
+    },
   },
 };
