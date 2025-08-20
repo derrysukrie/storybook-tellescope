@@ -11,4 +11,6 @@ export {
   type MessageLoadingState,
   type MessageProps,
   type HeaderFormData,
+  type MessageState,
+  type MessageActions,
 } from "./types";

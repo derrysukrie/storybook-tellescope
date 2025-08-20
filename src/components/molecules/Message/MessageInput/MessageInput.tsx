@@ -1,5 +1,5 @@
 import { Box, InputBase, Stack } from "@mui/material";
-import { useCallback, useEffect, memo } from "react";
+import { useCallback, useEffect, memo, useRef } from "react";
 import { IconButton } from "../../../atoms/button/icon-button";
 import { Icon } from "../../../atoms";
 import { AddCircleOutline, EmojiEmotionsOutlined, Mic } from "@mui/icons-material";
@@ -27,13 +27,12 @@ export const MessageInput = memo(({
   chatInterface, 
   setChatInterface, 
   onSubmit,
-  onInputChange,
   config = {}
 }: MessageInputProps) => {
   const {
     placeholder = "Type a message...",
     maxLength = 1000,
-    autoFocus = false,
+    // autoFocus = false,
     disabled = false,
     error = false,
     showCharacterCount = false,
@@ -41,44 +40,7 @@ export const MessageInput = memo(({
   } = config;
 
   const inputStyles = useMessageInputStyles({ disabled, error });
-  const {
-    value,
-    setValue,
-    handleSubmit,
-    canSubmit,
-    inputRef,
-    isComposing,
-    setIsComposing,
-    // characterCount,
-    // remainingChars
-  } = useMessageInput({ onSubmit, onInputChange, config });
-
-  // Auto-focus on mount if specified
-  useEffect(() => {
-    if (autoFocus && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [autoFocus]);
-
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setValue(newValue);
-  }, [setValue]);
-
-  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey && !isComposing) {
-      e.preventDefault();
-      handleSubmit();
-    }
-  }, [handleSubmit, isComposing]);
-
-  const handleCompositionStart = useCallback(() => {
-    setIsComposing(true);
-  }, [setIsComposing]);
-
-  const handleCompositionEnd = useCallback(() => {
-    setIsComposing(false);
-  }, [setIsComposing]);
+  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
 
   // Memoize the input props to prevent unnecessary re-renders
   const inputProps = useCallback(() => ({
@@ -90,12 +52,12 @@ export const MessageInput = memo(({
   // Memoize the send button styles
   const sendButtonStyles = useCallback(() => ({
     ...inputStyles.sendButton,
-    opacity: canSubmit ? 1 : 0.5,
+    // opacity: canSubmit ? 1 : 0.5,
     transition: 'opacity 0.2s ease'
-  }), [inputStyles.sendButton, canSubmit]);
+  }), [inputStyles.sendButton]);
 
   return (
-    <Box sx={styles.inputContainer(enableTeamChat)}>
+    <Box sx={styles.inputContainer(enableTeamChat ?? false)}>
       {enableTeamChat && (
         <Box sx={{ display: "flex" }}>
           <IconButton 
@@ -131,13 +93,13 @@ export const MessageInput = memo(({
               {/* <TextFieldsIcon /> */}
             </IconButton>
             <InputBase
-              ref={inputRef}
+              inputRef={inputRef}
               disabled={disabled}
-              value={value}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              onCompositionStart={handleCompositionStart}
-              onCompositionEnd={handleCompositionEnd}
+              // value={value}
+              // onChange={handleInputChange}
+              // onKeyDown={handleKeyDown}
+              // onCompositionStart={handleCompositionStart}
+              // onCompositionEnd={handleCompositionEnd}
               sx={inputStyles.inputBase}
               placeholder={placeholder}
               multiline={multiline}
@@ -154,8 +116,8 @@ export const MessageInput = memo(({
                 <Mic />
               </IconButton>
               <IconButton
-                onClick={handleSubmit}
-                disabled={!canSubmit}
+                onClick={() => onSubmit(inputRef.current?.value ?? "")}
+                // disabled={!canSubmit}  
                 className="send-button"
                 sx={sendButtonStyles()}
                 aria-label="Send message"

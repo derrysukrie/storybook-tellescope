@@ -12,7 +12,7 @@ export interface InputConfig {
 }
 
 export interface MessageInputProps {
-  enableTeamChat: boolean;
+  enableTeamChat?: boolean;
   chatInterface: ChatInterface;
   setChatInterface: (chatInterface: ChatInterface) => void;
   onSubmit: (content: string) => void;
@@ -30,35 +30,35 @@ export const useMessageInput = ({
   const { disabled = false, maxLength = 1000 } = config;
   const [value, setValue] = useState("");
   const [isComposing, setIsComposing] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
   const debounceTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-  const handleChange = useCallback(
-    (newValue: string) => {
-      if (maxLength && newValue.length > maxLength) return;
-      setValue(newValue);
+  // const handleChange = useCallback(
+  //   (newValue: string) => {
+  //     if (maxLength && newValue.length > maxLength) return;
+  //     setValue(newValue);
       
-      // Debounce the onInputChange callback to reduce parent component updates
-      if (onInputChange) {
-        if (debounceTimeoutRef.current) {
-          clearTimeout(debounceTimeoutRef.current);
-        }
-        debounceTimeoutRef.current = setTimeout(() => {
-          onInputChange(newValue);
-        }, 100); // 100ms debounce
-      }
-    },
-    [maxLength, onInputChange]
-  );
+  //     // Debounce the onInputChange callback to reduce parent component updates
+  //     if (onInputChange) {
+  //       if (debounceTimeoutRef.current) {
+  //         clearTimeout(debounceTimeoutRef.current);
+  //       }
+  //       debounceTimeoutRef.current = setTimeout(() => {
+  //         onInputChange(newValue);
+  //       }, 100); // 100ms debounce
+  //     }
+  //   },
+  //   [maxLength, onInputChange]
+  // );
 
   // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (debounceTimeoutRef.current) {
-        clearTimeout(debounceTimeoutRef.current);
-      }
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     if (debounceTimeoutRef.current) {
+  //       clearTimeout(debounceTimeoutRef.current);
+  //     }
+  //   };
+  // }, []);
 
   const handleSubmit = useCallback(() => {
     const trimmedValue = value.trim();
@@ -79,8 +79,8 @@ export const useMessageInput = ({
   const remainingChars = useMemo(() => maxLength - value.length, [maxLength, value]);
 
   return {
-    value,
-    setValue: handleChange,
+    // value,
+    // setValue: handleChange,
     handleSubmit,
     canSubmit,
     inputRef,

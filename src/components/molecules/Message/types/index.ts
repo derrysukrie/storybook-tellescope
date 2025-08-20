@@ -83,6 +83,28 @@ export interface MessageLoadingState {
   isUploading?: boolean;
 }
 
+// Public state/actions contracts for container-level usage
+export interface MessageState {
+  chatInterface: ChatInterface;
+  enableTeamChat: boolean;
+  headerFormData: HeaderFormData;
+  inputValue: string;
+  error: MessageError | null;
+  loading: MessageLoadingState;
+}
+
+export interface MessageActions {
+  setChatInterface: (chatInterface: ChatInterface) => void;
+  setEnableTeamChat: (enabled: boolean) => void;
+  setInputValue: (value: string) => void;
+  setHeaderFormData: (field: keyof HeaderFormData, value: string | string[]) => void;
+  submitMessage: (content: string) => void | Promise<void>;
+  setMessageReaction: (messageId: string, reaction: Reaction) => void;
+  setMessageOptions: (messageId: string, action: string) => void;
+  setError: (error: MessageError | null) => void;
+  setLoading: (loading: MessageLoadingState) => void;
+}
+
 // Main component props
 export interface MessageProps {
   messages: IMessage[];
@@ -92,6 +114,9 @@ export interface MessageProps {
   error?: MessageError | null;
   className?: string;
   'data-testid'?: string;
+  // Optional: allow container-level state management
+  state?: MessageState;
+  actions?: MessageActions;
 }
 
 // Header form data interface
