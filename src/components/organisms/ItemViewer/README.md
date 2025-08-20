@@ -122,7 +122,6 @@ const callbacks: MessageCallbacks = {
 
 ### ItemViewer.tsx
 - Main component that implements MessageProps
-- Uses useMessageState for centralized state management
 - Renders MessageContainer, MessageHeader, Messages, and MessageInput
 
 ### useMessageState Hook

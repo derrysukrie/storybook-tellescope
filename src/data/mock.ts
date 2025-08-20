@@ -116,3 +116,6 @@ export const generateSampleMessages = (count: number = 200): IMessage[] => {
 };
 
 export const mockMessages: IMessage[] = generateSampleMessages(10);
+
+// Export sample data for reuse
+export { sampleTexts, sampleAvatars, sampleReactions, sampleImages, sampleLinks };

@@ -67,7 +67,6 @@ export const Default: Story = {
       }}
       callbacks={{
         onMessageSubmit: (content) => console.log('Message submitted:', content),
-        onInputChange: (value) => console.log('Input changed:', value),
         onHeaderFormChange: (field, value) => console.log('Header form changed:', field, value),
         onChatInterfaceChange: (chatInterface) => console.log('Interface changed:', chatInterface),
         onTeamChatToggle: (enabled) => console.log('Team chat toggled:', enabled),

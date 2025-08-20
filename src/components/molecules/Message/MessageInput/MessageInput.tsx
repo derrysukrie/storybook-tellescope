@@ -1,12 +1,12 @@
 import { Box, InputBase, Stack } from "@mui/material";
-import { useCallback, useEffect, memo, useRef } from "react";
+import { useCallback, memo, useRef } from "react";
 import { IconButton } from "../../../atoms/button/icon-button";
 import { Icon } from "../../../atoms";
 import { AddCircleOutline, EmojiEmotionsOutlined, Mic } from "@mui/icons-material";
 import { Toolbar } from "../MessageToolbar/MessageToolbar";
 import { styles, useMessageInputStyles } from "./styles/maps";
 import { Send } from "../Icons";
-import { useMessageInput, type MessageInputProps } from "../hooks/useMessageInput";
+import type { MessageInputProps } from "../hooks/useMessageInput";
 
 /**
  * MessageInput component for composing and sending messages
@@ -41,6 +41,27 @@ export const MessageInput = memo(({
 
   const inputStyles = useMessageInputStyles({ disabled, error });
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
+
+  // Handle message submission
+  const handleSubmit = useCallback(() => {
+    const value = inputRef.current?.value ?? "";
+    if (value.trim()) {
+      onSubmit(value);
+      // Clear the input field after submission
+      if (inputRef.current) {
+        inputRef.current.value = "";
+      }
+    }
+  }, [onSubmit]);
+
+  // Handle key press events (Enter to submit)
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    // Submit on Enter, but not when Shift is held (for multiline)
+    if (e.key === 'Enter' && !e.shiftKey && !multiline) {
+      e.preventDefault(); // Prevent default to avoid line break
+      handleSubmit();
+    }
+  }, [handleSubmit, multiline]);
 
   // Memoize the input props to prevent unnecessary re-renders
   const inputProps = useCallback(() => ({
@@ -94,17 +115,12 @@ export const MessageInput = memo(({
             </IconButton>
             <InputBase
               inputRef={inputRef}
-              disabled={disabled}
-              // value={value}
-              // onChange={handleInputChange}
-              // onKeyDown={handleKeyDown}
-              // onCompositionStart={handleCompositionStart}
-              // onCompositionEnd={handleCompositionEnd}
               sx={inputStyles.inputBase}
               placeholder={placeholder}
               multiline={multiline}
               minRows={multiline ? 2 : 1}
               maxRows={multiline ? 4 : 1}
+              onKeyDown={handleKeyDown}
               inputProps={inputProps()}
             />
             <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -116,8 +132,7 @@ export const MessageInput = memo(({
                 <Mic />
               </IconButton>
               <IconButton
-                onClick={() => onSubmit(inputRef.current?.value ?? "")}
-                // disabled={!canSubmit}  
+                onClick={handleSubmit}
                 className="send-button"
                 sx={sendButtonStyles()}
                 aria-label="Send message"

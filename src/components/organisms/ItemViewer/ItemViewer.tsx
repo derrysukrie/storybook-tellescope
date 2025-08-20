@@ -22,17 +22,15 @@ export const ItemViewer: React.FC<MessageProps> = React.memo(
   ({
     messages: externalMessages,
     config = {},
-    callbacks: externalCallbacks,
+    callbacks,
     loading: externalLoading,
     error: externalError,
     className,
-    "data-testid": dataTestId,
   }) => {
-    
+
     return (
       <Box
         className={className}
-        data-testid={dataTestId}
         sx={{
           width: config?.container?.width || "100%",
           height: config?.container?.height || "auto",
@@ -46,21 +44,20 @@ export const ItemViewer: React.FC<MessageProps> = React.memo(
             chatInterface={config?.chatInterface as ChatInterface}
             content={externalMessages}
             enableTeamChat={config?.enableTeamChat}
-            setEnableTeamChat={externalCallbacks?.onTeamChatToggle as (enabled: boolean) => void}
+            setEnableTeamChat={callbacks.onTeamChatToggle as (enabled: boolean) => void}
             headerFormData={config.header?.formData}
-            onHeaderFormChange={externalCallbacks?.onHeaderFormChange}
+            onHeaderFormChange={callbacks.onHeaderFormChange}
           />
 
           {/* Messages List */}
-          <Messages content={externalMessages} onMessageRetry={externalCallbacks?.onMessageRetry} />
+          <Messages content={externalMessages} onMessageRetry={undefined} />
 
           {/* Input */}
           <MessageInput
             enableTeamChat={config?.enableTeamChat}
             chatInterface={config?.chatInterface as ChatInterface}
-            setChatInterface={externalCallbacks?.onChatInterfaceChange as (chatInterface: ChatInterface) => void}
-            onSubmit={externalCallbacks?.onMessageSubmit}
-            onInputChange={externalCallbacks?.onInputChange}
+            setChatInterface={callbacks.onChatInterfaceChange as (chatInterface: ChatInterface) => void}
+            onSubmit={callbacks.onMessageSubmit}
             config={{
               ...config.input,
               error: !!externalError,

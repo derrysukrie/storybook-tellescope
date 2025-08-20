@@ -55,11 +55,14 @@ export interface MessageConfig {
   input?: InputConfig;
   header?: HeaderConfig;
   container?: ContainerConfig;
+  setEnableTeamChat?: (enabled: boolean) => void;
+  setChatInterface?: (chatInterface: ChatInterface) => void;
+  setHeaderFormData?: (field: keyof HeaderFormData, value: string | string[]) => void;
 }
 
 export interface MessageCallbacks {
-  onMessageSubmit: (content: string) => void;
-  onInputChange?: (value: string) => void;
+  onMessageSubmit: (content: string) => void | Promise<void>;
+  onReceiveMessage?: (message: IMessage) => void;
   onHeaderFormChange?: (field: keyof HeaderFormData, value: string | string[]) => void;
   onChatInterfaceChange?: (chatInterface: ChatInterface) => void;
   onTeamChatToggle?: (enabled: boolean) => void;
@@ -113,10 +116,6 @@ export interface MessageProps {
   loading?: MessageLoadingState;
   error?: MessageError | null;
   className?: string;
-  'data-testid'?: string;
-  // Optional: allow container-level state management
-  state?: MessageState;
-  actions?: MessageActions;
 }
 
 // Header form data interface
