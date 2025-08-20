@@ -1,4 +1,3 @@
-export * from "./hooks/useMessageState";
 export * from "./container";
 export * from "./MessageItem";
 export {
@@ -11,4 +10,6 @@ export {
   type MessageLoadingState,
   type MessageProps,
   type HeaderFormData,
+  type MessageState,
+  type MessageActions,
 } from "./types";

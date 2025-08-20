@@ -5,7 +5,7 @@ import type { HeaderFormData } from './types';
 interface MessageHeaderProps {
   chatInterface: ChatInterface;
   content?: any;
-  enableTeamChat: boolean;
+  enableTeamChat?: boolean;
   setEnableTeamChat: (value: boolean) => void;
   headerFormData?: HeaderFormData;
   onHeaderFormChange?: (field: keyof HeaderFormData, value: string | string[]) => void;

@@ -104,7 +104,7 @@ export const HeaderContent = ({ chatInterface, enableTeamChat, setEnableTeamChat
           {isEmpty && <HeaderActions />}
 
           {/* Show team chat switch for non-empty state */}
-          {!isEmpty && <TeamChatSwitch checked={enableTeamChat} setChecked={setEnableTeamChat} />}
+          {!isEmpty && <TeamChatSwitch checked={enableTeamChat ?? false} setChecked={setEnableTeamChat} />}
         </Box>
 
         {/* Show additional form fields for non-empty SMS/EMAIL when team chat is disabled */}
@@ -152,7 +152,7 @@ export const HeaderContent = ({ chatInterface, enableTeamChat, setEnableTeamChat
 
         {/* Show form for empty state */}
         {isEmpty && headerFormData && onHeaderFormChange && (
-          <HeaderForm headerFormData={headerFormData} onHeaderFormChange={onHeaderFormChange} chatInterface={chatInterface} enableTeamChat={enableTeamChat} />
+          <HeaderForm headerFormData={headerFormData} onHeaderFormChange={onHeaderFormChange} chatInterface={chatInterface} enableTeamChat={enableTeamChat ?? false} />
         )}
         {!enableTeamChat && (
           <Box mt={chatInterface == "SMS" && !isEmpty ? 2 : 1}>

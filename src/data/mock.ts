@@ -115,4 +115,7 @@ export const generateSampleMessages = (count: number = 200): IMessage[] => {
   return messages.reverse(); // Reverse to show oldest first
 };
 
-export const mockMessages: IMessage[] = generateSampleMessages(200);
+export const mockMessages: IMessage[] = generateSampleMessages(10);
+
+// Export sample data for reuse
+export { sampleTexts, sampleAvatars, sampleReactions, sampleImages, sampleLinks };
