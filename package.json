@@ -13,6 +13,7 @@
     "predeploy": "npm run build-storybook",
     "deploy": "gh-pages -d storybook-static",
     "test": "vitest run",
+    "test:sample": "vitest --config vite.config.ts --environment jsdom src/components/atoms/Avatar/Avatar.test.tsx",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
   },
