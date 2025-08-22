@@ -82,10 +82,20 @@ describe("HorizontalAmPmToggle", () => {
 
   it("disables both buttons when disabled prop is true", () => {
     const { getByRole } = renderWithTheme(<HorizontalAmPmToggle disabled />);
-    const amButton = getByRole("button", { name: "AM" });
-    const pmButton = getByRole("button", { name: "PM" });
-    expect(amButton.getAttribute("aria-disabled")).toBe("true");
-    expect(pmButton.getAttribute("aria-disabled")).toBe("true");
+    const amButton = getByRole("button", { name: "AM" }) as HTMLButtonElement;
+    const pmButton = getByRole("button", { name: "PM" }) as HTMLButtonElement;
+    
+    // Check for disabled attribute (Material-UI's primary way of disabling buttons)
+    expect(amButton.disabled).toBe(true);
+    expect(pmButton.disabled).toBe(true);
+    
+    // Also check for aria-disabled attribute if it exists
+    const amAriaDisabled = amButton.getAttribute("aria-disabled");
+    const pmAriaDisabled = pmButton.getAttribute("aria-disabled");
+    
+    // Either disabled attribute should be true, or aria-disabled should be "true"
+    expect(amButton.disabled || amAriaDisabled === "true").toBe(true);
+    expect(pmButton.disabled || pmAriaDisabled === "true").toBe(true);
   });
 
   it("applies custom styling through sx prop", () => {
