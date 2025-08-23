@@ -37,6 +37,7 @@ export const Input = (props: InputProps) => {
             setInternalValue(e.target.value);
         }
     };
+
     const currentValue = isControlled ? props.value! : internalValue;
 
     if (props.appearance === 'distinct') {
