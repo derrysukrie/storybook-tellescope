@@ -1,11 +1,11 @@
 /** @vitest-environment jsdom */
 import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent } from "../../../../test/test-utils";
+import { render, fireEvent } from "../../../../test/test-utils";
 import userEvent from "@testing-library/user-event";
 import TimeInput from "./time-input";
 
 describe("TimeInput", () => {
-  const setup = (props?: any) => {
+  const setup = (props?: Partial<React.ComponentProps<typeof TimeInput>>) => {
     const utils = render(<TimeInput {...props} />);
     const input = utils.container.querySelector("input") as HTMLInputElement;
     return { input, ...utils };
