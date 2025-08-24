@@ -1,6 +1,6 @@
 import { FormControl, FormControlLabel, Switch as MuiSwitch } from "@mui/material";
 import type { SwitchProps as MuiSwitchProps, FormControlLabelProps as MuiFormControlLabelProps } from "@mui/material";
-import { type FC, type ReactNode } from "react";
+import { type FC, type ReactNode, useState } from "react";
 
 interface SwitchToggleProps extends Omit<MuiSwitchProps, "color"> {
     color?: "default" | "primary" | "secondary" | "info";
@@ -16,12 +16,35 @@ const SwitchToggle: FC<SwitchToggleProps> = ({
     formlabelProps, 
     label, 
     value,
-    checked,
+    checked: externalChecked,
     onChange,
     name,
     ...props 
 }) => {
     const { sx, ...rest } = formlabelProps || {};
+    
+    // Determine if this is a controlled component
+    const isControlled = typeof externalChecked !== 'undefined';
+    
+    // Internal state for uncontrolled mode
+    const [internalChecked, setInternalChecked] = useState(props.defaultChecked || false);
+    
+    // Use the appropriate checked value
+    const checked = isControlled ? externalChecked : internalChecked;
+    
+    // Handle change events
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        // For uncontrolled mode, update internal state
+        if (!isControlled) {
+            setInternalChecked(e.target.checked);
+        }
+        
+        // Call the external onChange handler if provided
+        if (onChange) {
+            onChange(e, e.target.checked);
+        }
+    };
+    
     return (
         <FormControl>
             <FormControlLabel
@@ -29,12 +52,13 @@ const SwitchToggle: FC<SwitchToggleProps> = ({
                     <MuiSwitch
                         color={props.color || "info"}
                         value={value}
-                        checked={checked}
-                        onChange={onChange}
                         name={name}
                         disableRipple
+                        checked={checked}
+                        onChange={handleChange}
                         {...props}
-
+                        // Remove defaultChecked from props to avoid conflicts
+                        defaultChecked={undefined}
                     />
                 }
                 label={label}
