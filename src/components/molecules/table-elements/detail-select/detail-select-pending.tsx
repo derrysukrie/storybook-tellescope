@@ -242,7 +242,7 @@ function FilterMenu({ open, anchorEl, onClose, onChange, usedFields, placeholder
             // autoFocusItem={false}
             >
                 <Input
-                    autoFocus={true}
+                    autoFocus
                     appearance="distinct"
                     placeholder={placeholder}
                     size="small"

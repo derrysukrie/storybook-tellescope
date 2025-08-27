@@ -2,8 +2,8 @@ import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
 
 export interface FormContextType {
-  updateFormData: (stepId: string, value: any) => void;
-  formData: Record<string, any>;
+  updateFormData: (stepId: string, value: unknown) => void;
+  formData: Record<string, unknown>;
   currentStep: string;
 }
 

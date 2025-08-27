@@ -26,10 +26,10 @@ export const SuggestedActions: React.FC<SuggestedActionsProps> = ({
     >
       {!expanded ? (
         <Badge color="error" variant="dot">
-          <img src={BulbIcon} />
+          <img alt="bulb" src={BulbIcon} />
         </Badge>
       ) : (
-        <img src={BulbActiveIcon} />
+        <img alt="bulb active" src={BulbActiveIcon} />
       )}
 
       <Page truncated={true} />

@@ -88,10 +88,7 @@ export const Address = () => {
     updateAddressField("state", value);
   }, [updateAddressField]);
 
-  // Memoized form validation state
-  const isFormValid = useMemo(() => {
-    return !error && address.addressLine1 && address.city && address.state && address.zipCode;
-  }, [error, address]);
+
 
   return (
     <StepWrapper title="Address" error={error || undefined}>

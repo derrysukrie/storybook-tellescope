@@ -87,7 +87,7 @@ export const Default: Story = {
       hidden: boolean;
       pinned: boolean;
     }) => {
-      let formattedField = { ...field };
+      const formattedField = { ...field };
       formattedField.pinned = !formattedField.pinned;
       const index = editValues?.findIndex((f) => field.label == f.label);
       const newFields = [...editValues];
@@ -101,7 +101,7 @@ export const Default: Story = {
       hidden: boolean;
       pinned: boolean;
     }) => {
-      let formattedField = { ...field };
+      const formattedField = { ...field };
       formattedField.hidden = !formattedField.hidden;
       const index = editValues?.findIndex((f) => field.label == f.label);
       const newFields = [...editValues];
@@ -268,7 +268,7 @@ export const Expanded: Story = {
       hidden: boolean;
       pinned: boolean;
     }) => {
-      let formattedField = { ...field };
+      const formattedField = { ...field };
       formattedField.pinned = !formattedField.pinned;
       const index = editValues?.findIndex((f) => field.label == f.label);
       const newFields = [...editValues];
@@ -282,7 +282,7 @@ export const Expanded: Story = {
       hidden: boolean;
       pinned: boolean;
     }) => {
-      let formattedField = { ...field };
+      const formattedField = { ...field };
       formattedField.hidden = !formattedField.hidden;
       const index = editValues?.findIndex((f) => field.label == f.label);
       const newFields = [...editValues];
@@ -447,7 +447,7 @@ export const Editing: Story = {
       hidden: boolean;
       pinned: boolean;
     }) => {
-      let formattedField = { ...field };
+      const formattedField = { ...field };
       formattedField.pinned = !formattedField.pinned;
       const index = editValues?.findIndex((f) => field.label == f.label);
       const newFields = [...editValues];
@@ -461,7 +461,7 @@ export const Editing: Story = {
       hidden: boolean;
       pinned: boolean;
     }) => {
-      let formattedField = { ...field };
+      const formattedField = { ...field };
       formattedField.hidden = !formattedField.hidden;
       const index = editValues?.findIndex((f) => field.label == f.label);
       const newFields = [...editValues];

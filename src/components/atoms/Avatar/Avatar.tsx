@@ -53,7 +53,6 @@ const CustomAvatar: React.FC<CustomAvatarProps> = ({
   sx,
   color,
   size,
-  badge = false,
   ...props
 }) => {
   return (
@@ -78,7 +77,7 @@ const Avatar: React.FC<CustomAvatarProps> = ({
   sx,
   color,
   size,
-  badge = false,
+  badge,
   ...props
 }) => {
   return badge ? (
@@ -91,12 +90,12 @@ const Avatar: React.FC<CustomAvatarProps> = ({
         sx={sx}
         color={color}
         size={size}
-        badge={badge}
+        badge={badge || false}
         {...props}
       />
     </StyledBadge>
   ) : (
-    <CustomAvatar sx={sx} color={color} size={size} badge={badge} {...props} />
+    <CustomAvatar sx={sx} color={color} size={size} badge={badge || false} {...props} />
   );
 };
 

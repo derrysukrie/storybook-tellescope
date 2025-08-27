@@ -9,7 +9,7 @@ interface PhoneNumberProps {
   helperText?: string;
 }
 
-export const PhoneNumber = ({ title, helperText }: PhoneNumberProps) => {
+export const PhoneNumber = ({ title }: PhoneNumberProps) => {
   const { updateFormData, currentStep } = useFormContext();
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);

@@ -6,7 +6,7 @@ import { DateSeparator } from "../MessageItem/DateSeparator";
 import { styles } from "../MessageInput/styles/maps";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { EmojiPicker } from "../../EmojiPicker/EmojiPicker";
-import { useEstimateMessageHeight } from "./hooks";
+import { useEstimateMessageHeight as estimateMessageHeight } from "./hooks";
 
 interface MessagesProps {
   content: IMessage[];
@@ -57,7 +57,7 @@ export const Messages = ({ content, onMessageRetry }: MessagesProps) => {
   const emojiPickerRef = React.useRef<HTMLDivElement>(null);
 
   // Handler for selecting an emoji
-  const handleEmojiSelect = (emoji: any) => {
+  const handleEmojiSelect = (emoji: string) => {
     // TODO: handle emoji selection logic
     console.log("Selected emoji:", emoji);
     setActiveEmojiPicker(null);
@@ -119,7 +119,7 @@ export const Messages = ({ content, onMessageRetry }: MessagesProps) => {
       const prevDate = prevMessage?.createdAt
         ? new Date(prevMessage.createdAt)
         : null;
-      return useEstimateMessageHeight(message, prevDate);
+      return estimateMessageHeight(message, prevDate);
     },
     overscan: 10,
   });

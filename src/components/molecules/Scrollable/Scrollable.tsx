@@ -144,7 +144,7 @@ const activities = [
   },
 ];
 
-const ScrollableSection: React.FC<any> = () => (
+const ScrollableSection: React.FC = () => (
   <Paper
     sx={{
       width: "450px",

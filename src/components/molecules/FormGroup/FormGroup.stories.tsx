@@ -45,7 +45,7 @@ export const Checkbox: StoryObj = {
 
 export const Text: StoryObj = {
   render: () => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+     
     const [value, setValue] = React.useState<Record<string, string>>({});
 
     return (

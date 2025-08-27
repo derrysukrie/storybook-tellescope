@@ -86,7 +86,7 @@ export const CalendarGrid: React.FC<CalendarGridProps> = ({
         <>
             {/* Weekdays */}
             <Grid container spacing={1} mb={1} role="rowgroup" aria-label="Week days">
-                {DAYS_OF_WEEK.map((day, index) => (
+                {DAYS_OF_WEEK.map((day) => (
                     <Grid item xs={12 / 7} key={day}>
                         <Typography 
                             align="center" 

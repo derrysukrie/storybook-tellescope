@@ -14,7 +14,7 @@ export const NumberField = ({ title, helperText }: NumberFieldProps) => {
   const [value, setValue] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let val = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric
+    const val = e.target.value.replace(/[^0-9]/g, ""); // Remove non-numeric
     if (val === "") {
       setValue("");
       updateFormData(currentStep, "");

@@ -1,7 +1,7 @@
 import { ChatBubbleOutline, EmailOutlined, Phone } from "@mui/icons-material";
 import { Avatar, Box, Stack, Typography, Button, Divider } from "@mui/material";
 
-interface CareTeamInfoProps {
+export interface CareTeamInfoProps {
   actions?: 1 | 2 | 3;
 }
 

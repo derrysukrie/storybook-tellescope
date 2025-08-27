@@ -78,6 +78,7 @@ export interface InsuranceStepProps extends BaseStepProps {
 // Form validation types
 export interface ValidationRule {
   type: 'required' | 'email' | 'minLength' | 'maxLength' | 'pattern' | 'custom';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value?: any;
   message: string;
 }

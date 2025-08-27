@@ -260,9 +260,6 @@ const Select: FC<SelectProps> = ({
         }
     };
 
-    const { sx } = FormControlProps || {}
-
-
     return (
         <FormControl
             fullWidth

@@ -36382,7 +36382,7 @@ Symbol]")
       "%encodeURIComponent%": encodeURIComponent,
       "%Error%": o,
       "%eval%": eval,
-      // eslint-disable-line no-eval
+       
       "%EvalError%": i,
       "%Float16Array%": typeof Float16Array > "u" ? r : Float16Array,
       "%Float32Array%": typeof Float32Array > "u" ? r : Float32Array,
@@ -53022,7 +53022,7 @@ function kJ({
   maxArrayLength: i = 1 / 0,
   breakLength: s = 1 / 0,
   seen: l = [],
-  // eslint-disable-next-line no-shadow
+   
   truncate: u = 1 / 0,
   stylize: c = String
 } = {}, d) {
@@ -55272,7 +55272,7 @@ function WQ({
   maxArrayLength: i = 1 / 0,
   breakLength: s = 1 / 0,
   seen: l = [],
-  // eslint-disable-next-line no-shadow
+   
   truncate: u = 1 / 0,
   stylize: c = String
 } = {}, d) {
@@ -55835,7 +55835,7 @@ function eh(e, t, r) {
 a(eh, "deepEqual");
 F(eh, "deepEqual");
 function u6(e, t) {
-  return e === t ? e !== 0 || 1 / e === 1 / t : e !== e && // eslint-disable-line no-self-compare
+  return e === t ? e !== 0 || 1 / e === 1 / t : e !== e &&  
   t !== t ? !0 : uu(e) || uu(t) ? !1 : null;
 }
 a(u6, "simpleEqual");
@@ -56205,7 +56205,7 @@ function Ad(e, t) {
         throw yZ(n).forEach(function(l) {
           if (
             // we actually mean to check `Object.prototype` here
-            // eslint-disable-next-line no-prototype-builtins
+             
             !Object.prototype.hasOwnProperty(l) && NQ.indexOf(l) === -1
           ) {
             var u = vZ(o, l, s);
@@ -58796,9 +58796,9 @@ var tke = /* @__PURE__ */ function() {
 function Bt(e) {
   var t;
   return (
-    // eslint-disable-next-line no-restricted-properties -- actual guard for environments without localName
+     
     (t = e.localName) !== null && t !== void 0 ? t : (
-      // eslint-disable-next-line no-restricted-properties -- required for the fallback
+       
       e.tagName.toLowerCase()
     )
   );
@@ -59450,7 +59450,7 @@ var v8 = class v8 extends Error {
         ""
       ),
       "",
-      // eslint-disable-next-line new-cap
+       
       `${o.utils.RECEIVED_COLOR(
         "received"
       )} value must ${t}.`,
@@ -59497,9 +59497,9 @@ var w8 = class w8 extends Error {
     super(), Error.captureStackTrace && Error.captureStackTrace(this, r), this.message = [
       t.message,
       "",
-      // eslint-disable-next-line new-cap
+       
       n.utils.RECEIVED_COLOR("Failing css:"),
-      // eslint-disable-next-line new-cap
+       
       n.utils.RECEIVED_COLOR(`${t.css}`)
     ].join(`
 `);
@@ -59533,12 +59533,12 @@ function br(e, t, r, n, o, i) {
   return [
     `${t}
 `,
-    // eslint-disable-next-line new-cap
+     
     `${r}:
 ${e.utils.EXPECTED_COLOR(
       (0, WM.default)(ose(e, n), 2)
     )}`,
-    // eslint-disable-next-line new-cap
+     
     `${o}:
 ${e.utils.RECEIVED_COLOR(
       (0, WM.default)(ose(e, i), 2)
@@ -59651,7 +59651,7 @@ in element, found ${this.utils.stringify(
         ""
       ),
       "",
-      // eslint-disable-next-line new-cap
+       
       this.utils.RECEIVED_COLOR(this.isNot ? r() : n())
     ].join(`
 `), "message")
@@ -59709,7 +59709,7 @@ function wR(e, t) {
         "element"
       ),
       "",
-      // eslint-disable-next-line new-cap
+       
       this.utils.RECEIVED_COLOR(`${this.utils.stringify(
         e.cloneNode(!1)
       )} ${this.isNot ? "contains:" : "does not contain:"} ${this.utils.stringify(t && t.cloneNode(!1))}
@@ -59736,7 +59736,7 @@ function QM(e, t) {
         ""
       ),
       "Expected:",
-      // eslint-disable-next-line new-cap
+       
       `  ${this.utils.EXPECTED_COLOR(t)}`,
       "Received:",
       `  ${this.utils.printReceived(e.cloneNode(!0))}`
@@ -65554,9 +65554,9 @@ var BQe = /* @__PURE__ */ function() {
 function Xt(e) {
   var t;
   return (
-    // eslint-disable-next-line no-restricted-properties -- actual guard for environments without localName
+     
     (t = e.localName) !== null && t !== void 0 ? t : (
-      // eslint-disable-next-line no-restricted-properties -- required for the fallback
+       
       e.tagName.toLowerCase()
     )
   );
@@ -66294,7 +66294,7 @@ function JN() {
   return typeof jest < "u" && jest !== null ? (
     // legacy timers
     setTimeout._isMockFunction === !0 || // modern timers
-    // eslint-disable-next-line prefer-object-has-own -- not supported by our support matrix
+     
     Object.prototype.hasOwnProperty.call(setTimeout, "clock")
   ) : !1;
 }

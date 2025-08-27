@@ -79,7 +79,7 @@ export const SentForm = ({
   }, [onFormDataChange, debounceDelay]);
 
   // Function to update form data from any step
-  const updateFormData = useCallback((stepId: string, value: any) => {
+  const updateFormData = useCallback((stepId: string, value: unknown) => {
     setFormData(prev => {
       const newData = { ...prev, [stepId]: value };
       // Use debounced callback to avoid excessive calls

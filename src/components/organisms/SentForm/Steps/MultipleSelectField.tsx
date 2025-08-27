@@ -45,12 +45,12 @@ export const MultipleSelectField = memo(({
     // }, [valueToLabelMap]);
     
     // render placeholder if no value is selected
-    const renderValue = useCallback((selected: string | string[]) => {
-      if (Array.isArray(selected) && selected.length === 0) {
-        return placeholder;
-      }
+    // const renderValue = useCallback((selected: string | string[]) => {
+    //   if (Array.isArray(selected) && selected.length === 0) {
+    //     return placeholder;
+    //   }
      
-    }, [placeholder]);
+    // }, [placeholder]);
 
   const handleChange = useCallback((event: SelectChangeEvent<string | string[]>) => {
     const newValue = event.target.value as string[];

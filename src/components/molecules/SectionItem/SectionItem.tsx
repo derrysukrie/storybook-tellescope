@@ -111,7 +111,7 @@ export const TicketSectionItem: React.FC<TicketSectionItemProps> = ({
   return (
     <SectionItemContainer>
       <Badge color="error" variant="dot" invisible={!badge}>
-        {<img src={TicketIcon} width={24} height={24} />}
+        {<img alt="ticket" src={TicketIcon} width={24} height={24} />}
       </Badge>
 
       <Box component="div" flexGrow={1}>
@@ -139,7 +139,7 @@ export const TicketSectionItem: React.FC<TicketSectionItemProps> = ({
         <Snooze sx={{ fontSize: "24px", color: "#49454F" }}></Snooze>
       )}
 
-      {assigned && snoozed && <img src={DumplingIcon} width={24} height={24} />}
+      {assigned && snoozed && <img alt="dumpling" src={DumplingIcon} width={24} height={24} />}
 
       {snoozed && (
         <AlarmOffOutlined sx={{ fontSize: "24px", color: "#49454F" }} />
@@ -181,7 +181,7 @@ export const EventSectionItem: React.FC<EventSectionItemProps> = ({
 
   return (
     <SectionItemContainer>
-      {<img src={EventIcon} width={24} height={24} />}
+      {<img alt="event" src={EventIcon} width={24} height={24} />}
 
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name ? name : "Event Name"}</SectionItemTitle>
@@ -219,7 +219,7 @@ export const PrescriptionSectionItem: React.FC<
 > = ({ status = "Pending", name = "" }) => {
   return (
     <SectionItemContainer>
-      {<img src={PrescriptionIcon} width={24} height={24} />}
+      {<img alt="prescription" src={PrescriptionIcon} width={24} height={24} />}
 
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name || "tropfungin"}</SectionItemTitle>
@@ -238,7 +238,7 @@ export const PrescriptionSectionItem: React.FC<
 export const FileSectionItem: React.FC<{ name?: string }> = ({ name }) => {
   return (
     <SectionItemContainer>
-      {<img src={FileIcon} width={24} height={24} />}
+      {<img alt="file" src={FileIcon} width={24} height={24} />}
 
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name || "file"}</SectionItemTitle>
@@ -259,7 +259,7 @@ export const MedicationSectionItem: React.FC<{ name?: string }> = ({
 }) => {
   return (
     <SectionItemContainer>
-      {<img src={MedicationIcon} width={24} height={24} />}
+      {<img alt="medication" src={MedicationIcon} width={24} height={24} />}
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name || "tropfugin"}</SectionItemTitle>
         <SectionItemSubTitle>0.1 mg 3 month March 5, 2025</SectionItemSubTitle>
@@ -277,7 +277,7 @@ export const MedicationSectionItem: React.FC<{ name?: string }> = ({
 export const PaymentSectionItem: React.FC<{ name?: string }> = ({ name }) => {
   return (
     <SectionItemContainer>
-      {<img src={PaymentIcon} width={24} height={24} />}
+      {<img alt="payment" src={PaymentIcon} width={24} height={24} />}
 
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name || "Payment"}</SectionItemTitle>
@@ -300,7 +300,7 @@ export const ContentSectionItem: React.FC<{ name?: string; icon?: string }> = ({
 }) => {
   return (
     <SectionItemContainer>
-      {<img src={icon || ContentIcon} width={24} height={24} />}
+      {<img alt="content" src={icon || ContentIcon} width={24} height={24} />}
 
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name || "Content title"}</SectionItemTitle>
@@ -319,7 +319,7 @@ export const ContentSectionItem: React.FC<{ name?: string; icon?: string }> = ({
 export const FormSectionItem: React.FC<{ name?: string }> = ({ name }) => {
   return (
     <SectionItemContainer>
-      {<img src={FormIcon} width={24} height={24} />}
+      {<img alt="form" src={FormIcon} width={24} height={24} />}
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name || "Form title"}</SectionItemTitle>
         <SectionItemSubTitle>3/5/2025 1 response</SectionItemSubTitle>
@@ -339,7 +339,7 @@ export const DeviceOrderSectionItem: React.FC<{ name?: string }> = ({
 }) => {
   return (
     <SectionItemContainer>
-      {<img src={DeviceOrderIcon} width={24} height={24} />}
+      {<img alt="device order" src={DeviceOrderIcon} width={24} height={24} />}
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>
           {name ? name : "Open Stock iBlood Pressure Cuff"}
@@ -370,7 +370,7 @@ export const DeviceOrderSectionItem: React.FC<{ name?: string }> = ({
 export const EncounterSectionItem: React.FC<{ name?: string }> = ({ name }) => {
   return (
     <SectionItemContainer>
-      {<img src={EncounterIcon} width={24} height={24} />}
+      {<img alt="encounter" src={EncounterIcon} width={24} height={24} />}
 
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name || "Title"}</SectionItemTitle>
@@ -392,7 +392,7 @@ export const TicketassignedSectionItem: React.FC<{ name?: string }> = ({
 }) => {
   return (
     <SectionItemContainer>
-      {<img src={TicketIcon} width={24} height={24} />}
+      {<img alt="ticket" src={TicketIcon} width={24} height={24} />}
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name || "Ticket assigned"}</SectionItemTitle>
         <SectionItemSubTitle> 3/5/2025 at 1:00 PM Name</SectionItemSubTitle>
@@ -410,7 +410,7 @@ export const TicketcompletedSectionItem: React.FC<{ name?: string }> = ({
   name,
 }) => (
   <SectionItemContainer>
-    {<img src={TicketIcon} width={24} height={24} />}
+    {<img alt="ticket" src={TicketIcon} width={24} height={24} />}
     <Box component="div" flexGrow={1}>
       <SectionItemTitle>{name || "Ticket completed"}</SectionItemTitle>
       <SectionItemSubTitle>3/5/2025 at 1:00 PM Name</SectionItemSubTitle>
@@ -428,7 +428,7 @@ export const EventScheduledSectionItem: React.FC<{ name?: string }> = ({
 }) => {
   return (
     <SectionItemContainer>
-      {<img src={EventIcon} width={24} height={24} />}
+      {<img alt="event" src={EventIcon} width={24} height={24} />}
 
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name || "Event scheduled"}</SectionItemTitle>
@@ -465,7 +465,7 @@ export const ChatResolvedSectionItem: React.FC<{ name?: string }> = ({
 }) => {
   return (
     <SectionItemContainer>
-      {<img src={ChatResolvedIcon} width={24} height={24} />}
+      {<img alt="chat resolved" src={ChatResolvedIcon} width={24} height={24} />}
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name || "Chat resolved"}</SectionItemTitle>
         <SectionItemSubTitle>3/5/2025 at 1:00 PM Name</SectionItemSubTitle>
@@ -483,7 +483,7 @@ export const AddedToJourneySectionItem: React.FC<{ name?: string }> = ({
 }) => {
   return (
     <SectionItemContainer>
-      {<img src={JourneyIcon} width={24} height={24} />}
+      {<img alt="journey" src={JourneyIcon} width={24} height={24} />}
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name || "Added to journey"}</SectionItemTitle>
         <SectionItemSubTitle>3/5/2025 at 1:00 PM Journey</SectionItemSubTitle>
@@ -501,7 +501,7 @@ export const RemovedFromJourneySectionItem: React.FC<{ name?: string }> = ({
 }) => {
   return (
     <SectionItemContainer>
-      {<img src={JourneyIcon} width={24} height={24} />}
+      {<img alt="journey" src={JourneyIcon} width={24} height={24} />}
 
       <Box component="div" flexGrow={1}>
         <SectionItemTitle>{name || "Removed from journey"}</SectionItemTitle>

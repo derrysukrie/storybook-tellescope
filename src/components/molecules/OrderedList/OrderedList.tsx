@@ -18,10 +18,10 @@ interface OrderedListProps {
 }
 
 export const OrderedList = ({ list, setList }: OrderedListProps) => {
-  const [draggedItem, setDraggedItem] = useState<any | null>(null);
+  const [draggedItem, setDraggedItem] = useState<ListItem | null>(null);
 
   const onDragStart = useCallback(
-    (e: React.DragEvent<HTMLLIElement>, item: any) => {
+    (e: React.DragEvent<HTMLLIElement>, item: ListItem) => {
       e.dataTransfer.effectAllowed = "move";
       setDraggedItem(item);
     },
@@ -29,7 +29,7 @@ export const OrderedList = ({ list, setList }: OrderedListProps) => {
   );
 
   const handleDrop = useCallback(
-    (e: React.DragEvent, targetItem: any) => {
+    (e: React.DragEvent, targetItem: ListItem) => {
       e.preventDefault();
 
       if (!draggedItem || draggedItem.id === targetItem.id) return;

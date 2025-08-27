@@ -45,13 +45,15 @@ const withSuspense = <T extends object>(Component: React.ComponentType<T>, props
 );
 
 // Helper function for steps with title and helperText
-const renderTextStep = (Component: any, step: any) => withSuspense(Component, {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const renderTextStep = (Component: React.ComponentType<any>, step: any) => withSuspense(Component, {
   title: step.title,
   helperText: step.helperText
 });
 
 // Helper function for steps with title and placeholder
-const renderDateStep = (Component: any, step: any) => withSuspense(Component, {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const renderDateStep = (Component: React.ComponentType<any>, step: any) => withSuspense(Component, {
   title: step.title,
   placeholder: step.placeholder
 });

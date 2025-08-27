@@ -6,7 +6,7 @@ import type { ValidationRule, ValidationResult } from "../types";
 interface UseStepFieldOptions {
   stepId?: string;
   validations?: ValidationRule[];
-  defaultValue?: any;
+  defaultValue?: unknown;
   required?: boolean;
 }
 
@@ -14,7 +14,7 @@ export const useStepField = (options: UseStepFieldOptions = {}) => {
   const { stepId, validations = [], defaultValue, required = false } = options;
   const { updateFormData, formData, currentStep } = useFormContext();
   
-  const [value, setValue] = useState(defaultValue || "");
+  const [value, setValue] = useState<unknown>(defaultValue || "");
   const [error, setError] = useState<string | null>(null);
   const [isTouched, setIsTouched] = useState(false);
   
@@ -41,11 +41,11 @@ export const useStepField = (options: UseStepFieldOptions = {}) => {
     setIsTouched(false);
   }, [effectiveStepId, formData, defaultValue]);
   
-  const validate = useCallback((val: any): ValidationResult => {
+  const validate = useCallback((val: unknown): ValidationResult => {
     return validator.validate(val);
   }, [validator]);
   
-  const handleChange = useCallback((newValue: any) => {
+  const handleChange = useCallback((newValue: unknown) => {
     setValue(newValue);
     updateFormData(effectiveStepId, newValue);
     
@@ -67,7 +67,7 @@ export const useStepField = (options: UseStepFieldOptions = {}) => {
   }, []);
   
   const reset = useCallback(() => {
-    setValue(defaultValue || "");
+    setValue(defaultValue || null);
     setError(null);
     setIsTouched(false);
   }, [defaultValue]);

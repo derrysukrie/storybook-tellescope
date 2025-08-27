@@ -3,7 +3,7 @@ import Picker from "@emoji-mart/react";
 import React from "react";
 
 interface EmojiPickerProps {
-  onEmojiSelect: (emoji: any) => void;
+  onEmojiSelect: (emoji: string) => void;
 }
 
 const EmojiPickerComponent: React.FC<EmojiPickerProps> = ({

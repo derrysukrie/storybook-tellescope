@@ -226,7 +226,7 @@ export const EventMultimodalTabContent: React.FC<{ nameSorted: boolean }> = ({
   const [events, setEvents] = useState(allEvents);
 
   useEffect(() => {
-    let filteredEvents = [...allEvents];
+    const filteredEvents = [...allEvents];
 
     if (nameSorted) {
       filteredEvents.sort((a, b) => a.name.localeCompare(b.name));
@@ -308,7 +308,7 @@ export const EligibilityMultimodalTabContent: React.FC<{
   const [items, setItems] = useState(allItems);
 
   useEffect(() => {
-    let filteredItems = [...allItems];
+    const filteredItems = [...allItems];
 
     if (nameSorted) {
       filteredItems.sort((a, b) => a.name.localeCompare(b.name));
@@ -387,7 +387,7 @@ export const DeviceorderMultimodalTabContent: React.FC<{
   const [items, setItems] = useState(allItems);
 
   useEffect(() => {
-    let filteredItems = [...allItems];
+    const filteredItems = [...allItems];
 
     if (nameSorted) {
       filteredItems.sort((a, b) => a.name.localeCompare(b.name));
@@ -467,7 +467,7 @@ export const EncountersMultimodalTabContent: React.FC<{
   const [items, setItems] = useState(allItems);
 
   useEffect(() => {
-    let filteredItems = [...allItems];
+    const filteredItems = [...allItems];
 
     if (nameSorted) {
       filteredItems.sort((a, b) => a.name.localeCompare(b.name));
@@ -548,7 +548,7 @@ export const FilesMultimodalTabContent: React.FC<{
   const [items, setItems] = useState(allItems);
 
   useEffect(() => {
-    let filteredItems = [...allItems];
+    const filteredItems = [...allItems];
 
     if (nameSorted) {
       filteredItems.sort((a, b) => a.name.localeCompare(b.name));
@@ -629,7 +629,7 @@ export const FormsMultimodalTabContent: React.FC<{ nameSorted: boolean }> = ({
   const [items, setItems] = useState(allItems);
 
   useEffect(() => {
-    let filteredItems = [...allItems];
+    const filteredItems = [...allItems];
 
     if (nameSorted) {
       filteredItems.sort((a, b) => a.name.localeCompare(b.name));
@@ -710,7 +710,7 @@ export const ContentMultimodalTabContent: React.FC<{ nameSorted: boolean }> = ({
   const [items, setItems] = useState(allItems);
 
   useEffect(() => {
-    let filteredItems = [...allItems];
+    const filteredItems = [...allItems];
 
     if (nameSorted) {
       filteredItems.sort((a, b) => a.name.localeCompare(b.name));
@@ -790,7 +790,7 @@ export const MedicationMultimodalTabContent: React.FC<{
   const [items, setItems] = useState(allItems);
 
   useEffect(() => {
-    let filteredItems = [...allItems];
+    const filteredItems = [...allItems];
 
     if (nameSorted) {
       filteredItems.sort((a, b) => a.name.localeCompare(b.name));
@@ -875,7 +875,7 @@ export const PaymentsMultimodalTabContent: React.FC<{
   const [items, setItems] = useState(allItems);
 
   useEffect(() => {
-    let filteredItems = [...allItems];
+    const filteredItems = [...allItems];
 
     if (nameSorted) {
       filteredItems.sort((a, b) => a.name.localeCompare(b.name));

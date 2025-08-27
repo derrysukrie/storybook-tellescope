@@ -1,4 +1,3 @@
-import { useCallback, useRef, useState, useMemo } from "react";
 import type { ChatInterface } from "../types";
 
 export interface InputConfig {

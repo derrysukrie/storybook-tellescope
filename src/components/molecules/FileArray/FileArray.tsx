@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import type React from "react";
 import { AttachedFile } from "../../atoms/AttachedFile/AttachedFile";
 
-export const FileArray: React.FC<any> = () => {
+export const FileArray: React.FC = () => {
   const attachedFile = Array.from({ length: 5 });
 
   return (
@@ -18,8 +18,8 @@ export const FileArray: React.FC<any> = () => {
         paddingBottom: "8px",
       }}
     >
-      {attachedFile?.map((i) => (
-        <AttachedFile key={i} />
+      {attachedFile?.map((_, index) => (
+        <AttachedFile key={index} />
       ))}
     </Box>
   );

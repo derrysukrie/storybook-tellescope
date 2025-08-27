@@ -6,7 +6,10 @@ interface CustomChipProps extends Omit<ChipProps, "appearance" | "selected"> {
   appearance?: "filled" | "outlined" | "square";
 }
 
-const getHoverStyles = (appearance: any, color: any) => {
+type ChipAppearance = "filled" | "outlined" | "square";
+type ChipColor = ChipProps["color"];
+
+const getHoverStyles = (appearance: ChipAppearance, color: ChipColor) => {
   switch (appearance) {
     case "filled": {
       switch (color) {
@@ -58,6 +61,7 @@ const getHoverStyles = (appearance: any, color: any) => {
             borderColor: "rgba(189, 189, 189, 1)",
           };
       }
+      break; // Add break to prevent fallthrough
     }
     case "square": {
       switch (color) {
@@ -86,11 +90,14 @@ const getHoverStyles = (appearance: any, color: any) => {
             borderColor: "rgba(189, 189, 189, 1)",
           };
       }
-    }
+      break; // Add break to prevent fallthrough
+    } 
+    default:
+      return "";
   }
 };
 
-const getSelectedStyles = (color: any, selected: boolean) => {
+const getSelectedStyles = (_color: ChipColor, selected: boolean) => {
   if (selected) {
     return {
       backgroundColor: "rgba(222, 234, 248, 1)",

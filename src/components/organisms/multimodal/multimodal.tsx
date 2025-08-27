@@ -1,5 +1,6 @@
-import { Box, IconButton, type SxProps } from "@mui/material";
 import React, { useState } from "react";
+import { Box, IconButton, type SxProps } from "@mui/material";
+
 import TicketIcon from "../../../assets/ticket.svg";
 import EventIcon from "../../../assets/event.svg";
 import EligibilityIcon from "../../../assets/eligibility.svg";
@@ -85,13 +86,13 @@ const tabs = [
 export const MultimodalIcons: React.FC<{ IconName: MultimodalIconType }> = ({
   IconName,
 }) => {
-  return <img src={IconName} width={24} height={24} />;
+  return <img alt="multimodal icon" src={IconName} width={24} height={24} />;
 };
 
 export const MultimodalTab: React.FC<{
   activeTab: boolean;
   ticketIcon: MultimodalIconType;
-  onClick?: (event: any) => any;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }> = ({ activeTab, ticketIcon, onClick }) => {
   const styling: SxProps = {
     position: "relative",

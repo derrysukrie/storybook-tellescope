@@ -6,7 +6,7 @@ import {
   Event,
   Link,
 } from "@mui/icons-material";
-import { Avatar, Box, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Stack, Typography, type SxProps, type Theme } from "@mui/material";
 import type { ReactNode } from "react";
 
 // Type definitions
@@ -31,7 +31,7 @@ export interface ItemPortalProps {
   avatarSrc?: string;
   hasNewMessage?: boolean;
   onClick?: () => void;
-  sx?: any;
+  sx?: SxProps<Theme>;
 }
 
 // Type-specific configurations

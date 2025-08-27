@@ -192,6 +192,7 @@ export type StepConfig =
 
 // Form data type
 export interface FormData {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [stepId: string]: any;
 }
 

@@ -58,7 +58,7 @@ export const FileUploader = () => {
       setUploadError(null);
 
       // Simulate upload progress
-      newFiles.forEach((file, index) => {
+      newFiles.forEach((file) => {
         const interval = setInterval(() => {
           setFiles((prev) =>
             prev.map((f) => {

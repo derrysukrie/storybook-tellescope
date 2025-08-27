@@ -11,7 +11,7 @@ export class FormValidator {
     this.rules.push(rule);
   }
 
-  validate(value: any): ValidationResult {
+  validate(value: unknown): ValidationResult {
     const errors: string[] = [];
 
     for (const rule of this.rules) {
@@ -27,7 +27,7 @@ export class FormValidator {
     };
   }
 
-  private validateRule(rule: ValidationRule, value: any): boolean {
+  private validateRule(rule: ValidationRule, value: unknown): boolean {
     switch (rule.type) {
       case 'required':
         return value !== null && value !== undefined && value !== '';
@@ -35,7 +35,7 @@ export class FormValidator {
       case 'email':
         if (!value) return true; // Skip if empty (use required rule for that)
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(value);
+        return emailRegex.test(value as string);
       
       case 'minLength':
         return !value || (typeof value === 'string' && value.length >= (rule.value || 0));
@@ -46,7 +46,7 @@ export class FormValidator {
       case 'pattern':
         if (!value) return true;
         const regex = new RegExp(rule.value || '');
-        return regex.test(value);
+        return regex.test(value as string);
       
       case 'custom':
         return rule.value ? rule.value(value) : true;
