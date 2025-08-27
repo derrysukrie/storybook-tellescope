@@ -1,6 +1,5 @@
 import { Box, FormControlLabel, Typography } from "@mui/material";
-import LinearProgress from "@mui/material/LinearProgress";
-import CheckBox from "../../atoms/checkbox/checkbox";
+
 import { Button } from "../../atoms/button/button";
 import { useState, useCallback, useMemo, useRef, useEffect, Suspense, Component } from "react";
 import type { ErrorInfo, ReactNode } from "react";
@@ -11,6 +10,7 @@ import { renderStep } from "./stepRenderer";
 import { isStepValid } from "./validation/validation";
 import type { SentFormProps, FormData } from "./types/types";
 import { StepSkeleton } from "./Steps/StepSkeleton";
+import { LinearProgress, CheckBox } from "../../atoms";
 
 // Error boundary component to catch errors in lazy-loaded components
 class ErrorBoundary extends Component<

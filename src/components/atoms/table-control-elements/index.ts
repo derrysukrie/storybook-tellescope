@@ -1,0 +1,6 @@
+export { default as Reset } from "./reset/reset";
+export { default as TableCell } from "./table-cell/table-cell";
+export { default as TableRow } from "./table-footer/table-footer";
+export { default as TableHead } from "./table-head/table-head";
+export { default as TableSearch } from "./table-search/table-search";
+export { default as TinySelect } from "./tiny-select/tiny-select";
