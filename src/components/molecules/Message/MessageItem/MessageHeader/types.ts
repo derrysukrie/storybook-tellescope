@@ -17,7 +17,7 @@ export interface HeaderFormProps {
 
 export interface HeaderContentProps {
   chatInterface: ChatInterface;
-  enableTeamChat: boolean;
+  enableTeamChat?: boolean;
   setEnableTeamChat: (value: boolean) => void;
   isEmpty: boolean;
   headerFormData?: HeaderFormData;

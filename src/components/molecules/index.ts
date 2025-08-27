@@ -4,3 +4,4 @@ export * from "./Dialog";
 export * from "./Breadcrumbs";
 export * from "./EmojiPicker";
 export * from "./FormGroup";
+export * from "./OrderedList";

@@ -67,7 +67,6 @@ const commonOptions = {
 export const Default: Story = {
   args: {
     steps: [
-    
       {
         type: "intro",
         id: "welcome",
