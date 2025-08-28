@@ -5,8 +5,7 @@
             "src/**/*.{ts,tsx,js,jsx}",
             "src/**/*.{json,md,mdx}",
             "*.{ts,tsx,js,jsx,json,md,mdx}",
-            "test/**/*.{ts,tsx,js,jsx}",
-            ".storybook/**/*.{ts,tsx,js,jsx,json}"
+            "test/**/*.{ts,tsx,js,jsx}"
         ],
         "ignoreUnknown": false
     },
