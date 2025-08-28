@@ -1,15 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import DetailSelect from './detail-select-default';
-import { type ComponentProps } from 'react';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
-import ShowChartIcon from '@mui/icons-material/ShowChart';
-import TagIcon from '@mui/icons-material/Tag';
-
+import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined'
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined'
+import ShowChartIcon from '@mui/icons-material/ShowChart'
+import TagIcon from '@mui/icons-material/Tag'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { ComponentProps } from 'react'
+import DetailSelect from './detail-select-default'
 
 type StoryProps = ComponentProps<typeof DetailSelect> & {
-    hasValue: boolean;
-    active: boolean;
+    hasValue: boolean
+    active: boolean
 }
 
 const meta = {
@@ -17,7 +16,7 @@ const meta = {
     component: DetailSelect,
     parameters: {
         controls: {
-            include: ["appearance", "active", "hasValue"],
+            include: ['appearance', 'active', 'hasValue'],
         },
     },
     argTypes: {
@@ -29,39 +28,38 @@ const meta = {
         },
         appearance: {
             control: {
-                type: "select",
+                type: 'select',
             },
-            options: ["sort", "filter"], // explicitly define options
+            options: ['sort', 'filter'], // explicitly define options
         },
     },
-} satisfies Meta<StoryProps>;
+} satisfies Meta<StoryProps>
 
-export default meta;
-type Story = StoryObj<StoryProps>;
+export default meta
+type Story = StoryObj<StoryProps>
 
 const availableSortFields = [
-    { label: "Name", value: "name", icon: <PersonOutlineOutlinedIcon /> },
-    { label: "Care Team", value: "care team", icon: <GroupOutlinedIcon /> },
-    { label: "Share Team", value: "share team", icon: <GroupOutlinedIcon /> },
-    { label: "Journeys", value: "journeys", icon: <ShowChartIcon /> },
-    { label: "Tags", value: "tags", icon: <TagIcon /> }
-];
+    { label: 'Name', value: 'name', icon: <PersonOutlineOutlinedIcon /> },
+    { label: 'Care Team', value: 'care team', icon: <GroupOutlinedIcon /> },
+    { label: 'Share Team', value: 'share team', icon: <GroupOutlinedIcon /> },
+    { label: 'Journeys', value: 'journeys', icon: <ShowChartIcon /> },
+    { label: 'Tags', value: 'tags', icon: <TagIcon /> },
+]
 
 const filterOptions = [
-    { label: "is", value: "is", },
-    { label: "is not", value: "is not", },
-    { label: "contains", value: "contains", },
-    { label: "does not contain", value: "does not contain", },
-    { label: "starts with", value: "starts with", },
-    { label: "ends with", value: "ends with", },
-    { label: "is empty", value: "is empty", },
-    { label: "is not empty", value: "is not empty", },
-];
-
+    { label: 'is', value: 'is' },
+    { label: 'is not', value: 'is not' },
+    { label: 'contains', value: 'contains' },
+    { label: 'does not contain', value: 'does not contain' },
+    { label: 'starts with', value: 'starts with' },
+    { label: 'ends with', value: 'ends with' },
+    { label: 'is empty', value: 'is empty' },
+    { label: 'is not empty', value: 'is not empty' },
+]
 
 export const Default: Story = {
     args: {
-        appearance: "sort",
+        appearance: 'sort',
         active: false,
         hasValue: false,
     },
@@ -81,13 +79,13 @@ export const Default: Story = {
 
         return (
             <>
-                {props.appearance === "sort" ? (
+                {props.appearance === 'sort' ? (
                     <DetailSelect
                         open={props.active}
                         appearance="sort"
                         availableSortFields={availableSortFields}
                         value={props.hasValue ? [{ field: 'name', order: 'ascending' }] : []}
-                    // onChangeSort, onChangeSortOrder, onAddSort, onDeleteSort handlers can be added here
+                        // onChangeSort, onChangeSortOrder, onAddSort, onDeleteSort handlers can be added here
                     />
                 ) : (
                     <DetailSelect
@@ -95,18 +93,15 @@ export const Default: Story = {
                         appearance="filter"
                         filterOptions={filterOptions}
                         value={props.hasValue ? { value: 'a', filterOption: 'contains' } : null}
-                        field='name'
+                        field="name"
 
-                    // OnSetFilterOption, OnSetFilterValue, OnClearFilter handlers can be added here
+                        // OnSetFilterOption, OnSetFilterValue, OnClearFilter handlers can be added here
                     />
                 )}
             </>
         )
-    }
-};
-
-
-
+    },
+}
 
 /*
     Detail Select props needs to refactor to support the following:

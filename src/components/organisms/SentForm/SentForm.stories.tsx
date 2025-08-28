@@ -1,243 +1,244 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { SentForm } from "./SentForm";
+import type { Meta, StoryObj } from '@storybook/react'
+import { SentForm } from './SentForm'
 
 const meta = {
-  title: "Organisms/SentForm",
-  component: SentForm,
-  parameters: {
-    layout: "centered",
-  },
-  argTypes: {},
-} satisfies Meta<typeof SentForm>;
+    title: 'Organisms/SentForm',
+    component: SentForm,
+    parameters: {
+        layout: 'centered',
+    },
+    argTypes: {},
+} satisfies Meta<typeof SentForm>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 // Common options for better DX
 const commonOptions = {
-  countries: [
-    { value: "us", label: "United States" },
-    { value: "ca", label: "Canada" },
-    { value: "uk", label: "United Kingdom" },
-    { value: "au", label: "Australia" },
-    { value: "de", label: "Germany" },
-    { value: "fr", label: "France" },
-    { value: "other", label: "Other" },
-  ],
-  // allegies list
-  allergies: [
-    { value: "peanuts", label: "Peanuts" },
-    { value: "eggs", label: "Eggs" },
-    { value: "milk", label: "Milk" },
-    { value: "soy", label: "Soy" },
-    { value: "wheat", label: "Wheat" },
-    { value: "fish", label: "Fish" },
-    { value: "shellfish", label: "Shellfish" },
-    { value: "tree_nuts", label: "Tree Nuts" },
-    { value: "other", label: "Other" },
-  ],
-  interests: [
-    { value: "tech", label: "Technology" },
-    { value: "health", label: "Healthcare" },
-    { value: "finance", label: "Finance" },
-    { value: "education", label: "Education" },
-    { value: "sports", label: "Sports" },
-    { value: "travel", label: "Travel" },
-  ],
-  conditions: [
-    { value: "conditions", label: "Conditions" },
-    { value: "medications", label: "Medications" },
-    { value: "other", label: "Other" },
-  ],
-  contactMethods: [
-    { id: "email", label: "Email", value: "email" },
-    { id: "phone", label: "Phone call", value: "phone" },
-    { id: "sms", label: "Text message", value: "sms" },
-    { id: "mail", label: "Postal mail", value: "mail" },
-  ],
-  
-  planTypes: [
-    { id: "basic", label: "Basic Plan", value: "basic" },
-    { id: "premium", label: "Premium Plan", value: "premium" },
-    { id: "enterprise", label: "Enterprise Plan", value: "enterprise" },
-    { id: "custom", label: "Custom Solution", value: "custom" },
-  ],
-};
+    countries: [
+        { value: 'us', label: 'United States' },
+        { value: 'ca', label: 'Canada' },
+        { value: 'uk', label: 'United Kingdom' },
+        { value: 'au', label: 'Australia' },
+        { value: 'de', label: 'Germany' },
+        { value: 'fr', label: 'France' },
+        { value: 'other', label: 'Other' },
+    ],
+    // allegies list
+    allergies: [
+        { value: 'peanuts', label: 'Peanuts' },
+        { value: 'eggs', label: 'Eggs' },
+        { value: 'milk', label: 'Milk' },
+        { value: 'soy', label: 'Soy' },
+        { value: 'wheat', label: 'Wheat' },
+        { value: 'fish', label: 'Fish' },
+        { value: 'shellfish', label: 'Shellfish' },
+        { value: 'tree_nuts', label: 'Tree Nuts' },
+        { value: 'other', label: 'Other' },
+    ],
+    interests: [
+        { value: 'tech', label: 'Technology' },
+        { value: 'health', label: 'Healthcare' },
+        { value: 'finance', label: 'Finance' },
+        { value: 'education', label: 'Education' },
+        { value: 'sports', label: 'Sports' },
+        { value: 'travel', label: 'Travel' },
+    ],
+    conditions: [
+        { value: 'conditions', label: 'Conditions' },
+        { value: 'medications', label: 'Medications' },
+        { value: 'other', label: 'Other' },
+    ],
+    contactMethods: [
+        { id: 'email', label: 'Email', value: 'email' },
+        { id: 'phone', label: 'Phone call', value: 'phone' },
+        { id: 'sms', label: 'Text message', value: 'sms' },
+        { id: 'mail', label: 'Postal mail', value: 'mail' },
+    ],
+
+    planTypes: [
+        { id: 'basic', label: 'Basic Plan', value: 'basic' },
+        { id: 'premium', label: 'Premium Plan', value: 'premium' },
+        { id: 'enterprise', label: 'Enterprise Plan', value: 'enterprise' },
+        { id: 'custom', label: 'Custom Solution', value: 'custom' },
+    ],
+}
 
 export const Default: Story = {
-  args: {
-    steps: [
-      {
-        type: "intro",
-        id: "welcome",
-      },
-      {
-        type: "height",
-        id: "height",
-      },
-      {
-        type: "insurance",
-        id: "insurance",
-      },
-      {
-        type: "time",
-        id: "time",
-      },
-       {
-        type: "address",
-        id: "address",
-      },
-     
-      {
-        type: "date",
-        id: "date",
-      },
-      {
-        type: "dateTime",
-        id: "dateTime",
-      },
-      {
-        type: "select",
-        id: "allergies",
-        title: "Allergies",
-        options: commonOptions.allergies,
-        placeholder: "Search conditions",
-      },
-      {
-        type: "select",
-        id: "conditions",
-        title: "Conditions",
-        options: commonOptions.conditions,
-        placeholder: "Search conditions",
-      },
-      {
-        type: "ranking",
-        id: "ranking",
-        items: [
-          { id: "1", text: "Item 1" },
-          { id: "2", text: "Item 2" },
-          { id: "3", text: "Item 3" },
+    args: {
+        steps: [
+            {
+                type: 'intro',
+                id: 'welcome',
+            },
+            {
+                type: 'height',
+                id: 'height',
+            },
+            {
+                type: 'insurance',
+                id: 'insurance',
+            },
+            {
+                type: 'time',
+                id: 'time',
+            },
+            {
+                type: 'address',
+                id: 'address',
+            },
+
+            {
+                type: 'date',
+                id: 'date',
+            },
+            {
+                type: 'dateTime',
+                id: 'dateTime',
+            },
+            {
+                type: 'select',
+                id: 'allergies',
+                title: 'Allergies',
+                options: commonOptions.allergies,
+                placeholder: 'Search conditions',
+            },
+            {
+                type: 'select',
+                id: 'conditions',
+                title: 'Conditions',
+                options: commonOptions.conditions,
+                placeholder: 'Search conditions',
+            },
+            {
+                type: 'ranking',
+                id: 'ranking',
+                items: [
+                    { id: '1', text: 'Item 1' },
+                    { id: '2', text: 'Item 2' },
+                    { id: '3', text: 'Item 3' },
+                ],
+            },
+            {
+                type: 'rating',
+                id: 'rating',
+                min: 0,
+                max: 12,
+                step: 1,
+                shiftStep: 1,
+                marks: true,
+            },
+            {
+                type: 'signatureConsent',
+                id: 'signatureConsent',
+            },
+            {
+                type: 'fileUpload',
+                id: 'fileUpload',
+            },
+            {
+                type: 'description',
+                id: 'description',
+                description:
+                    "Great, we have a variety of plans to fit your needs. Let's start with some questions about you, after that we'll find the plan that's a perfect fit!",
+            },
+            {
+                type: 'select',
+                id: 'location',
+                title: 'Where are you located?',
+                options: commonOptions.countries,
+                placeholder: 'Choose your country',
+                helperText: 'This helps us provide location-specific services',
+            },
+
+            {
+                type: 'multiSelect',
+                id: 'interests',
+                title: 'What are your interests?',
+                options: commonOptions.interests,
+                placeholder: 'Select multiple interests',
+                helperText: 'Choose all that apply to help personalize your experience',
+            },
+            {
+                type: 'choice',
+                id: 'plan_type',
+                label: 'What type of plan are you looking for?',
+                options: commonOptions.planTypes,
+                helperText: 'Choose the plan that best fits your needs',
+            },
+            {
+                type: 'questionsGroup',
+                title: 'What type of plan are you looking for?',
+                description: 'Choose the plan that best fits your needs',
+                questions: [
+                    {
+                        label: 'What is your name?',
+                        hint: 'Choose the plan that best fits your needs',
+                        fieldKey: 'name',
+                        hiddenLabel: false,
+                    },
+                    {
+                        label: 'What type of plan are you looking for?',
+                        hint: 'Choose the plan that best fits your needs',
+                        fieldKey: 'plan_type',
+                        hiddenLabel: false,
+                    },
+                ],
+                id: 'questionsGroup',
+            },
+            {
+                type: 'text',
+                id: 'name',
+                title: 'What is your name?',
+                helperText: "We'll use this to contact you",
+            },
+            {
+                type: 'email',
+                title: 'What is your email?',
+                placeholder: 'Enter your email',
+                helperText: "We'll use this to contact you",
+                id: 'email',
+            },
+            {
+                type: 'phone',
+                id: 'phone',
+                title: 'What is your phone number?',
+                helperText: "We'll use this to contact you",
+            },
+            {
+                type: 'number',
+                id: 'age',
+                title: 'What is your age?',
+                helperText: "We'll use this to contact you",
+            },
+            {
+                type: 'longText',
+                id: 'description',
+                title: 'What would you like to be called?',
+                helperText:
+                    "The location is where you're treatment supplies will be shipped, if prescibed",
+            },
+            {
+                type: 'checkbox',
+                id: 'preferences',
+                title: 'What are your preferences?',
+                options: [
+                    { label: 'Receive newsletter', value: 'newsletter' },
+                    { label: 'Product updates', value: 'updates' },
+                    { label: 'Marketing emails', value: 'marketing' },
+                ],
+                helperText: 'Select all that apply',
+            },
+            {
+                type: 'date',
+                id: 'date',
+            },
         ],
-      },
-      {
-        type: "rating",
-        id: "rating",
-        min: 0,
-        max: 12,
-        step: 1,
-        shiftStep: 1,
-        marks: true,
-      },
-      {
-        type: "signatureConsent",
-        id: "signatureConsent",
-      },
-      {
-        type: "fileUpload",
-        id: "fileUpload",
-      },
-      {
-        type: "description",
-        id: "description",
-        description: "Great, we have a variety of plans to fit your needs. Let's start with some questions about you, after that we'll find the plan that's a perfect fit!",
-      },
-      {
-        type: "select",
-        id: "location",
-        title: "Where are you located?",
-        options: commonOptions.countries,
-        placeholder: "Choose your country",
-        helperText: "This helps us provide location-specific services",
-      },
-     
-      {
-        type: "multiSelect",
-        id: "interests",
-        title: "What are your interests?",
-        options: commonOptions.interests,
-        placeholder: "Select multiple interests",
-        helperText: "Choose all that apply to help personalize your experience",
-      },
-      {
-        type: "choice",
-        id: "plan_type",
-        label: "What type of plan are you looking for?",
-        options: commonOptions.planTypes,
-        helperText: "Choose the plan that best fits your needs",
-      },
-      {
-        type: "questionsGroup",
-        title: "What type of plan are you looking for?",
-        description: "Choose the plan that best fits your needs",
-        questions: [
-          {
-            label: "What is your name?",
-            hint: "Choose the plan that best fits your needs",
-            fieldKey: "name",
-            hiddenLabel: false,
-          },
-          {
-            label: "What type of plan are you looking for?",
-            hint: "Choose the plan that best fits your needs",
-            fieldKey: "plan_type",
-            hiddenLabel: false,
-          },
-        ],
-        id: "questionsGroup",
-      },
-      {
-        type: "text",
-        id: "name",
-        title: "What is your name?",
-        helperText: "We'll use this to contact you",
-      },
-      {
-        type: "email",
-        title: "What is your email?",
-        placeholder: "Enter your email",
-        helperText: "We'll use this to contact you",
-        id: "email",
-      },
-      {
-        type: "phone",
-        id: "phone",
-        title: "What is your phone number?",
-        helperText: "We'll use this to contact you",
-      },
-      {
-        type: "number",
-        id: "age",
-        title: "What is your age?",
-        helperText: "We'll use this to contact you",
-      },
-      {
-        type: "longText",
-        id: "description",
-        title: "What would you like to be called?",
-        helperText: "The location is where you're treatment supplies will be shipped, if prescibed",
-      },
-      {
-        type: "checkbox",
-        id: "preferences",
-        title: "What are your preferences?",
-        options: [
-          { label: "Receive newsletter", value: "newsletter" },
-          { label: "Product updates", value: "updates" },
-          { label: "Marketing emails", value: "marketing" },
-        ],
-        helperText: "Select all that apply",
-      },
-      {
-        type: "date",
-        id: "date",
-      },
-    
-    ],
-    onFormDataChange: (formData) => {
-      console.log("Form data updated:", formData);
+        onFormDataChange: formData => {
+            console.log('Form data updated:', formData)
+        },
+        onComplete: formData => {
+            console.log('Form completed with data:', formData)
+        },
     },
-    onComplete: (formData) => {
-      console.log("Form completed with data:", formData);
-    },
-  },
-};
+}

@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import FileUpload from './file';
-import type { UploadStatus, FileItem, FileUploadProps } from './file';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { FileItem, FileUploadProps, UploadStatus } from './file'
+import FileUpload from './file'
 
 // Story args extends component props with 'status'
-type StoryArgs = FileUploadProps & { status: UploadStatus };
+type StoryArgs = FileUploadProps & { status: UploadStatus }
 
 // Meta typed with StoryArgs, so argTypes can include 'status'
 const meta = {
@@ -12,7 +12,7 @@ const meta = {
     parameters: {
         controls: {
             exclude: ['files'],
-        }
+        },
     },
     argTypes: {
         status: {
@@ -22,12 +22,12 @@ const meta = {
         onSelectFiles: { action: 'onSelectFiles' },
         onDelete: { action: 'onDelete' },
     },
-} satisfies Meta<StoryArgs>;
+} satisfies Meta<StoryArgs>
 
-export default meta;
+export default meta
 
 const createFilesFromStatus = (status: UploadStatus): FileItem[] => {
-    if (status === 'pre-upload') return [];
+    if (status === 'pre-upload') return []
 
     return [
         {
@@ -35,15 +35,15 @@ const createFilesFromStatus = (status: UploadStatus): FileItem[] => {
                 status === 'uploading'
                     ? 'document_file_name.pdf'
                     : status === 'complete'
-                        ? 'document_file_name.pdf'
-                        : 'Upload failed.',
+                      ? 'document_file_name.pdf'
+                      : 'Upload failed.',
             size: 102000,
             status,
             progress: status === 'uploading' ? 42 : 100,
             errorMessage: status === 'error' ? 'File too large' : undefined,
         },
-    ];
-};
+    ]
+}
 
 export const File: StoryObj<StoryArgs> = {
     args: {
@@ -53,15 +53,9 @@ export const File: StoryObj<StoryArgs> = {
         errorMsg: 'Unsuported file.',
     },
     render: ({ status, onSelectFiles, onDelete, ...rest }) => {
-        const files = createFilesFromStatus(status);
+        const files = createFilesFromStatus(status)
         return (
-            <FileUpload
-                {...rest}
-                files={files}
-                onSelectFiles={onSelectFiles}
-                onDelete={onDelete}
-
-            />
-        );
+            <FileUpload {...rest} files={files} onSelectFiles={onSelectFiles} onDelete={onDelete} />
+        )
     },
-};
+}

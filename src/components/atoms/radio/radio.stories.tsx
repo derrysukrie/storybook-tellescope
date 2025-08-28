@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Radio } from './radio';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Radio } from './radio'
 
 const meta = {
     title: 'ATOMS/FormInputs/Radio',
     component: Radio,
     parameters: {
         controls: {
-            exclude: ["color"],
+            exclude: ['color'],
         },
     },
     argTypes: {
@@ -15,14 +15,14 @@ const meta = {
             options: ['large', 'medium', 'small'],
         },
     },
-} satisfies Meta<typeof Radio>;
+} satisfies Meta<typeof Radio>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-        size: "medium",
-        color: "default",
+        size: 'medium',
+        color: 'default',
     },
-};
+}

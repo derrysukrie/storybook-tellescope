@@ -1,56 +1,59 @@
-import { FormControl, FormControlLabel, Switch as MuiSwitch } from "@mui/material";
-import type { SwitchProps as MuiSwitchProps, FormControlLabelProps as MuiFormControlLabelProps } from "@mui/material";
-import { type FC, type ReactNode, useState } from "react";
+import type {
+    FormControlLabelProps as MuiFormControlLabelProps,
+    SwitchProps as MuiSwitchProps,
+} from '@mui/material'
+import { FormControl, FormControlLabel, Switch as MuiSwitch } from '@mui/material'
+import { type FC, type ReactNode, useState } from 'react'
 
-interface SwitchToggleProps extends Omit<MuiSwitchProps, "color"> {
-    color?: "default" | "primary" | "secondary" | "info";
-    label?: ReactNode;
-    value?: string;
-    checked?: boolean;
-    onChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
-    name?: string;
-    formlabelProps?: Omit<MuiFormControlLabelProps, "label" | "control">;
+interface SwitchToggleProps extends Omit<MuiSwitchProps, 'color'> {
+    color?: 'default' | 'primary' | 'secondary' | 'info'
+    label?: ReactNode
+    value?: string
+    checked?: boolean
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void
+    name?: string
+    formlabelProps?: Omit<MuiFormControlLabelProps, 'label' | 'control'>
 }
 
-const SwitchToggle: FC<SwitchToggleProps> = ({ 
-    formlabelProps, 
-    label, 
+const SwitchToggle: FC<SwitchToggleProps> = ({
+    formlabelProps,
+    label,
     value,
     checked: externalChecked,
     onChange,
     name,
-    ...props 
+    ...props
 }) => {
-    const { sx, ...rest } = formlabelProps || {};
-    
+    const { sx, ...rest } = formlabelProps || {}
+
     // Determine if this is a controlled component
-    const isControlled = typeof externalChecked !== 'undefined';
-    
+    const isControlled = typeof externalChecked !== 'undefined'
+
     // Internal state for uncontrolled mode
-    const [internalChecked, setInternalChecked] = useState(props.defaultChecked || false);
-    
+    const [internalChecked, setInternalChecked] = useState(props.defaultChecked || false)
+
     // Use the appropriate checked value
-    const checked = isControlled ? externalChecked : internalChecked;
-    
+    const checked = isControlled ? externalChecked : internalChecked
+
     // Handle change events
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         // For uncontrolled mode, update internal state
         if (!isControlled) {
-            setInternalChecked(e.target.checked);
+            setInternalChecked(e.target.checked)
         }
-        
+
         // Call the external onChange handler if provided
         if (onChange) {
-            onChange(e, e.target.checked);
+            onChange(e, e.target.checked)
         }
-    };
-    
+    }
+
     return (
         <FormControl>
             <FormControlLabel
                 control={
                     <MuiSwitch
-                        color={props.color || "info"}
+                        color={props.color || 'info'}
                         value={value}
                         name={name}
                         disableRipple
@@ -65,9 +68,9 @@ const SwitchToggle: FC<SwitchToggleProps> = ({
                 labelPlacement="start"
                 sx={{
                     m: 0,
-                    borderRadius: "6px",
-                    transition: "background 0.3s ease-in-out",
-                    ...sx
+                    borderRadius: '6px',
+                    transition: 'background 0.3s ease-in-out',
+                    ...sx,
                 }}
                 {...rest}
             />

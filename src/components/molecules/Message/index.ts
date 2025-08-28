@@ -1,15 +1,15 @@
-export * from "./container";
-export * from "./MessageItem";
-export {
-  type IMessage,
-  type MessageType,
-  type ChatInterface,
-  type MessageConfig,
-  type MessageCallbacks,
-  type MessageError,
-  type MessageLoadingState,
-  type MessageProps,
-  type HeaderFormData,
-  type MessageState,
-  type MessageActions,
-} from "./types";
+export * from './container'
+export * from './MessageItem'
+export type {
+    ChatInterface,
+    HeaderFormData,
+    IMessage,
+    MessageActions,
+    MessageCallbacks,
+    MessageConfig,
+    MessageError,
+    MessageLoadingState,
+    MessageProps,
+    MessageState,
+    MessageType,
+} from './types'

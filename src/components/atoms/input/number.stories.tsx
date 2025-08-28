@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Input } from './input';
-import { useState, type ChangeEvent } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { type ChangeEvent, useState } from 'react'
+import { Input } from './input'
 
 const meta = {
     title: 'ATOMS/FormInputs/Input',
@@ -12,43 +12,42 @@ const meta = {
     },
     argTypes: {
         appearance: {
-            options: ['standard', 'filled', 'outlined', "distinct"],
+            options: ['standard', 'filled', 'outlined', 'distinct'],
             control: { type: 'select' },
         },
         size: {
             control: { type: 'select' },
             options: ['medium', 'small'],
         },
-
     },
-} satisfies Meta<typeof Input>;
+} satisfies Meta<typeof Input>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Number: Story = {
+export const NumberInput: Story = {
     args: {
         appearance: 'standard',
-        size: "medium",
+        size: 'medium',
         label: 'Label',
     },
-    render: (args) => {
-        const [value, setValue] = useState('');
-        const [error, setError] = useState(false);
-        const [helperText, setHelperText] = useState('');
+    render: args => {
+        const [value, setValue] = useState('')
+        const [error, setError] = useState(false)
+        const [helperText, setHelperText] = useState('')
 
         const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-            const val = e.target.value;
-            setValue(val);
+            const val = e.target.value
+            setValue(val)
 
             if (!/^[0-9\s]*$/.test(val)) {
-                setError(true);
-                setHelperText('Only Number is allowed');
+                setError(true)
+                setHelperText('Only Number is allowed')
             } else {
-                setError(false);
-                setHelperText('');
+                setError(false)
+                setHelperText('')
             }
-        };
+        }
         return (
             <Input
                 {...args}
@@ -59,4 +58,4 @@ export const Number: Story = {
             />
         )
     },
-};
+}

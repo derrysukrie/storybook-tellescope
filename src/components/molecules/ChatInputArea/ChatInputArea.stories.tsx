@@ -1,13 +1,13 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { ChatInputArea } from "./ChatInputArea";
+import type { Meta, StoryObj } from '@storybook/react'
+import { ChatInputArea } from './ChatInputArea'
 
 const meta: Meta<typeof ChatInputArea> = {
-  title: "Molecules/Chat Input Area",
-  component: ChatInputArea,
-};
+    title: 'Molecules/Chat Input Area',
+    component: ChatInputArea,
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof ChatInputArea>;
+type Story = StoryObj<typeof ChatInputArea>
 
-export const Default: Story = {};
+export const Default: Story = {}

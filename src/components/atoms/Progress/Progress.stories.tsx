@@ -1,39 +1,39 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { styled } from "@mui/material";
-import LinearProgress from "./Progress";
+import { styled } from '@mui/material'
+import type { Meta, StoryObj } from '@storybook/react'
+import LinearProgress from './Progress'
 
 const meta: Meta<typeof LinearProgress> = {
-  title: "Atoms/ProgressBar",
-  component: LinearProgress,
-  tags: ["autodocs"],
-  args: {
-    color: "primary",
-    variant: "determinate",
-    value: 20,
-    valueBuffer: 0,
-  },
-  argTypes: {
-    color: {
-      control: "select",
-      options: ["primary", "secondary", "inherit"],
+    title: 'Atoms/ProgressBar',
+    component: LinearProgress,
+    tags: ['autodocs'],
+    args: {
+        color: 'primary',
+        variant: 'determinate',
+        value: 20,
+        valueBuffer: 0,
     },
-    variant: {
-      control: "select",
-      options: ["determinate", "indeterminate", "buffer"],
+    argTypes: {
+        color: {
+            control: 'select',
+            options: ['primary', 'secondary', 'inherit'],
+        },
+        variant: {
+            control: 'select',
+            options: ['determinate', 'indeterminate', 'buffer'],
+        },
+        value: {
+            control: { type: 'number', min: 0 },
+        },
+        valueBuffer: {
+            control: { type: 'number', min: 0 },
+            if: { arg: 'variant', eq: 'buffer' },
+        },
     },
-    value: {
-      control: { type: "number", min: 0 },
-    },
-    valueBuffer: {
-      control: { type: "number", min: 0 },
-      if: { arg: "variant", eq: "buffer" },
-    },
-  },
-};
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof LinearProgress>;
+type Story = StoryObj<typeof LinearProgress>
 
 // export const Progress: Story = {
 //   args: {
@@ -100,38 +100,38 @@ type Story = StoryObj<typeof LinearProgress>;
 // };
 
 export const SentForms: Story = {
-  argTypes: {
-    color: {
-      table: {
-        disable: true,
-      },
+    argTypes: {
+        color: {
+            table: {
+                disable: true,
+            },
+        },
+        valueBuffer: {
+            table: {
+                disable: true,
+            },
+        },
+        variant: {
+            control: 'radio',
+            options: ['determinate', 'indeterminate'],
+        },
     },
-    valueBuffer: {
-      table: {
-        disable: true,
-      },
-    },
-    variant: {
-      control: "radio",
-      options: ["determinate", "indeterminate"],
-    },
-  },
-  render: (args) => {
-    const BorderLinearProgress = styled(LinearProgress)(() => ({
-      height: 16,
-      borderRadius: 20,
-      background: "#b7bed3",
-      "& .MuiLinearProgress-bar": {
-        background: "#798ed0",
-      },
-    }));
+    render: args => {
+        const BorderLinearProgress = styled(LinearProgress)(() => ({
+            height: 16,
+            borderRadius: 20,
+            background: '#b7bed3',
+            '& .MuiLinearProgress-bar': {
+                background: '#798ed0',
+            },
+        }))
 
-    return (
-      <BorderLinearProgress
-        variant={args.variant}
-        value={args.value}
-        aria-label="progress-border"
-      />
-    );
-  },
-};
+        return (
+            <BorderLinearProgress
+                variant={args.variant}
+                value={args.value}
+                aria-label="progress-border"
+            />
+        )
+    },
+}

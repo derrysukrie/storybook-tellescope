@@ -1,22 +1,12 @@
-import { List as MuiList, type ListProps } from "@mui/material";
-import React from "react";
+import { type ListProps, List as MuiList } from '@mui/material'
+import type React from 'react'
 
-interface CustomListProps extends Omit<ListProps, "density"> {
-  density?: "dense" | "normal";
+interface CustomListProps extends Omit<ListProps, 'density'> {
+    density?: 'dense' | 'normal'
 }
 
-const List: React.FC<CustomListProps> = ({
-  sx,
-  density = "normal",
-  ...props
-}) => {
-  return (
-    <MuiList
-      dense={density == "dense" ? true : false}
-      sx={{ ...sx }}
-      {...props}
-    />
-  );
-};
+const List: React.FC<CustomListProps> = ({ sx, density = 'normal', ...props }) => {
+    return <MuiList dense={density === 'dense'} sx={{ ...sx }} {...props} />
+}
 
-export default List;
+export default List

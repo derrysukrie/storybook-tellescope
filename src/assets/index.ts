@@ -1,1 +1,1 @@
-export { default as CloudDownload } from "./cloud-download.svg";
+export { default as CloudDownload } from './cloud-download.svg'

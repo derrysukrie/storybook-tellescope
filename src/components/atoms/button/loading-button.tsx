@@ -1,16 +1,16 @@
-import { CircularProgress, Button as MuiButton } from '@mui/material';
-import type { ButtonProps as MuiButtonProps } from '@mui/material/Button';
-import type { FC } from 'react';
+import { CircularProgress, Button as MuiButton } from '@mui/material'
+import type { ButtonProps as MuiButtonProps } from '@mui/material/Button'
+import type { FC } from 'react'
 
 export interface LoadingButtonProps extends Omit<MuiButtonProps, 'color' | 'variant' | 'size'> {
-    appearance?: "contained" | "outlined" | "text"
-    size?: "large" | "medium" | "small";
-    loading?: boolean;
-    color?: "primary" | "secondary" | "info";
-    loadingPosition?: 'start' | 'end' | 'center';
-    loadingIndicator?: React.ReactNode | string;
-    children?: React.ReactNode;
-    onClick?: () => void;
+    appearance?: 'contained' | 'outlined' | 'text'
+    size?: 'large' | 'medium' | 'small'
+    loading?: boolean
+    color?: 'primary' | 'secondary' | 'info'
+    loadingPosition?: 'start' | 'end' | 'center'
+    loadingIndicator?: React.ReactNode | string
+    children?: React.ReactNode
+    onClick?: () => void
 }
 
 export const LoadingButton: FC<LoadingButtonProps> = ({
@@ -18,7 +18,7 @@ export const LoadingButton: FC<LoadingButtonProps> = ({
     loadingPosition = 'start',
     loadingIndicator,
     children,
-    appearance = "contained",
+    appearance = 'contained',
     ...rest
 }) => {
     return (
@@ -39,12 +39,16 @@ export const LoadingButton: FC<LoadingButtonProps> = ({
         >
             {loading && loadingPosition === 'center' ? (
                 <>
-                    <CircularProgress color="inherit" size={16} sx={{ mr: loadingIndicator ? "8px" : null }} />
+                    <CircularProgress
+                        color="inherit"
+                        size={16}
+                        sx={{ mr: loadingIndicator ? '8px' : null }}
+                    />
                     {loadingIndicator}
                 </>
             ) : (
                 children
             )}
         </MuiButton>
-    );
-};
+    )
+}

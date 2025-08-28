@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import ChipArray from './chip-array';
-import { Stack } from '@mui/material';
-import InboxIcon from '@mui/icons-material/Inbox';
+import InboxIcon from '@mui/icons-material/Inbox'
+import { Stack } from '@mui/material'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import ChipArray from './chip-array'
 
 const meta = {
     title: 'ATOMS/FormInputs/ChipArray',
@@ -11,14 +11,14 @@ const meta = {
             include: [''],
         },
     },
-} satisfies Meta<typeof ChipArray>;
+} satisfies Meta<typeof ChipArray>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-        label: "Label",
+        label: 'Label',
         data: [
             { key: '1', label: 'Chip' },
             { key: '2', label: 'Chip' },
@@ -29,8 +29,7 @@ export const Default: Story = {
         ],
         withDelete: true,
     },
-};
-
+}
 
 export const SansLabel: Story = {
     args: {
@@ -42,11 +41,15 @@ export const SansLabel: Story = {
         ],
         withDelete: true,
     },
-};
+}
 
 export const Filter: Story = {
     args: {
-        label: <Stack sx={{ flexDirection: "row", gap: 1 }}><InboxIcon /> Channel</Stack>,
+        label: (
+            <Stack sx={{ flexDirection: 'row', gap: 1 }}>
+                <InboxIcon /> Channel
+            </Stack>
+        ),
         data: [
             { key: '1', label: 'Chat' },
             { key: '2', label: 'SMS' },
@@ -58,8 +61,8 @@ export const Filter: Story = {
         selectable: true,
         ListProps: {
             sx: {
-                maxWidth: "500px"
-            }
-        }
+                maxWidth: '500px',
+            },
+        },
     },
-};
+}

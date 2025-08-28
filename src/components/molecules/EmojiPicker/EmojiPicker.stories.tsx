@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
-import { EmojiPicker } from './EmojiPicker';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { fn } from 'storybook/test'
+import { EmojiPicker } from './EmojiPicker'
 
 const meta = {
     title: 'MOLECULES/EmojiPicker',
@@ -12,19 +12,19 @@ const meta = {
     argTypes: {
         onEmojiSelect: {
             description: 'The function to call when an emoji is selected',
-            action: 'emoji selected'
+            action: 'emoji selected',
         },
     },
     args: {
         onEmojiSelect: fn(),
     },
-} satisfies Meta<typeof EmojiPicker>;
+} satisfies Meta<typeof EmojiPicker>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
         onEmojiSelect: fn(),
     },
-};
+}

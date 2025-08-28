@@ -1,15 +1,9 @@
-import { FormControlLabel as MuiFormControlLabel, type FormControlLabelProps } from "@mui/material";
+import { type FormControlLabelProps, FormControlLabel as MuiFormControlLabel } from '@mui/material'
 
 export const FormControlLabel = ({
-  control,
-  label,
-  labelPlacement = "end",
+    control,
+    label,
+    labelPlacement = 'end',
 }: FormControlLabelProps) => {
-  return (
-    <MuiFormControlLabel
-      control={control}
-      label={label}
-      labelPlacement={labelPlacement}
-    />
-  );
-};
+    return <MuiFormControlLabel control={control} label={label} labelPlacement={labelPlacement} />
+}

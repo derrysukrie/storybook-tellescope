@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { type ComponentProps } from 'react';
-import Reset from './reset';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { ComponentProps } from 'react'
+import Reset from './reset'
 
 type StoryProps = ComponentProps<typeof Reset>
 
@@ -9,21 +9,16 @@ const meta = {
     component: Reset,
     parameters: {
         controls: {
-            exclude: ["small", "children", "value", "onChange"],
+            exclude: ['small', 'children', 'value', 'onChange'],
         },
     },
-} satisfies Meta<StoryProps>;
+} satisfies Meta<StoryProps>
 
-export default meta;
-type Story = StoryObj<StoryProps>;
+export default meta
+type Story = StoryObj<StoryProps>
 
 export const Default: Story = {
     render: () => {
-
-        return (
-            <Reset>
-
-            </Reset>
-        )
-    }
+        return <Reset></Reset>
+    },
 }

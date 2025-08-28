@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import Table from './table';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import Table from './table'
 
 const meta = {
     title: 'ORGANISMS/Table',
@@ -7,25 +7,25 @@ const meta = {
     parameters: {
         controls: {
             include: ['color'],
-        }
+        },
     },
     argTypes: {
         color: {
-            options: ["standard", "transitional",],
-            control: { type: "select" }
-        }
+            options: ['standard', 'transitional'],
+            control: { type: 'select' },
+        },
     },
     args: {
-        color: "standard",
+        color: 'standard',
         expanded: true,
-    }
-} satisfies Meta<typeof Table>;
+    },
+} satisfies Meta<typeof Table>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const ContactsList: Story = {
-    render: (args) => (
+    render: args => (
         <>
             <style>
                 {`
@@ -36,5 +36,5 @@ export const ContactsList: Story = {
             </style>
             <Table {...args} expanded={false} />
         </>
-    )
-};
+    ),
+}

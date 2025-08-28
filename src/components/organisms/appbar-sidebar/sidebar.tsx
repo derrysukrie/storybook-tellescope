@@ -1,183 +1,185 @@
-import { useState } from "react";
-import { List, ListItem, ListItemIcon, ListItemText, Stack } from "@mui/material";
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import EmailIcon from '@mui/icons-material/Email';
-import GroupIcon from '@mui/icons-material/Group';
-import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import ForumIcon from '@mui/icons-material/Forum';
-import FolderIcon from '@mui/icons-material/Folder';
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import StorageIcon from '@mui/icons-material/Storage';
-import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
-import ShareIcon from '@mui/icons-material/Share';
-import LocalMallIcon from '@mui/icons-material/LocalMall';
-import TableChartIcon from '@mui/icons-material/TableChart';
-import { useAppbarSidebarContext } from "./context";
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import AssignmentIcon from '@mui/icons-material/Assignment'
+import BarChartIcon from '@mui/icons-material/BarChart'
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble'
+import CompareArrowsIcon from '@mui/icons-material/CompareArrows'
+import DashboardIcon from '@mui/icons-material/Dashboard'
+import EmailIcon from '@mui/icons-material/Email'
+import FolderIcon from '@mui/icons-material/Folder'
+import ForumIcon from '@mui/icons-material/Forum'
+import GroupIcon from '@mui/icons-material/Group'
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile'
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
+import LocalMallIcon from '@mui/icons-material/LocalMall'
+import LocalShippingIcon from '@mui/icons-material/LocalShipping'
+import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone'
+import ShareIcon from '@mui/icons-material/Share'
+import StorageIcon from '@mui/icons-material/Storage'
+import TableChartIcon from '@mui/icons-material/TableChart'
+import TrendingUpIcon from '@mui/icons-material/TrendingUp'
+import { List, ListItem, ListItemIcon, ListItemText, Stack } from '@mui/material'
+import { useState } from 'react'
+import { useAppbarSidebarContext } from './context'
 
-
-const COLLAPSED_WIDTH = 48;
-const EXPANDED_WIDTH = 205;
+const COLLAPSED_WIDTH = 48
+const EXPANDED_WIDTH = 205
 
 const sidebarItems = [
     {
-        text: "Dashboard",
+        text: 'Dashboard',
         icon: <DashboardIcon />,
     },
     {
-        text: "Analytics",
+        text: 'Analytics',
         icon: <BarChartIcon />,
     },
     {
-        text: "Calendar",
+        text: 'Calendar',
         icon: <CalendarTodayIcon />,
     },
     {
-        text: "Email",
+        text: 'Email',
         icon: <EmailIcon />,
     },
     {
-        text: "Contacts",
+        text: 'Contacts',
         icon: <GroupIcon />,
     },
     {
-        text: "Orders",
+        text: 'Orders',
         icon: <CompareArrowsIcon />,
     },
     {
-        text: "Shipping",
+        text: 'Shipping',
         icon: <LocalShippingIcon />,
     },
     {
-        text: "Delivery",
+        text: 'Delivery',
         icon: <AccessTimeIcon />,
     },
     {
-        text: "Chat",
+        text: 'Chat',
         icon: <ChatBubbleIcon />,
     },
     {
-        text: "Tasks",
+        text: 'Tasks',
         icon: <AssignmentIcon />,
     },
     {
-        text: "Reports",
+        text: 'Reports',
         icon: <TrendingUpIcon />,
     },
     {
-        text: "Forum",
+        text: 'Forum',
         icon: <ForumIcon />,
     },
     {
-        text: "Files",
+        text: 'Files',
         icon: <FolderIcon />,
     },
     {
-        text: "Documents",
+        text: 'Documents',
         icon: <InsertDriveFileIcon />,
     },
     {
-        text: "Storage",
+        text: 'Storage',
         icon: <StorageIcon />,
     },
     {
-        text: "Mobile App",
+        text: 'Mobile App',
         icon: <PhoneIphoneIcon />,
     },
     {
-        text: "Share",
+        text: 'Share',
         icon: <ShareIcon />,
     },
     {
-        text: "Shop",
+        text: 'Shop',
         icon: <LocalMallIcon />,
     },
     {
-        text: "Tables",
+        text: 'Tables',
         icon: <TableChartIcon />,
-    }
-];
+    },
+]
 
 const Sidebar = () => {
-    const { bgColor: contextBgColor, expanded: contextExpanded, setExpanded } = useAppbarSidebarContext()
-    const [collapsed, setCollapsed] = useState(!contextExpanded);
+    const {
+        bgColor: contextBgColor,
+        expanded: contextExpanded,
+        setExpanded,
+    } = useAppbarSidebarContext()
+    const [collapsed, setCollapsed] = useState(!contextExpanded)
 
     return (
         <Stack>
             <List
                 sx={{
                     width: collapsed ? COLLAPSED_WIDTH : EXPANDED_WIDTH,
-                    transition: "width 0.2s",
-                    height: "calc(100vh - 64px)",
-                    overflowY: "auto",
+                    transition: 'width 0.2s',
+                    height: 'calc(100vh - 64px)',
+                    overflowY: 'auto',
                     padding: 0,
-                    scrollbarWidth: "none",
-                    "&::-webkit-scrollbar": { display: "none" },
-                    msOverflowStyle: "none",
+                    scrollbarWidth: 'none',
+                    '&::-webkit-scrollbar': { display: 'none' },
+                    msOverflowStyle: 'none',
                 }}
             >
                 <ListItem
                     sx={{
-                        justifyContent: "center",
-                        userSelect: "none",
+                        justifyContent: 'center',
+                        userSelect: 'none',
                         height: 48,
-                        position: "sticky",
+                        position: 'sticky',
                         top: 0,
                         zIndex: 1,
                         background: contextBgColor,
                     }}
                     onClick={() => {
-                        setCollapsed((prev) => !prev);
-                        setExpanded(!contextExpanded);
+                        setCollapsed(prev => !prev)
+                        setExpanded(!contextExpanded)
                     }}
                 >
-                    <ListItemIcon sx={{
-                        justifyContent: "center",
-                    }}>
+                    <ListItemIcon
+                        sx={{
+                            justifyContent: 'center',
+                        }}
+                    >
                         <KeyboardArrowLeftIcon
                             sx={{
-                                transform: collapsed ? "rotate(180deg)" : "none",
-                                transition: "transform 0.2s"
+                                transform: collapsed ? 'rotate(180deg)' : 'none',
+                                transition: 'transform 0.2s',
                             }}
                         />
                     </ListItemIcon>
                 </ListItem>
                 {sidebarItems.map(({ text, icon }, index) => (
                     <ListItem
-                        key={index}
+                        key={index.toString()}
                         sx={{
                             height: 48,
                             padding: collapsed ? 1.5 : undefined,
-                            transition: "0.2s",
+                            transition: '0.2s',
                         }}
                     >
-                        <ListItemIcon sx={{
-                        }}>
-                            {icon}
-                        </ListItemIcon>
+                        <ListItemIcon sx={{}}>{icon}</ListItemIcon>
                         <ListItemText
                             primary={text}
                             sx={{
                                 opacity: 0.7,
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                transition: "0.2s",
-                                width: collapsed ? 0 : "auto",
+                                whiteSpace: 'nowrap',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                transition: '0.2s',
+                                width: collapsed ? 0 : 'auto',
                             }}
                         />
                     </ListItem>
                 ))}
             </List>
         </Stack>
-    );
-};
+    )
+}
 
-export default Sidebar;
+export default Sidebar

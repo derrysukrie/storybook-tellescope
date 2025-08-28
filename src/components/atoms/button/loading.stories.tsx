@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
-import { LoadingButton } from './loading-button';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { fn } from 'storybook/test'
+import { LoadingButton } from './loading-button'
 
 const meta = {
     title: 'ATOMS/Button',
@@ -32,13 +32,10 @@ const meta = {
         },
     },
     args: { onClick: fn() },
+} satisfies Meta<typeof LoadingButton>
 
-} satisfies Meta<typeof LoadingButton>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Loading: Story = {
     args: {
@@ -50,4 +47,4 @@ export const Loading: Story = {
         loadingPosition: 'start',
         loadingIndicator: 'loading...',
     },
-};
+}

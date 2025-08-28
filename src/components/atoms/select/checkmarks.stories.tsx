@@ -1,16 +1,16 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import Select from './select';
-import { useState } from 'react';
-import { MenuItem } from '@mui/material';
-import { CheckCircle } from '@mui/icons-material';
+import { CheckCircle } from '@mui/icons-material'
+import { MenuItem } from '@mui/material'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useState } from 'react'
+import Select from './select'
 
 const meta = {
     title: 'ATOMS/FormInputs/Select',
     component: Select,
     parameters: {
         controls: {
-            include: [""],
-        }
+            include: [''],
+        },
     },
     argTypes: {
         appearance: {
@@ -20,57 +20,57 @@ const meta = {
         multiple: { control: 'boolean' },
     },
     decorators: [
-        (Story) => (
+        Story => (
             <div style={{ width: 250 }}>
                 <Story />
             </div>
-        )
-    ]
-} satisfies Meta<typeof Select>;
+        ),
+    ],
+} satisfies Meta<typeof Select>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const CheckMarks: Story = {
     args: {
-        label: "Label",
-        appearance: "standard",
+        label: 'Label',
+        appearance: 'standard',
         multiple: true,
-        size: "medium",
+        size: 'medium',
         value: [],
-        onChange: () => { },
-        children: []
+        onChange: () => {},
+        children: [],
     },
-    render: (args) => {
-        const [value, setValue] = useState<string | string[]>([]);
+    render: args => {
+        const [value, setValue] = useState<string | string[]>([])
 
         return (
-            <Select
-                {...args}
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-            >
+            <Select {...args} value={value} onChange={e => setValue(e.target.value)}>
                 <MenuItem value="Oliver Hansen" key="Oliver Hansen">
                     Oliver Hansen
-                    {value.includes("Oliver Hansen") && <CheckCircle />}
-                </MenuItem>,
+                    {value.includes('Oliver Hansen') && <CheckCircle />}
+                </MenuItem>
+                ,
                 <MenuItem value="Van Henry" key="Van Henry">
                     Van Henry
-                    {value.includes("Van Henry") && <CheckCircle />}
-                </MenuItem>,
+                    {value.includes('Van Henry') && <CheckCircle />}
+                </MenuItem>
+                ,
                 <MenuItem value="April Tucker" key="April Tucker">
                     April Tucker
-                    {value.includes("April Tucker") && <CheckCircle />}
-                </MenuItem>,
+                    {value.includes('April Tucker') && <CheckCircle />}
+                </MenuItem>
+                ,
                 <MenuItem value="Ralph Hubbard" key="Ralph Hubbard">
                     Ralph Hubbard
-                    {value.includes("Ralph Hubbard") && <CheckCircle />}
-                </MenuItem>,
+                    {value.includes('Ralph Hubbard') && <CheckCircle />}
+                </MenuItem>
+                ,
                 <MenuItem value="Omar Alexander" key="Omar Alexander">
                     Omar Alexander
-                    {value.includes("Omar Alexander") && <CheckCircle />}
+                    {value.includes('Omar Alexander') && <CheckCircle />}
                 </MenuItem>
             </Select>
-        );
-    }
-};
+        )
+    },
+}

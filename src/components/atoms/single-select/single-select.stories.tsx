@@ -1,45 +1,45 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
-import SingleSelect from './single-select';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useState } from 'react'
+import SingleSelect from './single-select'
 
 const meta = {
     title: 'ATOMS/Single Select',
     component: SingleSelect,
     parameters: {
         controls: {
-            include: ["appearance", "disabled", "value", "selectedValue"],
-        }
+            include: ['appearance', 'disabled', 'value', 'selectedValue'],
+        },
     },
     argTypes: {
-        "appearance": {
+        appearance: {
             control: {
                 type: 'select',
                 options: ['enabled', 'hovered', 'selected'],
             },
         },
-        "disabled": {
+        disabled: {
             control: {
                 type: 'boolean',
             },
         },
-        "value": {
+        value: {
             control: {
                 type: 'text',
             },
         },
-        "selectedValue": {
+        selectedValue: {
             control: {
                 type: 'text',
             },
         },
-        "onClick": {
+        onClick: {
             action: 'clicked',
-        }
-    }
-} satisfies Meta<typeof SingleSelect>;
+        },
+    },
+} satisfies Meta<typeof SingleSelect>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
@@ -57,29 +57,36 @@ export const Disabled: Story = {
 
 export const InteractiveExample: Story = {
     render: () => {
-        const [selectedOption, setSelectedOption] = useState<string>('');
-        
+        const [selectedOption, setSelectedOption] = useState<string>('')
+
         const options = [
             'Option 1: This is a selectable question',
-            'Option 2: This is another selectable question', 
-            'Option 3: This is a third selectable question'
-        ];
-        
+            'Option 2: This is another selectable question',
+            'Option 3: This is a third selectable question',
+        ]
+
         return (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {options.map((option, index) => (
                     <SingleSelect
-                        key={index}
+                        key={index.toString()}
                         value={option}
                         selectedValue={selectedOption}
                         onClick={() => setSelectedOption(option)}
                     />
                 ))}
-                
-                <div style={{ marginTop: '16px', padding: '8px', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+
+                <div
+                    style={{
+                        marginTop: '16px',
+                        padding: '8px',
+                        backgroundColor: '#f5f5f5',
+                        borderRadius: '4px',
+                    }}
+                >
                     <strong>Selected:</strong> {selectedOption || 'None'}
                 </div>
             </div>
-        );
-    }
+        )
+    },
 }

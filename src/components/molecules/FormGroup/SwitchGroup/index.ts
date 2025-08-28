@@ -1,1 +1,1 @@
-export * from "./SwitchGroup";
+export * from './SwitchGroup'

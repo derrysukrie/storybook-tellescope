@@ -1,9 +1,9 @@
-import  { forwardRef, useMemo } from 'react';
-import { Box } from '@mui/material';
-import { CalendarHeader } from './calendar-header';
-import { CalendarGrid } from './calendar-grid';
-import { CalendarFooter } from './calendar-footer';
-import { useDatePicker } from './use-date-picker';
+import { Box } from '@mui/material'
+import { forwardRef, useMemo } from 'react'
+import { CalendarFooter } from './calendar-footer'
+import { CalendarGrid } from './calendar-grid'
+import { CalendarHeader } from './calendar-header'
+import { useDatePicker } from './use-date-picker'
 
 // Design system constants
 const DESIGN_TOKENS = {
@@ -11,39 +11,30 @@ const DESIGN_TOKENS = {
     padding: 2,
     width: 360,
     borderColor: '#0000001F',
-    backgroundColor: 'white'
-} as const;
+    backgroundColor: 'white',
+} as const
 
 // Props interface for proper API design
 export interface DialogDatePickerProps {
     /** The currently selected date */
-    value?: Date | null;
+    value?: Date | null
     /** Callback fired when a date is selected */
-    onChange?: (date: Date | null) => void;
+    onChange?: (date: Date | null) => void
     /** Minimum selectable date */
-    minDate?: Date;
+    minDate?: Date
     /** Maximum selectable date */
-    maxDate?: Date;
+    maxDate?: Date
     /** Whether the date picker is disabled */
     /** Callback fired when the dialog is cancelled */
-    onCancel?: () => void;
+    onCancel?: () => void
     /** Callback fired when the next action is triggered */
-    onNext?: () => void;
+    onNext?: () => void
     /** Callback fired when the clear action is triggered */
-    onClear?: () => void;
+    onClear?: () => void
 }
 
 export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps>(
-    ({
-        value = null,
-        onChange,
-        minDate,
-        maxDate,
-        onCancel,
-        onNext,
-        onClear,
-        ...props
-    }, ref) => {
+    ({ value = null, onChange, minDate, maxDate, onCancel, onNext, onClear, ...props }, ref) => {
         // Use custom hook for all date picker logic
         const {
             viewDate,
@@ -56,7 +47,7 @@ export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps
             handleDateSelect,
             handleClear,
             handleCancel,
-            handleNext
+            handleNext,
         } = useDatePicker({
             value,
             onChange,
@@ -64,17 +55,20 @@ export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps
             maxDate,
             onCancel,
             onNext,
-            onClear
-        });
+            onClear,
+        })
 
         // Memoized container styles
-        const containerStyles = useMemo(() => ({
-            borderRadius: DESIGN_TOKENS.borderRadius,
-            p: DESIGN_TOKENS.padding,
-            width: DESIGN_TOKENS.width,
-            border: `1px solid ${DESIGN_TOKENS.borderColor}`,
-            backgroundColor: DESIGN_TOKENS.backgroundColor,
-        }), []);
+        const containerStyles = useMemo(
+            () => ({
+                borderRadius: DESIGN_TOKENS.borderRadius,
+                p: DESIGN_TOKENS.padding,
+                width: DESIGN_TOKENS.width,
+                border: `1px solid ${DESIGN_TOKENS.borderColor}`,
+                backgroundColor: DESIGN_TOKENS.backgroundColor,
+            }),
+            []
+        )
 
         return (
             <Box
@@ -103,16 +97,12 @@ export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps
                     maxDate={maxDate}
                 />
 
-                <CalendarFooter
-                    onClear={handleClear}
-                    onCancel={handleCancel}
-                    onNext={handleNext}
-                />
+                <CalendarFooter onClear={handleClear} onCancel={handleCancel} onNext={handleNext} />
             </Box>
-        );
+        )
     }
-);
+)
 
-DialogDatePicker.displayName = 'DialogDatePicker';
+DialogDatePicker.displayName = 'DialogDatePicker'
 
-export default DialogDatePicker;
+export default DialogDatePicker

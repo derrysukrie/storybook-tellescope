@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import Textaraa from './textarea';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import Textaraa from './textarea'
 
 const meta = {
     title: 'ATOMS/FormInputs/Textarea',
@@ -11,18 +11,18 @@ const meta = {
     },
     argTypes: {
         appearance: {
-            options: ['standard', 'filled', 'outlined', "patientForm"],
+            options: ['standard', 'filled', 'outlined', 'patientForm'],
             control: { type: 'select' },
         },
     },
-} satisfies Meta<typeof Textaraa>;
+} satisfies Meta<typeof Textaraa>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-        appearance: "standard",
-        label: "Label",
+        appearance: 'standard',
+        label: 'Label',
     },
-};
+}

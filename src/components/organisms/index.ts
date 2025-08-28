@@ -1,1 +1,1 @@
-export * from './ItemViewer/ItemViewer';
+export * from './ItemViewer/ItemViewer'

@@ -1,1 +1,1 @@
-export * from "./SelectGroup";
+export * from './SelectGroup'

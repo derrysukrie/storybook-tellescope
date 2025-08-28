@@ -1,1 +1,1 @@
-export { SelectableGroup } from "./SelectableGroup";
+export { SelectableGroup } from './SelectableGroup'

@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import TableFooter from './table-footer';
-import type { ComponentProps } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { ComponentProps } from 'react'
+import TableFooter from './table-footer'
 
 type StoryProps = ComponentProps<typeof TableFooter> & {
-    hasValue: boolean;
+    hasValue: boolean
 }
 
 const meta = {
@@ -11,7 +11,7 @@ const meta = {
     component: TableFooter,
     parameters: {
         controls: {
-            exclude: ["children", "StackProps"]
+            exclude: ['children', 'StackProps'],
         },
     },
     argTypes: {
@@ -19,27 +19,21 @@ const meta = {
             control: { type: 'boolean' },
         },
     },
-} satisfies Meta<StoryProps>;
+} satisfies Meta<StoryProps>
 
-export default meta;
-type Story = StoryObj<StoryProps>;
+export default meta
+type Story = StoryObj<StoryProps>
 
 export const Text: Story = {
     args: {
         hasValue: true,
     },
-    render: (args) => {
-        const { hasValue, ...rest } = args as StoryProps;
+    render: args => {
+        const { hasValue, ...rest } = args as StoryProps
         return (
-            <TableFooter  {...rest} sx={{ width: "300px" }} >
-                {
-                    hasValue ?
-                        <>
-                            100
-                        </>
-                        : undefined
-                }
+            <TableFooter {...rest} sx={{ width: '300px' }}>
+                {hasValue ? 100 : undefined}
             </TableFooter>
-        );
+        )
     },
-};
+}

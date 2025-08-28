@@ -1,23 +1,23 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import ListSubheader from "./ListSubHeader";
-import { List, ListItem } from "@mui/material";
+import { List, ListItem } from '@mui/material'
+import type { Meta, StoryObj } from '@storybook/react'
+import ListSubheader from './ListSubHeader'
 
 const meta: Meta<typeof ListSubheader> = {
-  title: "Atoms/ListSubHeader",
-  component: ListSubheader,
-  tags: ["autodocs"],
-};
+    title: 'Atoms/ListSubHeader',
+    component: ListSubheader,
+    tags: ['autodocs'],
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof ListSubheader>;
+type Story = StoryObj<typeof ListSubheader>
 
 export const Default: Story = {
-  render: (args) => (
-    <List>
-      <ListItem>
-        <ListSubheader {...args}>Subheader</ListSubheader>
-      </ListItem>
-    </List>
-  ),
-};
+    render: args => (
+        <List>
+            <ListItem>
+                <ListSubheader {...args}>Subheader</ListSubheader>
+            </ListItem>
+        </List>
+    ),
+}

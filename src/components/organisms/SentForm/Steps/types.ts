@@ -1,101 +1,101 @@
 export interface SelectOption {
-  value: string;
-  label: string;
+    value: string
+    label: string
 }
 
 export interface ChoiceOption {
-  label: string;
-  value: string;
+    label: string
+    value: string
 }
 
 // Base interface for all step components
 export interface BaseStepProps {
-  title?: string;
-  helperText?: string;
-  required?: boolean;
-  disabled?: boolean;
-  error?: string;
-  stepId?: string;
+    title?: string
+    helperText?: string
+    required?: boolean
+    disabled?: boolean
+    error?: string
+    stepId?: string
 }
 
 // Specific step interfaces
 export interface TextFieldStepProps extends BaseStepProps {
-  placeholder?: string;
-  type?: 'text' | 'email' | 'password' | 'tel' | 'number';
-  maxLength?: number;
-  minLength?: number;
-  pattern?: string;
+    placeholder?: string
+    type?: 'text' | 'email' | 'password' | 'tel' | 'number'
+    maxLength?: number
+    minLength?: number
+    pattern?: string
 }
 
 export interface SelectFieldStepProps extends BaseStepProps {
-  options: SelectOption[];
-  placeholder?: string;
-  multiple?: boolean;
-  searchable?: boolean;
+    options: SelectOption[]
+    placeholder?: string
+    multiple?: boolean
+    searchable?: boolean
 }
 
 export interface CheckboxFieldStepProps extends BaseStepProps {
-  options: ChoiceOption[];
-  maxSelections?: number;
-  minSelections?: number;
+    options: ChoiceOption[]
+    maxSelections?: number
+    minSelections?: number
 }
 
 export interface FileUploaderStepProps extends BaseStepProps {
-  accept?: string;
-  maxFiles?: number;
-  maxFileSize?: number; // in bytes
-  allowedTypes?: string[];
+    accept?: string
+    maxFiles?: number
+    maxFileSize?: number // in bytes
+    allowedTypes?: string[]
 }
 
 export interface DateFieldStepProps extends BaseStepProps {
-  minDate?: Date;
-  maxDate?: Date;
-  format?: string;
+    minDate?: Date
+    maxDate?: Date
+    format?: string
 }
 
 export interface RatingStepProps extends BaseStepProps {
-  min: number;
-  max: number;
-  step: number;
-  shiftStep: number;
-  marks: boolean;
+    min: number
+    max: number
+    step: number
+    shiftStep: number
+    marks: boolean
 }
 
 export interface RankingStepProps extends BaseStepProps {
-  options: ChoiceOption[];
-  maxSelections?: number;
-  minSelections?: number;
+    options: ChoiceOption[]
+    maxSelections?: number
+    minSelections?: number
 }
 
 export interface InsuranceStepProps extends BaseStepProps {
-  insurer: string;
-  memberId: string;
-  planName: string;
-  planStartDate: string;
-  relationshipToPolicyOwner: string;
+    insurer: string
+    memberId: string
+    planName: string
+    planStartDate: string
+    relationshipToPolicyOwner: string
 }
 
 // Form validation types
 export interface ValidationRule {
-  type: 'required' | 'email' | 'minLength' | 'maxLength' | 'pattern' | 'custom';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value?: any;
-  message: string;
+    type: 'required' | 'email' | 'minLength' | 'maxLength' | 'pattern' | 'custom'
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    value?: unknown
+    message: string
 }
 
 export interface ValidationResult {
-  isValid: boolean;
-  errors: string[];
+    isValid: boolean
+    errors: string[]
 }
 
 // File upload types
 export interface FileItem {
-  id: string;
-  name: string;
-  size: number;
-  type: string;
-  status: 'uploading' | 'completed' | 'error';
-  progress?: number;
-  errorMessage?: string;
-  url?: string;
-} 
+    id: string
+    name: string
+    size: number
+    type: string
+    status: 'uploading' | 'completed' | 'error'
+    progress?: number
+    errorMessage?: string
+    url?: string
+}

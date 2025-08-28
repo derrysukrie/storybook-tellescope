@@ -1,20 +1,17 @@
-import * as React from "react";
-import {
-  LinearProgress as MuiProgress,
-  type LinearProgressProps,
-} from "@mui/material";
+import { type LinearProgressProps, LinearProgress as MuiProgress } from '@mui/material'
+import type * as React from 'react'
 
 interface CustomProgressProps extends LinearProgressProps {}
 
 const LinearProgress: React.FC<CustomProgressProps> = ({ sx, ...props }) => {
-  return (
-    <MuiProgress
-      {...props}
-      sx={{
-        ...sx,
-      }}
-    />
-  );
-};
+    return (
+        <MuiProgress
+            {...props}
+            sx={{
+                ...sx,
+            }}
+        />
+    )
+}
 
-export default LinearProgress;
+export default LinearProgress

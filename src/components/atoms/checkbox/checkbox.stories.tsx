@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
-import CheckBox from './checkbox';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { fn } from 'storybook/test'
+import CheckBox from './checkbox'
 
 const meta = {
     title: 'ATOMS/FormInputs/Checkbox',
@@ -19,17 +19,16 @@ const meta = {
             control: { type: 'select' },
             options: ['large', 'medium', 'small'],
         },
-
     },
     args: { onClick: fn() },
-} satisfies Meta<typeof CheckBox>;
+} satisfies Meta<typeof CheckBox>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
         color: 'primary',
-        size: "medium",
+        size: 'medium',
     },
-};
+}

@@ -1,10 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import TableSearch from './table-search';
-import { useEffect, useState, type ComponentProps } from 'react';
-
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { type ComponentProps, useEffect, useState } from 'react'
+import TableSearch from './table-search'
 
 type StoryProps = ComponentProps<typeof TableSearch> & {
-    hasValue: boolean;
+    hasValue: boolean
 }
 
 const meta = {
@@ -12,7 +11,7 @@ const meta = {
     component: TableSearch,
     parameters: {
         controls: {
-            exclude: ["small", "children", "value", "onChange"],
+            exclude: ['small', 'children', 'value', 'onChange'],
         },
     },
     argTypes: {
@@ -23,34 +22,31 @@ const meta = {
             control: { type: 'boolean' },
         },
     },
-} satisfies Meta<StoryProps>;
+} satisfies Meta<StoryProps>
 
-export default meta;
-type Story = StoryObj<StoryProps>;
+export default meta
+type Story = StoryObj<StoryProps>
 
 export const Default: Story = {
     args: {
         hasValue: true,
-        expanded: false
+        expanded: false,
     },
-    render: (args) => {
-        const [value, setValue] = useState<string>("")
+    render: args => {
+        const [value, setValue] = useState<string>('')
         const handleOnChange = (newValue: string) => {
-            setValue(newValue);
+            setValue(newValue)
         }
-        const { hasValue, ...rest } = args as StoryProps;
+        const { hasValue, ...rest } = args as StoryProps
 
         useEffect(() => {
             if (hasValue) {
-                setValue("Organization");
+                setValue('Organization')
             } else {
-                setValue("");
+                setValue('')
             }
-        }, [hasValue]);
+        }, [hasValue])
 
-        return (
-            <TableSearch {...rest} value={value} onChange={handleOnChange} />
-        );
+        return <TableSearch {...rest} value={value} onChange={handleOnChange} />
     },
-};
-
+}

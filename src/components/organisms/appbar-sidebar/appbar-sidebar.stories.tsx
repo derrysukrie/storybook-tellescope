@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import AppbarSidebar from './appbar-sidebar';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import AppbarSidebar from './appbar-sidebar'
 
 const meta = {
     title: 'ORGANISMS/Appbar and Side Bar',
@@ -7,27 +7,25 @@ const meta = {
     parameters: {
         controls: {
             include: ['color'],
-        }
+        },
     },
     argTypes: {
         color: {
-            options: ["standard", "transitional",],
-            control: { type: "select" }
-        }
+            options: ['standard', 'transitional'],
+            control: { type: 'select' },
+        },
     },
     args: {
-        color: "standard",
-    }
-} satisfies Meta<typeof AppbarSidebar>;
+        color: 'standard',
+    },
+} satisfies Meta<typeof AppbarSidebar>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const ExpandedSidebar: Story = {
-    args: {
-
-    },
-    render: (args) => (
+    args: {},
+    render: args => (
         <>
             <style>
                 {`
@@ -38,5 +36,5 @@ export const ExpandedSidebar: Story = {
             </style>
             <AppbarSidebar {...args} expanded={true} />
         </>
-    )
-};
+    ),
+}

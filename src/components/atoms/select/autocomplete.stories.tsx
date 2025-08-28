@@ -1,14 +1,14 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
-import { Autocomplete } from './autocomplete';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useState } from 'react'
+import { Autocomplete } from './autocomplete'
 
 const meta = {
     title: 'ATOMS/FormInputs/Select',
     component: Autocomplete,
     parameters: {
         controls: {
-            include: ["appearance"],
-        }
+            include: ['appearance'],
+        },
     },
     argTypes: {
         appearance: {
@@ -18,16 +18,16 @@ const meta = {
         multiple: { control: 'boolean' },
     },
     decorators: [
-        (Story) => (
+        Story => (
             <div style={{ width: 250 }}>
                 <Story />
             </div>
-        )
-    ]
-} satisfies Meta<typeof Autocomplete>;
+        ),
+    ],
+} satisfies Meta<typeof Autocomplete>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const AutoComplete: Story = {
     args: {
@@ -36,20 +36,11 @@ export const AutoComplete: Story = {
         appearance: 'standard',
         multiple: true,
         value: '',
-        onChange: () => { },
+        onChange: () => {},
         size: 'medium',
     },
-    render: (args) => {
-        const [value, setValue] = useState<string | string[] | null>(
-            args.multiple ? [] : null
-        );
-        return (
-            <Autocomplete
-                {...args}
-                value={value}
-                disableCloseOnSelect
-                onChange={setValue}
-            />
-        );
-    }
-};
+    render: args => {
+        const [value, setValue] = useState<string | string[] | null>(args.multiple ? [] : null)
+        return <Autocomplete {...args} value={value} disableCloseOnSelect onChange={setValue} />
+    },
+}

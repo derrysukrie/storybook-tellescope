@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import TableTabsFiltersControls from './table-tabs-filters-controls';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import TableTabsFiltersControls from './table-tabs-filters-controls'
 
 const meta = {
     title: 'MOLECULES/Table Elements/Table tabs filters and controls',
@@ -9,13 +9,10 @@ const meta = {
             include: [''],
         },
     },
-} satisfies Meta<typeof TableTabsFiltersControls>;
+} satisfies Meta<typeof TableTabsFiltersControls>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
-
-
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
@@ -23,8 +20,6 @@ export const Default: Story = {
         tabPanels: [],
     },
     render: () => {
-        return (
-            <TableTabsFiltersControls />
-        )
-    }
+        return <TableTabsFiltersControls />
+    },
 }

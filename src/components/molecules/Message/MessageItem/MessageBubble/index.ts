@@ -1,2 +1,2 @@
-export * from "./MessageBubble";
-export * from "./MessageText";
+export * from './MessageBubble'
+export * from './MessageText'

@@ -1,0 +1,74 @@
+{
+    "$schema": "https://biomejs.dev/schemas/2.2.2/schema.json",
+    "files": {
+        "includes": [
+            "src/**/*.{ts,tsx,js,jsx}",
+            "src/**/*.{json,md,mdx}",
+            "*.{ts,tsx,js,jsx,json,md,mdx}",
+            "test/**/*.{ts,tsx,js,jsx}",
+            ".storybook/**/*.{ts,tsx,js,jsx,json}"
+        ],
+        "ignoreUnknown": false
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 100,
+        "lineEnding": "lf"
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "correctness": {
+                "noUnusedVariables": "error",
+                "useExhaustiveDependencies": "off"
+            },
+            "style": {
+                "useConst": "error",
+                "useTemplate": "error",
+                "useImportType": "error"
+            },
+            "suspicious": {
+                "noExplicitAny": "warn"
+            },
+            "a11y": {
+                "useAltText": "error",
+                "useSemanticElements": "off"
+            },
+            "complexity": {
+                "noExcessiveCognitiveComplexity": "warn"
+            }
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "single",
+            "semicolons": "asNeeded",
+            "trailingCommas": "es5",
+            "bracketSpacing": true,
+            "bracketSameLine": false,
+            "arrowParentheses": "asNeeded"
+        },
+        "globals": [
+            "React",
+            "describe",
+            "it",
+            "test",
+            "expect",
+            "beforeEach",
+            "afterEach",
+            "vi",
+            "beforeAll",
+            "afterAll"
+        ]
+    },
+    "json": {
+        "formatter": {
+            "enabled": true,
+            "indentStyle": "space",
+            "indentWidth": 4
+        }
+    }
+}

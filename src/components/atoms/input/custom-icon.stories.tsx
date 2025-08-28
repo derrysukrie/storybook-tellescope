@@ -1,11 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Input } from './input';
-import StarIcon from '@mui/icons-material/Star';
-import type { ComponentProps } from 'react';
+import StarIcon from '@mui/icons-material/Star'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { ComponentProps } from 'react'
+import { Input } from './input'
 
 type StoryProps = ComponentProps<typeof Input> & {
-    CustomIcon?: 'start' | 'end';
-};
+    CustomIcon?: 'start' | 'end'
+}
 
 const meta: Meta<StoryProps> = {
     title: 'ATOMS/FormInputs/Input',
@@ -17,7 +17,7 @@ const meta: Meta<StoryProps> = {
     },
     argTypes: {
         appearance: {
-            options: ['standard', 'filled', 'outlined', "distinct"],
+            options: ['standard', 'filled', 'outlined', 'distinct'],
             control: { type: 'select' },
         },
         size: {
@@ -31,16 +31,16 @@ const meta: Meta<StoryProps> = {
     },
     args: {
         CustomIcon: 'start',
-    }
+    },
 }
 
-export default meta;
-type Story = StoryObj<StoryProps>;
+export default meta
+type Story = StoryObj<StoryProps>
 
 export const CustomIcon: Story = {
     args: {
-        appearance: "standard",
-        size: "medium",
+        appearance: 'standard',
+        size: 'medium',
     },
     render: ({ CustomIcon, ...args }: StoryProps) => {
         return (
@@ -50,9 +50,9 @@ export const CustomIcon: Story = {
                 disabled={false}
                 label="Label"
                 error={false}
-                startIcon={CustomIcon === "start" ? <StarIcon /> : undefined}
-                endIcon={CustomIcon === "end" ? <StarIcon /> : undefined}
+                startIcon={CustomIcon === 'start' ? <StarIcon /> : undefined}
+                endIcon={CustomIcon === 'end' ? <StarIcon /> : undefined}
             />
         )
     },
-};
+}

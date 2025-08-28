@@ -1,10 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import TableHead from './table-head';
-import type { ComponentProps } from 'react';
-
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { ComponentProps } from 'react'
+import TableHead from './table-head'
 
 type StoryProps = ComponentProps<typeof TableHead> & {
-    hasValue: boolean;
+    hasValue: boolean
 }
 
 const meta = {
@@ -12,25 +11,25 @@ const meta = {
     component: TableHead,
     parameters: {
         controls: {
-            exclude: ["small", "children"],
+            exclude: ['small', 'children'],
         },
     },
     argTypes: {
         icon: {
-            options: ["none", 'left', 'right'],
+            options: ['none', 'left', 'right'],
             control: { type: 'select' },
         },
         checkbox: {
-            control: { type: "boolean" },
+            control: { type: 'boolean' },
         },
         hasValue: {
             control: { type: 'boolean' },
         },
     },
-} satisfies Meta<StoryProps>;
+} satisfies Meta<StoryProps>
 
-export default meta;
-type Story = StoryObj<StoryProps>;
+export default meta
+type Story = StoryObj<StoryProps>
 
 export const Default: Story = {
     args: {
@@ -38,19 +37,8 @@ export const Default: Story = {
         icon: 'none',
         checkbox: false,
     },
-    render: (args) => {
-        const { hasValue, ...rest } = args as StoryProps;
-        return (
-            <TableHead {...rest}>
-                {
-                    hasValue ?
-                        <>
-                            Head
-                        </>
-                        : undefined
-                }
-            </TableHead>
-        );
+    render: args => {
+        const { hasValue, ...rest } = args as StoryProps
+        return <TableHead {...rest}>{hasValue ? 'Head' : undefined}</TableHead>
     },
-};
-
+}

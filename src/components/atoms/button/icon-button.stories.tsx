@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from 'storybook/test';
-import { IconButton as Comp } from './icon-button';
-import StarIcon from '@mui/icons-material/Star';
+import StarIcon from '@mui/icons-material/Star'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { fn } from 'storybook/test'
+import { IconButton as Comp } from './icon-button'
 
 const meta = {
     title: 'ATOMS/Button',
@@ -18,20 +18,20 @@ const meta = {
         },
         size: {
             control: { type: 'select' },
-            options: ['large', 'medium', 'small', "table"],
+            options: ['large', 'medium', 'small', 'table'],
         },
     },
     args: { onClick: fn() },
-} satisfies Meta<typeof Comp>;
+} satisfies Meta<typeof Comp>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const IconButton: Story = {
     args: {
         color: 'primary',
         children: <StarIcon />,
-        size: "medium",
+        size: 'medium',
         disabled: false,
     },
-};
+}

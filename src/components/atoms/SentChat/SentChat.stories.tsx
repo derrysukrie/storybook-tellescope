@@ -1,29 +1,29 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import SentChat from "./SentChat";
+import type { Meta, StoryObj } from '@storybook/react'
+import SentChat from './SentChat'
 
 const meta: Meta<typeof SentChat> = {
-  title: "Atoms/Sent Chat",
-  component: SentChat,
-};
+    title: 'Atoms/Sent Chat',
+    component: SentChat,
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof SentChat>;
+type Story = StoryObj<typeof SentChat>
 
 export const Default: Story = {
-  args: {
-    message: "How many patients are in the sync to healthie journey?",
-  },
-  argTypes: {
-    message: {
-      control: {
-        table: {
-          disable: true,
-        },
-      },
+    args: {
+        message: 'How many patients are in the sync to healthie journey?',
     },
-  },
-  render: (args) => {
-    return <SentChat {...args} />;
-  },
-};
+    argTypes: {
+        message: {
+            control: {
+                table: {
+                    disable: true,
+                },
+            },
+        },
+    },
+    render: args => {
+        return <SentChat {...args} />
+    },
+}

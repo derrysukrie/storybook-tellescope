@@ -1,79 +1,81 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { FormGroup } from ".";
-import React from "react";
+import type { Meta, StoryObj } from '@storybook/react'
+import React from 'react'
+import { FormGroup } from '.'
 
 const meta: Meta = {
-  title: "Molecules/FormGroup",
-};
+    title: 'Molecules/FormGroup',
+}
 
-export default meta;
+export default meta
 
 export const Radio: StoryObj = {
-  render: () => (
-    <FormGroup.Radio
-      onChange={(value) => console.log("onChange", value)}
-      label="Radio Group"
-      helperText="This is a helper text"
-      options={[
-        { label: "Option 1", value: "1" },
-        { label: "Option 2", value: "2" },
-        { label: "Option 3", value: "3" },
-      ]}
-    />
-  ),
-};
+    render: () => (
+        <FormGroup.Radio
+            onChange={value => console.log('onChange', value)}
+            label="Radio Group"
+            helperText="This is a helper text"
+            options={[
+                { label: 'Option 1', value: '1' },
+                { label: 'Option 2', value: '2' },
+                { label: 'Option 3', value: '3' },
+            ]}
+        />
+    ),
+}
 
 export const Checkbox: StoryObj = {
-  render: () => {
-    const [value, setValue] = React.useState<string[]>([]);
+    render: () => {
+        const [value, setValue] = React.useState<string[]>([])
 
-    return (
-      <FormGroup.Checkbox
-        onChange={(values) => setValue(values)}
-        value={value}
-        options={[
-          { label: "Option 1", value: "1" },
-          { label: "Option 2", value: "2" },
-          { label: "Option 3", value: "3" },
-        ]}
-        label="Checkbox Group"
-        helperText="This is a helper text"
-      />
-    );
-  },
-};
+        return (
+            <FormGroup.Checkbox
+                onChange={values => setValue(values)}
+                value={value}
+                options={[
+                    { label: 'Option 1', value: '1' },
+                    { label: 'Option 2', value: '2' },
+                    { label: 'Option 3', value: '3' },
+                ]}
+                label="Checkbox Group"
+                helperText="This is a helper text"
+            />
+        )
+    },
+}
 
 export const Text: StoryObj = {
-  render: () => {
-     
-    const [value, setValue] = React.useState<Record<string, string>>({});
+    render: () => {
+        const [value, setValue] = React.useState<Record<string, string>>({})
 
-    return (
-      <FormGroup.Text
-        label="Text Group"
-        helperText="This is a helper text"
-        options={[{ label: "Option 1", value: "1" }, { label: "Option 2", value: "2" }]}
-        value={value}
-        onChange={setValue}
-      />
-    );
-  },
-};
+        return (
+            <FormGroup.Text
+                label="Text Group"
+                helperText="This is a helper text"
+                options={[
+                    { label: 'Option 1', value: '1' },
+                    { label: 'Option 2', value: '2' },
+                ]}
+                value={value}
+                onChange={setValue}
+            />
+        )
+    },
+}
 
 export const Switch: StoryObj = {
-  render: () => (
-    <FormGroup.Switch
-      onChange={(values) => console.log("onChange", values)}
-      label="Switch Group"
-      helperText="This is a helper text"
-      options={[
-        { label: "Option 1", value: "1" },
-        { label: "Option 2", value: "2" },
-        { label: "Option 3", value: "3" },
-      ]}
-    />
-  ),
-};
+    render: () => (
+        <FormGroup.Switch
+            onChange={values => console.log('onChange', values)}
+            label="Switch Group"
+            helperText="This is a helper text"
+            options={[
+                { label: 'Option 1', value: '1' },
+                { label: 'Option 2', value: '2' },
+                { label: 'Option 3', value: '3' },
+            ]}
+        />
+    ),
+}
 
 // export const SwitchControlled: StoryObj = {
 //   render: () => {
@@ -100,42 +102,42 @@ export const Switch: StoryObj = {
 // };
 
 export const TextArea: StoryObj = {
-  render: () => (
-    <FormGroup.TextArea
-      label="Text Area Group"
-      helperText="This is a helper text"
-      options={[{ label: "Option 1", value: "1" }]}
-    />
-  ),
-};
+    render: () => (
+        <FormGroup.TextArea
+            label="Text Area Group"
+            helperText="This is a helper text"
+            options={[{ label: 'Option 1', value: '1' }]}
+        />
+    ),
+}
 
 export const Select: StoryObj = {
-  render: () => (
-    <FormGroup.Select
-      label="Select Group"
-      onChange={(value) => console.log("onChange", value)}
-      helperText="This is a helper text"
-      options={[
-        { label: "Option 1", value: "1" },
-        { label: "Option 2", value: "2" },
-        { label: "Option 3", value: "3" },
-      ]}
-    />
-  ),
-};
+    render: () => (
+        <FormGroup.Select
+            label="Select Group"
+            onChange={value => console.log('onChange', value)}
+            helperText="This is a helper text"
+            options={[
+                { label: 'Option 1', value: '1' },
+                { label: 'Option 2', value: '2' },
+                { label: 'Option 3', value: '3' },
+            ]}
+        />
+    ),
+}
 
 export const Selectable: StoryObj = {
-  render: () => (
-    <FormGroup.Selectable
-      label="Selectable Group"
-      labelSize="large"
-      onChange={(values) => console.log("onChange", values)}
-      helperText="This is a helper text"
-      options={[
-        { id: "1", label: "This is a selectable  question ", value: "value1" },
-        { id: "2", label: "This is a selectable  question ", value: "value2" },
-        { id: "3", label: "This is a selectable  question ", value: "value3" },
-      ]}
-    />
-  ),
-};
+    render: () => (
+        <FormGroup.Selectable
+            label="Selectable Group"
+            labelSize="large"
+            onChange={values => console.log('onChange', values)}
+            helperText="This is a helper text"
+            options={[
+                { id: '1', label: 'This is a selectable  question ', value: 'value1' },
+                { id: '2', label: 'This is a selectable  question ', value: 'value2' },
+                { id: '3', label: 'This is a selectable  question ', value: 'value3' },
+            ]}
+        />
+    ),
+}

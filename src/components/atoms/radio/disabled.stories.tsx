@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Radio } from './radio';
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { Radio } from './radio'
 
 const meta = {
     title: 'ATOMS/FormInputs/Radio',
@@ -16,18 +16,17 @@ const meta = {
         },
         checked: {
             control: { type: 'boolean' },
-        }
+        },
     },
-} satisfies Meta<typeof Radio>;
+} satisfies Meta<typeof Radio>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
-
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Disabled: Story = {
     args: {
-        color: "default",
-        size: "medium",
+        color: 'default',
+        size: 'medium',
         disabled: true,
     },
-};
+}

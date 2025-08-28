@@ -1,34 +1,34 @@
-import { type FC } from 'react';
+import type {
+    AutocompleteRenderInputParams,
+    AutocompleteProps as MuiAutocompleteProps,
+} from '@mui/material'
 import {
-    Autocomplete as MuiAutocomplete,
     Chip,
     FormControl,
+    Autocomplete as MuiAutocomplete,
+    Stack,
     type Theme,
-    Stack
-} from '@mui/material';
-import type {
-    AutocompleteProps as MuiAutocompleteProps,
-    AutocompleteRenderInputParams,
-} from '@mui/material';
-import { Input } from '../input/input';
+} from '@mui/material'
+import type { FC } from 'react'
+import { Input } from '../input/input'
 
-type OptionType = string;
+type OptionType = string
 
 interface AutocompleteProps
     extends Omit<
         MuiAutocompleteProps<OptionType, boolean, boolean, boolean>,
         'renderInput' | 'options' | 'value' | 'onChange'
     > {
-    label: string;
-    options: OptionType[];
-    value: OptionType | OptionType[] | null;
-    onChange: (value: OptionType | OptionType[]) => void;
-    helperText?: string;
-    error?: boolean;
-    disabled?: boolean;
-    appearance?: 'standard' | 'filled' | 'outlined' | 'table';
-    textFieldProps?: Omit<Partial<React.ComponentProps<typeof Input>>, "appearance">;
-    multiple?: boolean;
+    label: string
+    options: OptionType[]
+    value: OptionType | OptionType[] | null
+    onChange: (value: OptionType | OptionType[]) => void
+    helperText?: string
+    error?: boolean
+    disabled?: boolean
+    appearance?: 'standard' | 'filled' | 'outlined' | 'table'
+    textFieldProps?: Omit<Partial<React.ComponentProps<typeof Input>>, 'appearance'>
+    multiple?: boolean
 }
 
 export const Autocomplete: FC<AutocompleteProps> = ({
@@ -42,18 +42,17 @@ export const Autocomplete: FC<AutocompleteProps> = ({
     helperText,
     disableCloseOnSelect,
     textFieldProps,
-    appearance = "standard",
+    appearance = 'standard',
     size,
     sx,
     ...rest
 }) => {
-
     const getSx = (theme: Theme) => {
         if (appearance === 'table') {
             return {
                 minWidth: 220,
                 '.MuiOutlinedInput-root': {
-                    height: "auto",
+                    height: 'auto',
                     padding: '0',
                 },
                 '& .MuiInputLabel-root': {
@@ -62,25 +61,28 @@ export const Autocomplete: FC<AutocompleteProps> = ({
                 '& .MuiOutlinedInput-notchedOutline': {
                     display: 'none',
                 },
-                ".MuiInputBase-root.MuiInput-root.MuiInput-underline::before, .MuiInputBase-root.MuiInput-root.MuiInput-underline::after": {
-                    borderColor: "transparent"
-                },
-                ".MuiInputBase-root.MuiInput-root.MuiInput-underline.Mui-error::before, .MuiInputBase-root.MuiInput-root.MuiInput-underline.Mui-error::after": {
-                    borderColor: `${theme.palette.error.main}`,
-                    borderWidth: "2px !important"
-                },
-                '& .MuiSelect-select.MuiSelect-standard.MuiSelect-multiple.Mui-error.MuiInputBase-input': {
-                    padding: "0 0 2px 0 !important"
-                },
-            };
+                '.MuiInputBase-root.MuiInput-root.MuiInput-underline::before, .MuiInputBase-root.MuiInput-root.MuiInput-underline::after':
+                    {
+                        borderColor: 'transparent',
+                    },
+                '.MuiInputBase-root.MuiInput-root.MuiInput-underline.Mui-error::before, .MuiInputBase-root.MuiInput-root.MuiInput-underline.Mui-error::after':
+                    {
+                        borderColor: `${theme.palette.error.main}`,
+                        borderWidth: '2px !important',
+                    },
+                '& .MuiSelect-select.MuiSelect-standard.MuiSelect-multiple.Mui-error.MuiInputBase-input':
+                    {
+                        padding: '0 0 2px 0 !important',
+                    },
+            }
         }
-    };
+    }
 
     return (
         <FormControl
             fullWidth
-            variant={appearance === "table" ? "standard" : appearance}
-            sx={(theme) => ({ m: 1, ...getSx(theme) })}
+            variant={appearance === 'table' ? 'standard' : appearance}
+            sx={theme => ({ m: 1, ...getSx(theme) })}
             error={error}
             disabled={disabled}
             size={size}
@@ -94,9 +96,9 @@ export const Autocomplete: FC<AutocompleteProps> = ({
                 onChange={(_, newValue) => {
                     // Handle null safely
                     if (newValue === null) {
-                        onChange(multiple ? [] : '');
+                        onChange(multiple ? [] : '')
                     } else {
-                        onChange(newValue as OptionType | OptionType[]);
+                        onChange(newValue as OptionType | OptionType[])
                     }
                 }}
                 disabled={disabled}
@@ -104,23 +106,27 @@ export const Autocomplete: FC<AutocompleteProps> = ({
                     <Stack
                         component="div"
                         sx={{
-                            flexDirection: "row",
+                            flexDirection: 'row',
                             // gap: 1,
                             overflowX: 'auto',
                             overflowY: 'hidden',
                             maxWidth: '100%',
-                            "&::-webkit-scrollbar": {
-                                display: "none"
+                            '&::-webkit-scrollbar': {
+                                display: 'none',
                             },
-                            "-ms-overflow-style": "none", // IE and Edge
-                            "scrollbarWidth": "none", // Firefox
+                            '-ms-overflow-style': 'none', // IE and Edge
+                            scrollbarWidth: 'none', // Firefox
                         }}
                     >
-                        {
-                            tagValue.map((option, index) => (
-                                <Chip size="small" clickable label={option} {...getTagProps({ index })} />
-                            ))
-                        }
+                        {tagValue.map((option, index) => (
+                            <Chip
+                                key={index.toString()}
+                                size="small"
+                                clickable
+                                label={option}
+                                {...getTagProps}
+                            />
+                        ))}
                     </Stack>
                 )}
                 renderInput={(params: AutocompleteRenderInputParams) => {
@@ -132,25 +138,25 @@ export const Autocomplete: FC<AutocompleteProps> = ({
                             error={error}
                             helperText={helperText}
                             {...textFieldProps}
-                            appearance={appearance === "table" ? "distinct" : appearance}
+                            appearance={appearance === 'table' ? 'distinct' : appearance}
                         />
                     )
                 }}
                 sx={{
-                    "& > .MuiFormControl-root": {
-                        width: "100%"
+                    '& > .MuiFormControl-root': {
+                        width: '100%',
                     },
-                    "& .MuiAutocomplete-inputRoot": {
-                        flexDirection: "row",
+                    '& .MuiAutocomplete-inputRoot': {
+                        flexDirection: 'row',
                         gap: 1,
-                        overflowX: "hidden",
-                        maxWidth: "100%",
-                        flexWrap: "nowrap"
+                        overflowX: 'hidden',
+                        maxWidth: '100%',
+                        flexWrap: 'nowrap',
                     },
-                    ...sx
+                    ...sx,
                 }}
                 {...rest}
             />
         </FormControl>
-    );
-};
+    )
+}

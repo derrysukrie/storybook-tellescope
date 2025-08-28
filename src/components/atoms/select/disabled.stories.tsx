@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import Select from './select';
-import { useState } from 'react';
-import { MenuItem } from '@mui/material';
+import { MenuItem } from '@mui/material'
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { useState } from 'react'
+import Select from './select'
 
 const meta = {
     title: 'ATOMS/FormInputs/Select',
     component: Select,
     parameters: {
         controls: {
-            include: ["appearance"],
-        }
+            include: ['appearance'],
+        },
     },
     argTypes: {
         appearance: {
@@ -19,16 +19,16 @@ const meta = {
         multiple: { control: 'boolean' },
     },
     decorators: [
-        (Story) => (
+        Story => (
             <div style={{ width: 250 }}>
                 <Story />
             </div>
-        )
-    ]
-} satisfies Meta<typeof Select>;
+        ),
+    ],
+} satisfies Meta<typeof Select>
 
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const Disabled: Story = {
     args: {
@@ -37,24 +37,32 @@ export const Disabled: Story = {
         appearance: 'standard',
         multiple: false,
         value: '',
-        onChange: () => { },
+        onChange: () => {},
         size: 'medium',
     },
-    render: (args) => {
-        const [value, setValue] = useState<string | string[]>(args.multiple ? [] : '');
+    render: args => {
+        const [value, setValue] = useState<string | string[]>(args.multiple ? [] : '')
 
         return (
             <Select
                 {...args}
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={e => setValue(e.target.value)}
                 disabled={true}
             >
-                <MenuItem value="Menu Item 1" key="Menu Item 1">Menu Item 1</MenuItem>
-                <MenuItem value="Menu Item 2" key="Menu Item 2">Menu Item 2</MenuItem>
-                <MenuItem value="Menu Item 3" key="Menu Item 3">Menu Item 3</MenuItem>
-                <MenuItem value="Menu Item 4" key="Menu Item 4">Menu Item 4</MenuItem>
+                <MenuItem value="Menu Item 1" key="Menu Item 1">
+                    Menu Item 1
+                </MenuItem>
+                <MenuItem value="Menu Item 2" key="Menu Item 2">
+                    Menu Item 2
+                </MenuItem>
+                <MenuItem value="Menu Item 3" key="Menu Item 3">
+                    Menu Item 3
+                </MenuItem>
+                <MenuItem value="Menu Item 4" key="Menu Item 4">
+                    Menu Item 4
+                </MenuItem>
             </Select>
-        );
-    }
-};
+        )
+    },
+}

@@ -1,1 +1,1 @@
-export * from './TextGroup' 
+export * from './TextGroup'
