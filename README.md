@@ -63,6 +63,39 @@ npm run storybook
 
 You should now be done setting up and running Storybook on a Mac. You can now checkout different branches to test them over time without having to follow the previous instructions.
 
+## 🔧 Code Quality & Pre-commit Hooks
+
+This project uses pre-commit hooks to ensure code quality and consistent formatting:
+
+### Available Scripts
+```bash
+npm run format        # Format all files with Biome
+npm run lint          # Check for code style issues
+npm run lint:fix      # Fix code style issues automatically
+npm run check         # Run both linting and TypeScript checks
+```
+
+### Pre-commit Hooks
+The following hooks run automatically before commits and pushes:
+
+- **Pre-commit**: Runs `lint-staged` to format and lint only staged files
+- **Pre-push**: Runs full linting and type checking
+- **Commit-msg**: Validates commit message format
+
+### Code Formatting Rules
+- **Indentation**: 4 spaces
+- **Line width**: 100 characters
+- **Quotes**: Single quotes
+- **Semicolons**: As needed
+- **Trailing commas**: ES5 style
+
+### Manual Formatting
+If you need to format files manually:
+```bash
+npm run format        # Format all files
+npm run lint:fix      # Fix linting issues
+```
+
 <br/><br/><br/><br/>
 ### (Storybook Template Overview) React + TypeScript + Vite
 
