@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof ChatFeedback>;
 
-export const Default: StoryObj = {
+export const Default: Story = {
   args: { type: "default" },
   argTypes: {
     type: {
@@ -21,7 +21,7 @@ export const Default: StoryObj = {
   },
 };
 
-export const Return: StoryObj = {
+export const Return: Story = {
   args: { type: "return" },
   argTypes: {
     type: {
@@ -32,7 +32,7 @@ export const Return: StoryObj = {
   },
 };
 
-export const Use: StoryObj = {
+export const Use: Story = {
   args: { type: "use" },
   argTypes: {
     type: {
