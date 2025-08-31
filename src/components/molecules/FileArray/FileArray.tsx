@@ -2,8 +2,8 @@ import { Box } from "@mui/material";
 import type React from "react";
 import { AttachedFile } from "../../atoms/AttachedFile/AttachedFile";
 
-export const FileArray: React.FC<any> = () => {
-  const attachedFile = Array.from({ length: 5 });
+export const FileArray: React.FC = () => {
+  const attachedFile = Array.from({ length: 5 }, (_, i) => i);
 
   return (
     <Box

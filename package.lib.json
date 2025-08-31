@@ -1,0 +1,77 @@
+{
+  "name": "@tellescope/ui",
+  "version": "1.0.0",
+  "description": "Tellescope Design System - A comprehensive React component library",
+  "type": "module",
+  "main": "./dist/tellescope-ui.cjs.js",
+  "module": "./dist/tellescope-ui.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/tellescope-ui.es.js",
+      "require": "./dist/tellescope-ui.cjs.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./atoms": {
+      "import": "./dist/atoms.es.js",
+      "require": "./dist/atoms.cjs.js",
+      "types": "./dist/atoms.d.ts"
+    },
+    "./molecules": {
+      "import": "./dist/molecules.es.js",
+      "require": "./dist/molecules.cjs.js",
+      "types": "./dist/molecules.d.ts"
+    },
+    "./organisms": {
+      "import": "./dist/organisms.es.js",
+      "require": "./dist/organisms.cjs.js",
+      "types": "./dist/organisms.d.ts"
+    },
+    "./theme": {
+      "import": "./dist/theme.es.js",
+      "require": "./dist/theme.cjs.js",
+      "types": "./dist/theme.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "keywords": [
+    "react",
+    "components",
+    "design-system",
+    "ui",
+    "typescript",
+    "mui",
+    "material-ui"
+  ],
+  "author": "Tellescope",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@mui/material": {
+      "optional": false
+    },
+    "@mui/icons-material": {
+      "optional": false
+    },
+    "@emotion/react": {
+      "optional": false
+    },
+    "@emotion/styled": {
+      "optional": false
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tellescope/storybook.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tellescope/storybook/issues"
+  },
+  "homepage": "https://github.com/tellescope/storybook#readme"
+}

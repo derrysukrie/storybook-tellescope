@@ -1,4 +1,4 @@
-import type { IMessage } from "../components/molecules";
+import type { IMessage } from "../components/molecules/Message/types";
 
 // Sample message templates for generating varied content
 const sampleTexts = [
