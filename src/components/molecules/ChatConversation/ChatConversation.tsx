@@ -4,7 +4,15 @@ import { Page } from "../../atoms/Page/Page";
 import SentChat from "../../atoms/SentChat/SentChat";
 import { ChatFeedback } from "../../atoms/ChatFeedback/ChatFeedback";
 
-export const ChatConversation: React.FC = () => {
+interface ChatConversationProps {
+  userMessage: string;
+  responseMessage: string;
+}
+
+export const ChatConversation: React.FC<ChatConversationProps> = ({
+  userMessage,
+  responseMessage,
+}) => {
   return (
     <Box component="section">
       <Box
@@ -18,10 +26,11 @@ export const ChatConversation: React.FC = () => {
       >
         <Page truncated={false} />
 
-        <SentChat message={"How many messages am I assigned to currently"} />
+        <SentChat message={userMessage} />
 
         <Typography variant="body1" component="span">
-          You're currently assigned to 10 messages. <br />
+          {responseMessage}
+          <br />
           <ChatFeedback type="default" />
         </Typography>
       </Box>
