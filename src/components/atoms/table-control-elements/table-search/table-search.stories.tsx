@@ -15,7 +15,7 @@ const meta = {
             exclude: ["small", "children", "value", "onChange"],
         },
     },
-    argTypes: {
+    argTypes: { 
         expanded: {
             control: { type: 'boolean' },
         },
