@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import type { SelectChangeEvent } from '@mui/material/Select';
 
 // Date range configuration
@@ -13,6 +13,16 @@ const isDateInRange = (date: Date, minDate?: Date, maxDate?: Date): boolean => {
     if (minDate && date < minDate) return false;
     if (maxDate && date > maxDate) return false;
     return true;
+};
+
+// Helper to create dates without timezone issues
+const createUTCDate = (year: number, month: number, day: number): Date => {
+    return new Date(Date.UTC(year, month, day));
+};
+
+// Helper to check if date is valid
+const isValidDate = (date: Date): boolean => {
+    return date instanceof Date && !isNaN(date.getTime());
 };
 
 interface UseDatePickerProps {
@@ -38,21 +48,31 @@ export const useDatePicker = ({
 }: UseDatePickerProps) => {
     // Internal state for view management
     const [viewDate, setViewDate] = useState(() => {
-        if (value) return new Date(value);
-        if (minDate) return new Date(minDate);
-        return new Date();
+        if (value && isValidDate(value)) return new Date(value);
+        // When no value is provided, use a predictable default date (January 2024)
+        const defaultDate = new Date(2024, 0, 1);
+        if (minDate && isValidDate(minDate) && defaultDate < minDate) return new Date(minDate);
+        if (maxDate && isValidDate(maxDate) && defaultDate > maxDate) return new Date(maxDate);
+        return defaultDate;
     });
 
     // Memoized effective date bounds
-    const effectiveMinDate = useMemo(() => 
-        minDate || new Date(DATE_RANGE.minYear, 0, 1), 
-        [minDate]
-    );
+    const effectiveMinDate = useMemo(() => {
+        if (minDate && isValidDate(minDate)) return new Date(minDate);
+        return createUTCDate(DATE_RANGE.minYear, 0, 1);
+    }, [minDate]);
     
-    const effectiveMaxDate = useMemo(() => 
-        maxDate || new Date(DATE_RANGE.maxYear, 11, 31), 
-        [maxDate]
-    );
+    const effectiveMaxDate = useMemo(() => {
+        if (maxDate && isValidDate(maxDate)) return new Date(maxDate);
+        return createUTCDate(DATE_RANGE.maxYear, 11, 31);
+    }, [maxDate]);
+
+    // Update viewDate when value changes
+    useEffect(() => {
+        if (value && isValidDate(value)) {
+            setViewDate(new Date(value));
+        }
+    }, [value]);
 
     // Navigation handlers
     const handlePrevMonth = useCallback(() => {
@@ -125,6 +145,7 @@ export const useDatePicker = ({
     // Date selection handler
     const handleDateSelect = useCallback((date: Date) => {
         if (disabled) return;
+        if (!isValidDate(date)) return;
         if (!isDateInRange(date, minDate, maxDate)) return;
         onChange?.(date);
     }, [disabled, minDate, maxDate, onChange]);
@@ -134,7 +155,9 @@ export const useDatePicker = ({
         if (disabled) return;
         onChange?.(null);
         onClear?.();
-        const resetDate = minDate ? new Date(minDate) : new Date();
+        // Reset to default date or minDate if default date is before minDate
+        const defaultDate = new Date(2024, 0, 1);
+        const resetDate = minDate && isValidDate(minDate) && defaultDate < minDate ? new Date(minDate) : defaultDate;
         setViewDate(resetDate);
     }, [disabled, onChange, onClear, minDate]);
 

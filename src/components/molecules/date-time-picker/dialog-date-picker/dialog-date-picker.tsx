@@ -14,6 +14,11 @@ const DESIGN_TOKENS = {
     backgroundColor: 'white'
 } as const;
 
+// Helper to check if date is valid
+const isValidDate = (date: Date | null | undefined): boolean => {
+    return date instanceof Date && !isNaN(date.getTime());
+};
+
 // Props interface for proper API design
 export interface DialogDatePickerProps {
     /** The currently selected date */
@@ -44,6 +49,11 @@ export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps
         onClear,
         ...props
     }, ref) => {
+        // Validate and sanitize dates
+        const validValue = value && isValidDate(value) ? value : null;
+        const validMinDate = minDate && isValidDate(minDate) ? minDate : undefined;
+        const validMaxDate = maxDate && isValidDate(maxDate) ? maxDate : undefined;
+
         // Use custom hook for all date picker logic
         const {
             viewDate,
@@ -58,10 +68,10 @@ export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps
             handleCancel,
             handleNext
         } = useDatePicker({
-            value,
+            value: validValue,
             onChange,
-            minDate,
-            maxDate,
+            minDate: validMinDate,
+            maxDate: validMaxDate,
             onCancel,
             onNext,
             onClear
@@ -69,7 +79,7 @@ export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps
 
         // Memoized container styles
         const containerStyles = useMemo(() => ({
-            borderRadius: DESIGN_TOKENS.borderRadius,
+            borderRadius: `${DESIGN_TOKENS.borderRadius}px`,
             p: DESIGN_TOKENS.padding,
             width: DESIGN_TOKENS.width,
             border: `1px solid ${DESIGN_TOKENS.borderColor}`,
@@ -97,10 +107,10 @@ export const DialogDatePicker = forwardRef<HTMLDivElement, DialogDatePickerProps
 
                 <CalendarGrid
                     viewDate={viewDate}
-                    selectedDate={value}
+                    selectedDate={validValue}
                     onDateSelect={handleDateSelect}
-                    minDate={minDate}
-                    maxDate={maxDate}
+                    minDate={validMinDate}
+                    maxDate={validMaxDate}
                 />
 
                 <CalendarFooter
