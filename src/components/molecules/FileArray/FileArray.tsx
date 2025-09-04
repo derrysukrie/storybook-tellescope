@@ -18,8 +18,8 @@ export const FileArray: React.FC<any> = () => {
         paddingBottom: "8px",
       }}
     >
-      {attachedFile?.map((i) => (
-        <AttachedFile key={i} />
+      {attachedFile?.map((_, i) => (
+        <AttachedFile key={i.toString()} />
       ))}
     </Box>
   );
