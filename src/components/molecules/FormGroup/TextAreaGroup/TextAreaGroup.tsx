@@ -38,7 +38,7 @@ export const TextAreaGroup = ({
   );
 
   const isControlled = controlledValue !== undefined;
-  const value = isControlled ? controlledValue : internalValue;
+  const value = isControlled ? (controlledValue || {}) : internalValue;
 
   const handleChange = (optionValue: string, text: string) => {
     const newValue = { ...value, [optionValue]: text };
