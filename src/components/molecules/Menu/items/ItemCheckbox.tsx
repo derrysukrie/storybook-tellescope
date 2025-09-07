@@ -16,8 +16,9 @@ type Props = Omit<MenuItemProps, "checked"> & {
 export const ItemCheckbox: React.FC<Props> = ({
   checked,
   children,
-
-  ...props
+  searchableText: _searchableText,
+  dense: _dense,
+  ...rest
 }) => {
   const { dense } = useDensity();
   
@@ -36,7 +37,7 @@ export const ItemCheckbox: React.FC<Props> = ({
           },
         },
       }}
-      {...props}
+      {...rest}
     >
       <Checkbox 
         edge="start" 

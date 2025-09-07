@@ -18,8 +18,9 @@ export const Item: React.FC<Props> = ({
   icon,
   children,
   selected,
-
-  ...props
+  searchableText: _searchableText,
+  dense: _dense,
+  ...rest
 }) => {
   const { dense } = useDensity();
 
@@ -38,7 +39,7 @@ export const Item: React.FC<Props> = ({
           },
         },
       }}
-      {...props}
+      {...rest}
     >
       {icon && (
         <ListItemIcon sx={{ minWidth: dense ? "24px" : "auto" }}>

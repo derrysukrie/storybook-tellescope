@@ -1,6 +1,6 @@
 // components/Menu/Menu.tsx
 import React, { useState, createContext, useContext } from "react";
-import { Menu as MuiMenu, Divider, Stack, type MenuProps } from "@mui/material";
+import { Menu as MuiMenu, Divider, Stack, Box, type MenuProps } from "@mui/material";
 import { SearchField } from "./components";
 import { ItemCheckbox, ItemSwitch, Item, SubMenuItem } from "./items";
 
@@ -49,14 +49,14 @@ const MenuComponent: React.FC<Props> = ({
         }}
       >
         {search && (
-          <>
+          <Box>
             <SearchField
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               dense={dense}
             />
             <Divider sx={{ mb: 1 }} />
-          </>
+          </Box>
         )}
 
         <Stack display="flex" gap={0} flexDirection="column">
