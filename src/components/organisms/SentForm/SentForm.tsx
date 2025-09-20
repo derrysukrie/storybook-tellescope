@@ -57,6 +57,7 @@ export const SentForm = ({
 
   // Memoize progress calculation
   const progress = useMemo(() => {
+    if (steps.length === 0) return 0;
     return ((currentStep + 1) / steps.length) * 100;
   }, [currentStep, steps.length]);
 
@@ -64,6 +65,7 @@ export const SentForm = ({
 
   // Check if current step is valid
   const isCurrentStepValid = useMemo(() => {
+    if (!currentStepData) return false;
     return isStepValid(currentStepData, formData, checked);
   }, [currentStepData, formData, checked]);
 
@@ -102,8 +104,8 @@ export const SentForm = ({
   const formContext = useMemo(() => ({
     updateFormData,
     formData,
-    currentStep: currentStepData.id || `step-${currentStep}`,
-  }), [updateFormData, formData, currentStepData.id, currentStep]);
+    currentStep: currentStepData?.id || `step-${currentStep}`,
+  }), [updateFormData, formData, currentStepData, currentStep]);
 
   // Cleanup debounce timer on unmount
   useEffect(() => {
@@ -113,6 +115,28 @@ export const SentForm = ({
       }
     };
   }, []);
+
+  // Handle empty steps array
+  if (steps.length === 0) {
+    return (
+      <Box sx={sentFormStyles.container}>
+        <Box sx={sentFormStyles.contentWrapper}>
+          <LinearProgress
+            sx={sentFormStyles.progressBar}
+            variant="determinate"
+            value={0}
+          />
+          <Box sx={sentFormStyles.contentContainer}>
+            <Box sx={sentFormStyles.contentBox}>
+              <Typography variant="body1" color="text.secondary">
+                No form steps available.
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    );
+  }
 
   return (
     <Box sx={sentFormStyles.container}>

@@ -67,6 +67,7 @@ const validateInsurance = (stepData: any): boolean => {
  * Simplified validation function
  */
 export const isStepValid = (step: StepConfig, formData: FormData, checked: boolean): boolean => {
+  if (!step) return false;
   const { type, id } = step;
 
   // Always valid steps
@@ -103,17 +104,16 @@ export const isStepValid = (step: StepConfig, formData: FormData, checked: boole
   // Get step data
   const stepData = formData[id];
   
-  // Check if data exists
-  if (!hasValue(stepData)) {
-    return false;
-  }
-
   // Apply type-specific validation
   if (validationRules.requiresString.includes(type)) {
     return typeof stepData === "string" && stepData.trim().length > 0;
   }
 
   if (validationRules.requiresArray.includes(type)) {
+    // Special case for checkbox - it can be a boolean true or a non-empty array
+    if (type === "checkbox") {
+      return stepData === true || (Array.isArray(stepData) && stepData.length > 0);
+    }
     return Array.isArray(stepData) && stepData.length > 0;
   }
 
@@ -121,6 +121,6 @@ export const isStepValid = (step: StepConfig, formData: FormData, checked: boole
     return typeof stepData === "number" && stepData >= 0;
   }
 
-  // Default to valid if no specific rules apply
-  return true;
+  // For other types, use hasValue check
+  return hasValue(stepData);
 }; 
